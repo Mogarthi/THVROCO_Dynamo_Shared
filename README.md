@@ -1,7 +1,9 @@
 # THVROCO_Dynamo_Shared
-GitHub REPO url: https://github.com/BartDM-ROCO/THVROCO_Dynamo_Shared.git
 Gedeelde omgeving waarin de Dynamo scripts binnen THVROCO gedistribueerd kunnen worden.
 ---------------------------------------------------------------------------------------
+
+GitHub REPO url: https://github.com/BartDM-ROCO/THVROCO_Dynamo_Shared.git
+
 
 Deze Repo wordt gebruikt om binnen THVROCO de dynamo bestanden uit te wisselen. 
 Voor dit goed te laten werken, dient u de de volgende stappen op te volgen:
