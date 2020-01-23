@@ -23,5 +23,5 @@ Het wordt aangeraden elke dag te 'Pullen'.
 
 Dit kan door middel van de knop 'Fetch' rechts bovenin GitHub, of met de toetsenbord combinatie Ctrl + Shift + P
 
-Voor overige vragen over GitHub kun je terecht op:
+Voor overige vragen over GitHub kunt u terecht op:
 https://help.github.com/en
