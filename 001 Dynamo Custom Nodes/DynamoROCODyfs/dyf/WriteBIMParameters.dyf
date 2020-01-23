@@ -1,0 +1,37 @@
+<Workspace Version="1.3.4.6666" X="11.1666123792877" Y="-39.0870288163136" zoom="0.616107147327431" ScaleFactor="1" Name="WriteBIMParameters" Description="Write the ROCO BIM Parameters on the components" ID="b4ea8558-19c0-4fb5-a64b-0251d57a5339" Category="DynamoROCODyfs">
+  <NamespaceResolutionMap />
+  <Elements>
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="6a864ceb-0891-454d-afc9-5ec87fee035d" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="67.2842657845888" y="471.67217644908" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="{&quot;Plaats.Code&quot;,&quot;Plaats.Beschrijving&quot;,&quot;Deel.Code&quot;,&quot;Deel.Beschrijving&quot;,&quot;En.Code&quot;,&quot;En.Beschrijving&quot;,&quot;Ss.Code&quot;,&quot;Ss.Beschrijving&quot;, &quot;Dynamo.GUID&quot;, &quot;Dynamo.Script&quot;, &quot;Dynamo.Report&quot;};" ShouldFocus="false" />
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="8a9ec172-57b3-4195-9960-b34cad960aa2" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="987.143554720499" y="392.67974937782" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="true" CodeText="out ={};&#xA;comps: var[];&#xA;&#xA;ParameterNames : var[];&#xA;ParameterValues :var[];&#xA;[Imperative]&#xA;{&#xA;	pIndex:int=0;&#xA;	for (c in comps)&#xA;	{&#xA;		paramIndex:int =0;&#xA;		_namesCount :int = Count(ParameterNames);&#xA;		while (paramIndex&lt;_namesCount)&#xA;		{&#xA;			_name :string = ParameterNames[paramIndex]+&quot;&quot;;&#xA;			_value :string = ParameterValues[paramIndex]+&quot;&quot;;&#xA;			if (_name!=null &amp;&amp; _value!=null)&#xA;			{&#xA;				c.SetParameterByName(_name, _value);&#xA;			}&#xA;			paramIndex=paramIndex+1;&#xA;		}&#xA;		out[pIndex] = c;&#xA;		pIndex=pIndex+1;&#xA;	}&#xA;};" ShouldFocus="false">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <PortInfo index="2" default="False" />
+    </Dynamo.Graph.Nodes.CodeBlockNodeModel>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="81f5a75d-1709-462a-99a0-f8ab7bc7bfb2" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="632.679858343091" y="391.022020575369" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="Componenten" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="819bef56-654b-474c-8883-4368af5a081d" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="572.205702793393" y="548.573507538919" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="BIMParameterWaarden" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Output guid="e566edf7-9813-4788-84e3-b4e75a199178" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="1829.03295270771" y="390.74297922486" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+      <Symbol value="Componenten" />
+    </Dynamo.Graph.Nodes.CustomNodes.Output>
+  </Elements>
+  <Connectors>
+    <Dynamo.Graph.Connectors.ConnectorModel start="6a864ceb-0891-454d-afc9-5ec87fee035d" start_index="0" end="8a9ec172-57b3-4195-9960-b34cad960aa2" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="8a9ec172-57b3-4195-9960-b34cad960aa2" start_index="0" end="e566edf7-9813-4788-84e3-b4e75a199178" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="81f5a75d-1709-462a-99a0-f8ab7bc7bfb2" start_index="0" end="8a9ec172-57b3-4195-9960-b34cad960aa2" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="819bef56-654b-474c-8883-4368af5a081d" start_index="0" end="8a9ec172-57b3-4195-9960-b34cad960aa2" end_index="2" portType="0" />
+  </Connectors>
+  <Notes />
+  <Annotations>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="4d1e848b-93bc-42e3-8d0f-ca8b3562e530" annotationText="Set BIM Parameters" left="977.143554720499" top="346.67974937782" width="664" height="545" fontSize="30" InitialTop="392.67974937782" InitialHeight="829.3216480844" TextblockHeight="36" backgrouund="#FF71C6A8">
+      <Models ModelGuid="8a9ec172-57b3-4195-9960-b34cad960aa2" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+  </Annotations>
+  <Presets />
+  <Cameras>
+    <Camera Name="Background Preview" eyeX="28.8162860870361" eyeY="22.5928001403809" eyeZ="32.5722579956055" lookX="-33.8162841796875" lookY="-11.5928010940552" lookZ="-40.5722579956055" upX="-2.53402069564247E-14" upY="1" upZ="2.21966542368612E-14" />
+  </Cameras>
+</Workspace>

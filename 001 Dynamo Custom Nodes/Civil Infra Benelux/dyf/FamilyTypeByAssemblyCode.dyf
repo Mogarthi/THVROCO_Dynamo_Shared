@@ -1,0 +1,68 @@
+<Workspace Version="1.3.4.6666" X="-463.416964709819" Y="-597.086416863493" zoom="2.63950307583218" ScaleFactor="1" Name="FamilyTypeByAssemblyCode" Description="Returns all Family types with the given Assembly code as a string" ID="7447afdc-1375-478f-b1a7-1b4c55083066" Category="CIB.Revit.Elements.FamilyType.Actions">
+  <NamespaceResolutionMap>
+    <ClassMap partialName="System.Object" resolvedName="System.Object" assemblyName="" />
+    <ClassMap partialName="FamilyType" resolvedName="Revit.Elements.FamilyType" assemblyName="RevitNodes.dll" />
+    <ClassMap partialName="String" resolvedName="DSCore.String" assemblyName="DSCoreNodes.dll" />
+  </NamespaceResolutionMap>
+  <Elements>
+    <PythonNodeModels.PythonNode guid="a6ca3b32-5417-41a0-b343-024253e10b22" type="PythonNodeModels.PythonNode" nickname="Python Script" x="486.472558432234" y="292" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="1">
+      <PortInfo index="0" default="False" />
+      <Script>import clr
+clr.AddReference('ProtoGeometry')
+from Autodesk.DesignScript.Geometry import *
+
+# Import DocumentManager and TransactionManager
+clr.AddReference("RevitServices")
+import RevitServices
+from RevitServices.Persistence import DocumentManager
+from RevitServices.Transactions import TransactionManager
+
+# Import RevitAPI
+clr.AddReference("RevitAPI")
+import Autodesk
+from Autodesk.Revit.DB import *
+
+doc = DocumentManager.Instance.CurrentDBDocument
+uiapp = DocumentManager.Instance.CurrentUIApplication
+app = uiapp.Application
+
+# Import ToDSType(bool) extension method
+clr.AddReference("RevitNodes")
+import Revit
+clr.ImportExtensions(Revit.Elements)
+
+#The inputs to this node will be stored as a list in the IN variables.
+assemblyCode = IN[0]
+
+# Filter elements with element collector
+collector = FilteredElementCollector(doc)
+
+provider = ParameterValueProvider(ElementId(BuiltInParameter.UNIFORMAT_CODE));
+evaluator = FilterStringContains()
+rule = FilterStringRule(provider, evaluator, assemblyCode, True)
+filter = ElementParameterFilter( rule )
+
+collector.OfClass(FamilySymbol).WherePasses(filter)
+
+#Assign your output to the OUT variable.
+OUT = []
+for x in (x.ToDSType(True) for x in collector):
+	OUT.append(x)
+</Script>
+    </PythonNodeModels.PythonNode>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="6feab461-a544-4e88-93a8-e547ff9f8301" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="146.983355731284" y="293.169183506432" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="// The Assembly Code as String&#xD;&#xA;AssemblyCode : string" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Output guid="a1deef54-5a0a-4850-9730-2a6a55cc0fa3" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="683.862829207732" y="289.175514874308" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+      <Symbol value="// All Families&#xD;&#xA;familyTypes : FamilyType" />
+    </Dynamo.Graph.Nodes.CustomNodes.Output>
+  </Elements>
+  <Connectors>
+    <Dynamo.Graph.Connectors.ConnectorModel start="a6ca3b32-5417-41a0-b343-024253e10b22" start_index="0" end="a1deef54-5a0a-4850-9730-2a6a55cc0fa3" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="6feab461-a544-4e88-93a8-e547ff9f8301" start_index="0" end="a6ca3b32-5417-41a0-b343-024253e10b22" end_index="0" portType="0" />
+  </Connectors>
+  <Notes />
+  <Annotations />
+  <Presets />
+</Workspace>

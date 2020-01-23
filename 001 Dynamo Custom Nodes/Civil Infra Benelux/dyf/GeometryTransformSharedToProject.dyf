@@ -1,0 +1,67 @@
+<Workspace Version="1.3.4.6666" X="-307.450374720921" Y="-139.239640179299" zoom="0.463369481827714" ScaleFactor="1" Name="GeometryTransformSharedToProject" Description="Transforms objects from Shared Coordinates to Project Coordinates, since Dynamo calculates with Project Coordinates" ID="6b642ae5-d524-4aba-8186-6605c0c6a1cd" Category="CIB.Geometry.Geometry.Actions">
+  <NamespaceResolutionMap>
+    <ClassMap partialName="Geometry" resolvedName="Autodesk.DesignScript.Geometry.Geometry" assemblyName="ProtoGeometry.dll" />
+  </NamespaceResolutionMap>
+  <Elements>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="6364babb-5c1d-4908-9898-1d71186b5157" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="943.928354683939" y="602.260639818131" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="//Geometry in World Coordinate System&#xD;&#xA;geometry : Geometry" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Output guid="1a17a774-3429-42b4-be3f-317c1235dedf" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="2633.69796651036" y="703.710465686842" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+      <Symbol value="//Geometry in Revit Coordinate System&#xD;&#xA;geometry:Geometry" />
+    </Dynamo.Graph.Nodes.CustomNodes.Output>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="e7e294cb-010a-49fe-9939-e2f75b335789" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Vector.ByTwoPoints" x="1293.69048504945" y="1061.96793005569" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="ProtoGeometry.dll" function="Autodesk.DesignScript.Geometry.Vector.ByTwoPoints@Autodesk.DesignScript.Geometry.Point,Autodesk.DesignScript.Geometry.Point">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="ee650b2a-80d9-4be7-a7c2-acd1c9c4002f" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Geometry.Rotate" x="2276.01261485339" y="992.079488984669" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="ProtoGeometry.dll" function="Autodesk.DesignScript.Geometry.Geometry.Rotate@Autodesk.DesignScript.Geometry.Point,Autodesk.DesignScript.Geometry.Vector,double">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <PortInfo index="2" default="False" />
+      <PortInfo index="3" default="True" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="1a1bdd8c-61f6-48d3-a124-7ac56f28aa7c" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Vector.ZAxis" x="2111.39554043338" y="1024.64754725993" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="ProtoGeometry.dll" function="Autodesk.DesignScript.Geometry.Vector.ZAxis" />
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="7982a3d9-5fa0-4f50-9c89-b7e5988344ef" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Coordinates.SurveyPoint" x="1019.50205774975" y="1081.92638702899" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="RevitNodes.dll" function="Revit.Elements.Coordinates.SurveyPoint" />
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="d21a4432-4cab-4ffb-b3fb-106d5d447b8b" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Coordinates.ProjectRotation" x="2008.96849062464" y="1131.00956506408" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="RevitNodes.dll" function="Revit.Elements.Coordinates.ProjectRotation" />
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="34ef7636-5946-4d32-a0d6-e200a48fde80" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Coordinates.BasePoint" x="1023.50205774975" y="993.804725307918" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="RevitNodes.dll" function="Revit.Elements.Coordinates.BasePoint" />
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="effc403f-7c41-4642-8324-fd6fe9791434" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Geometry.Translate" x="1495.27208742334" y="932.445674862814" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="ProtoGeometry.dll" function="Autodesk.DesignScript.Geometry.Geometry.Translate@Autodesk.DesignScript.Geometry.Vector">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+  </Elements>
+  <Connectors>
+    <Dynamo.Graph.Connectors.ConnectorModel start="6364babb-5c1d-4908-9898-1d71186b5157" start_index="0" end="effc403f-7c41-4642-8324-fd6fe9791434" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="e7e294cb-010a-49fe-9939-e2f75b335789" start_index="0" end="effc403f-7c41-4642-8324-fd6fe9791434" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="ee650b2a-80d9-4be7-a7c2-acd1c9c4002f" start_index="0" end="1a17a774-3429-42b4-be3f-317c1235dedf" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="1a1bdd8c-61f6-48d3-a124-7ac56f28aa7c" start_index="0" end="ee650b2a-80d9-4be7-a7c2-acd1c9c4002f" end_index="2" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="7982a3d9-5fa0-4f50-9c89-b7e5988344ef" start_index="0" end="e7e294cb-010a-49fe-9939-e2f75b335789" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="7982a3d9-5fa0-4f50-9c89-b7e5988344ef" start_index="0" end="ee650b2a-80d9-4be7-a7c2-acd1c9c4002f" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="d21a4432-4cab-4ffb-b3fb-106d5d447b8b" start_index="0" end="ee650b2a-80d9-4be7-a7c2-acd1c9c4002f" end_index="3" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="34ef7636-5946-4d32-a0d6-e200a48fde80" start_index="0" end="e7e294cb-010a-49fe-9939-e2f75b335789" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="effc403f-7c41-4642-8324-fd6fe9791434" start_index="0" end="ee650b2a-80d9-4be7-a7c2-acd1c9c4002f" end_index="0" portType="0" />
+  </Connectors>
+  <Notes />
+  <Annotations>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="e2a2f737-f365-4d9e-9d31-530dff594e39" annotationText="Transformed Geometry in Revit Coordinate  System" left="2623.69796651036" top="621.710465686842" width="355" height="159" fontSize="30" InitialTop="703.710465686842" InitialHeight="325.202580523744" TextblockHeight="72" backgrouund="#FF71C6A8">
+      <Models ModelGuid="1a17a774-3429-42b4-be3f-317c1235dedf" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="ec31ca37-29d2-4e68-b018-a73250f7a097" annotationText="Rotate The Geometry" left="1998.96849062464" top="946.079488984669" width="524.044124228758" height="277.93007607941" fontSize="30" InitialTop="992.079488984669" InitialHeight="261.93007607941" TextblockHeight="36" backgrouund="#FFFFAA45">
+      <Models ModelGuid="ee650b2a-80d9-4be7-a7c2-acd1c9c4002f" />
+      <Models ModelGuid="1a1bdd8c-61f6-48d3-a124-7ac56f28aa7c" />
+      <Models ModelGuid="d21a4432-4cab-4ffb-b3fb-106d5d447b8b" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="d49ca35f-fa16-4139-862d-8c8971f00349" annotationText="Translate the Geometry" left="1009.50205774975" top="886.445674862814" width="732.77002967359" height="288.480712166172" fontSize="30" InitialTop="932.445674862814" InitialHeight="272.480712166172" TextblockHeight="36" backgrouund="#FFFFAA45">
+      <Models ModelGuid="e7e294cb-010a-49fe-9939-e2f75b335789" />
+      <Models ModelGuid="7982a3d9-5fa0-4f50-9c89-b7e5988344ef" />
+      <Models ModelGuid="34ef7636-5946-4d32-a0d6-e200a48fde80" />
+      <Models ModelGuid="effc403f-7c41-4642-8324-fd6fe9791434" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="7a979711-1721-4ea1-bc48-5a17a3249869" annotationText="Geometry in World Coordinate System" left="933.928354683939" top="520.260639818131" width="355" height="159" fontSize="30" InitialTop="602.260639818131" InitialHeight="107" TextblockHeight="72" backgrouund="#FFFF7BAC">
+      <Models ModelGuid="6364babb-5c1d-4908-9898-1d71186b5157" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+  </Annotations>
+  <Presets />
+  <Cameras>
+    <Camera Name="Background Preview" eyeX="-17" eyeY="24" eyeZ="50" lookX="12" lookY="-13" lookZ="-58" upX="0" upY="1" upZ="0" />
+  </Cameras>
+</Workspace>

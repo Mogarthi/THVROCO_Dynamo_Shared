@@ -1,0 +1,159 @@
+<Workspace Version="1.3.4.6666" X="0" Y="0" zoom="1" ScaleFactor="1" Name="FloorTypeByMaterialAndThickness" Description="Creates a Floor Type  or Slab Type by Material and Thickness. Structural = True for a Slab Type, False for a Floor Type" ID="523adfb1-2396-45df-9d3c-9df1a1493d99" Category="CIB.Revit.Elements.FloorType.Create">
+  <NamespaceResolutionMap>
+    <ClassMap partialName="Revit.Material" resolvedName="Revit.Elements.Material" assemblyName="RevitNodes.dll" />
+  </NamespaceResolutionMap>
+  <Elements>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="6002e076-ba1c-46df-86eb-d2d1c5407ed6" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="280.635881677502" y="370.4" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="thickness : double" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="1de6a87b-92a0-49d5-bcda-1ae4c144dcf0" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="255.2" y="445.586272258339" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="material : Revit.Material" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="d06b9736-1480-4419-ad8a-3eb14813dc90" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="260.682588424851" y="522.280583798483" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="floorType : bool = false" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <PythonNodeModels.PythonNode guid="9aed6208-1703-461f-a306-8cd40f027c10" type="PythonNodeModels.PythonNode" nickname="Python Script | FloorTypeByMaterialAndThickness" x="557.128236644997" y="396.639313612917" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="3">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <PortInfo index="2" default="False" />
+      <Script>import clr
+clr.AddReference('ProtoGeometry')
+from Autodesk.DesignScript.Geometry import *
+
+#Import the Revit Services
+clr.AddReference("RevitServices")
+import RevitServices
+from RevitServices.Persistence import DocumentManager
+from RevitServices.Transactions import TransactionManager
+doc = DocumentManager.Instance.CurrentDBDocument
+
+#Import the Revit Nodes
+clr.AddReference("RevitNodes")
+import Revit
+clr.ImportExtensions(Revit.Elements)
+
+#Import the Revit API
+clr.AddReference("RevitAPI")
+import Autodesk
+from Autodesk.Revit.DB import *
+
+#Import system
+from System import *
+from System.Collections.Generic import *
+
+#Define tolist function
+def tolist(obj1):
+	if hasattr(obj1,"__iter__"):
+		return obj1
+	else:
+		return [obj1]
+
+def fromlist(obj1):
+	if len(obj1) == 1:
+		return obj1[0];
+	else:
+		return obj1;
+
+def FeetToMm(d):
+	return float(d) * 304.8
+	
+def MmToFeet(d):
+	return float(d) / 304.8
+
+#Function to Create a FloorType (false) of StructuralFoundationType (true) By Width and Material
+def FloorTypeByWidthAndMaterial(doc, width, material, floorBool):
+	widths = tolist(width)
+	materials = tolist(UnwrapElement(material))
+	output = []
+	for width, material in zip(widths, materials):
+	
+		#Get all Floor types in the current Document
+		floor_types = [f for f in FilteredElementCollector(doc).OfClass(FloorType)]
+		
+		#Is it a Structural Foundation
+		if floorBool:
+			floor_types = [f for f in floor_types if f.Category.Id.IntegerValue == int(BuiltInCategory.OST_Floors)]
+		else:
+			floor_types = [f for f in floor_types if f.Category.Id.IntegerValue == int(BuiltInCategory.OST_StructuralFoundation)]
+			
+		
+		#Is the Width larger then 0
+		if width &gt; 0:
+		
+			#Try to find a matching Floor type
+			current_floors = []
+			for floor_type in floor_types:
+				cs = floor_type.GetCompoundStructure();
+				floor_width = FeetToMm(cs.GetLayerWidth(0))
+				matId = cs.GetMaterialId(0);
+				if width == floor_width and material.Id == matId:
+					current_floors.append(floor_type);
+					break
+			
+			#Determine if Floor type is Found
+			if len(current_floors) &gt; 0:
+				output.append(current_floors[0]);
+				
+			#Create a New Floor type
+			else:
+				name = material.Name + "_" + str(int(width));
+				#Try to create a type
+				try:
+					type = floor_types[0].Duplicate(name)
+					csl = CompoundStructureLayer()
+					csl.Width = MmToFeet(width)
+					csl.Function = MaterialFunctionAssignment.Structure
+					csl.MaterialId = material.Id
+					cs = CompoundStructure.CreateSimpleCompoundStructure(List[CompoundStructureLayer]([csl]))
+					cs.EndCap = EndCapCondition.NoEndCap
+					cs.StructuralMaterialIndex = cs.GetFirstCoreLayerIndex()
+					type.SetCompoundStructure(cs)
+					output.append(type)
+				#Return an existing type
+				except:
+					output.append(Revit.Elements.FloorType.ByName(name))
+		else:
+			output.append("Thickness has to be greater than zero!");
+			
+	return fromlist(output);
+
+doc = DocumentManager.Instance.CurrentDBDocument
+uiapp = DocumentManager.Instance.CurrentUIApplication
+app = uiapp.Application
+uidoc=DocumentManager.Instance.CurrentUIApplication.ActiveUIDocument
+
+# Start Transaction
+TransactionManager.Instance.EnsureInTransaction(doc)
+
+OUT = FloorTypeByWidthAndMaterial(doc,IN[0],IN[1],IN[2]);
+
+#End Transaction
+TransactionManager.Instance.TransactionTaskDone()</Script>
+    </PythonNodeModels.PythonNode>
+    <Dynamo.Graph.Nodes.CustomNodes.Output guid="801ba27e-3fa2-4eb6-b623-5c3491ad7696" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="955.495123250672" y="398.360722338171" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+      <Symbol value="floorType : var" />
+    </Dynamo.Graph.Nodes.CustomNodes.Output>
+  </Elements>
+  <Connectors>
+    <Dynamo.Graph.Connectors.ConnectorModel start="6002e076-ba1c-46df-86eb-d2d1c5407ed6" start_index="0" end="9aed6208-1703-461f-a306-8cd40f027c10" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="1de6a87b-92a0-49d5-bcda-1ae4c144dcf0" start_index="0" end="9aed6208-1703-461f-a306-8cd40f027c10" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="d06b9736-1480-4419-ad8a-3eb14813dc90" start_index="0" end="9aed6208-1703-461f-a306-8cd40f027c10" end_index="2" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="9aed6208-1703-461f-a306-8cd40f027c10" start_index="0" end="801ba27e-3fa2-4eb6-b623-5c3491ad7696" end_index="0" portType="0" />
+  </Connectors>
+  <Notes />
+  <Annotations>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="b9bdf4f5-cd58-4343-bbf2-dd263fc89b41" annotationText="Input" left="245.2" top="324.4" width="256.8" height="265.680583798483" fontSize="30" InitialTop="370.4" InitialHeight="249.680583798483" TextblockHeight="36" backgrouund="#FFFF7BAC">
+      <Models ModelGuid="6002e076-ba1c-46df-86eb-d2d1c5407ed6" />
+      <Models ModelGuid="1de6a87b-92a0-49d5-bcda-1ae4c144dcf0" />
+      <Models ModelGuid="d06b9736-1480-4419-ad8a-3eb14813dc90" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="7c9bb5ee-9fa6-4cdc-8725-2e004e821f1e" annotationText="Core Function" left="547.128236644997" top="350.639313612917" width="344" height="165" fontSize="30" InitialTop="396.639313612917" InitialHeight="149" TextblockHeight="36" backgrouund="#FFFFAA45">
+      <Models ModelGuid="9aed6208-1703-461f-a306-8cd40f027c10" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="1657e553-44ae-4ac8-a1d4-a439276ce11b" annotationText="Output" left="945.495123250672" top="352.360722338171" width="173.6" height="113.8" fontSize="30" InitialTop="398.360722338171" InitialHeight="97.8" TextblockHeight="36" backgrouund="#FF71C6A8">
+      <Models ModelGuid="801ba27e-3fa2-4eb6-b623-5c3491ad7696" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+  </Annotations>
+  <Presets />
+</Workspace>

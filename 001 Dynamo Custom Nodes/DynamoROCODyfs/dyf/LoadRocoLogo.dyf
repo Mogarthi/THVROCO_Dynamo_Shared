@@ -1,0 +1,357 @@
+{
+  "Uuid": "686ae292-8086-44e3-bb08-535aae98eef5",
+  "IsCustomNode": true,
+  "Category": "DynamoROCODyfs",
+  "Description": "",
+  "Name": "LoadRocoLogo",
+  "ElementResolver": {
+    "ResolutionMap": {
+      "CivilApplication": {
+        "Key": "CivilConnection.CivilApplication",
+        "Value": "Autodesk2020.dll"
+      },
+      "Math": {
+        "Key": "DSCore.Math",
+        "Value": "DSCoreNodes.dll"
+      }
+    }
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Importing Reference Modules\n# CLR ( Common Language Runtime Module )\nimport clr\n# Adding the DynamoRevitDS.dll module to work with the Dynamo API\nclr.AddReference('DynamoRevitDS')\nimport Dynamo \n\n# access to the current Dynamo instance and workspace\ndynamoRevit = Dynamo.Applications.DynamoRevit()\ncurrentWorkspace = dynamoRevit.RevitDynamoModel.CurrentWorkspace\n\n# Access current version of dynamo\nversion=dynamoRevit.RevitDynamoModel.Version\n\n# checks version of dynamo and adjusts output according to version\nif version.StartsWith(\"1.\"):\n\t\n\t# Gets file name which includes full path\n\tfilename=currentWorkspace.FileName\n\t\n\t# Splits out file path to just file name\n\tOUT=filename\n\nelif version.StartsWith(\"2.\"):\n\tOUT=currentWorkspace.Name\n\nelse:\n\tOUT=\"Not supported\"",
+      "VariableInputPorts": true,
+      "Id": "ab1fdb3ec06c453f8793387a59d81c7b",
+      "Inputs": [
+        {
+          "Id": "c8b2a5509c9e4c61b16d5dd8f8db8733",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "7b635a5f72594850872eebc8c74b7809",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.IO.FileSystem.DirectoryName@string",
+      "Id": "c9fbd5ea5a494cf6954bf65be2808416",
+      "Inputs": [
+        {
+          "Id": "8bdd7d636035471e9ad963e31574ddc1",
+          "Name": "path",
+          "Description": "Path to get directory information of.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "f794c7dc29f441ef8a49b84df281f2d4",
+          "Name": "string",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns the directory name of a file path.\n\nFileSystem.DirectoryName (path: string): string"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"\\\\config_files\\\\ROCO.jpg\";",
+      "Id": "bc9c8db7cf6f44e1ac1106740501023e",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "3b9003e719f9426687961a7e877c6642",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSVarArgFunction, DynamoCore",
+      "FunctionSignature": "DSCore.String.Concat@string[]",
+      "FunctionType": "VariableArgument",
+      "NodeType": "FunctionNode",
+      "Id": "7bd3fb31b74a4c9a84a6be93053c1dd3",
+      "Inputs": [
+        {
+          "Id": "e67e4fe601b04b219676e77ed45f5fa7",
+          "Name": "string0",
+          "Description": "List of strings to concatenate.\n\nstring[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "38d1b4448b364c80a88218b47b6f5093",
+          "Name": "string1",
+          "Description": "string[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "50ff05c389f14f5485502c096eb9dc2e",
+          "Name": "str",
+          "Description": "String made from list of strings.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Concatenates multiple strings into a single string.\n\nString.Concat (strings: string[]): string"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.FileObject, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "195dacfae1eb48849908583f721b623a",
+      "Inputs": [
+        {
+          "Id": "8affc547757842b0be2795be41a8fb88",
+          "Name": "path",
+          "Description": "Path to the file.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "a089fbf9d76c456f9c24ed80cca036d5",
+          "Name": "file",
+          "Description": "File object",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a file object from a path."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.IO.Image.ReadFromFile@var",
+      "Id": "9c3bd46b56c048cfbd3fe001944131d6",
+      "Inputs": [
+        {
+          "Id": "bf7e9b785bb04957af868f115fa26385",
+          "Name": "file",
+          "Description": "File object to load image from.\n\nvar",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "ecada77af766482fb176d22d910118f6",
+          "Name": "image",
+          "Description": "Image",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Loads the file as a bitmap.\n\nImage.ReadFromFile (file: var): var"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Output, DynamoCore",
+      "NodeType": "OutputNode",
+      "ElementResolver": null,
+      "Symbol": "image",
+      "Id": "f56c7dc22cd94ba1bb29fd579fe17d41",
+      "Inputs": [
+        {
+          "Id": "f9a2eb73d475410588aeec9f879142f2",
+          "Name": "",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [],
+      "Replication": "Disabled",
+      "Description": "A function output, use with custom nodes"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "7b635a5f72594850872eebc8c74b7809",
+      "End": "8bdd7d636035471e9ad963e31574ddc1",
+      "Id": "9f6075a9c7094573bae6ede6e60163cb"
+    },
+    {
+      "Start": "f794c7dc29f441ef8a49b84df281f2d4",
+      "End": "e67e4fe601b04b219676e77ed45f5fa7",
+      "Id": "151dde54510c4361a439d01bf933a5df"
+    },
+    {
+      "Start": "3b9003e719f9426687961a7e877c6642",
+      "End": "38d1b4448b364c80a88218b47b6f5093",
+      "Id": "642bc667d50d42dda6ae455a8e633fc1"
+    },
+    {
+      "Start": "50ff05c389f14f5485502c096eb9dc2e",
+      "End": "8affc547757842b0be2795be41a8fb88",
+      "Id": "645a5ed965474f759c9bccdb88a72a54"
+    },
+    {
+      "Start": "a089fbf9d76c456f9c24ed80cca036d5",
+      "End": "bf7e9b785bb04957af868f115fa26385",
+      "Id": "dad0a7a1bd2943da85add8cf80ecf2f5"
+    },
+    {
+      "Start": "ecada77af766482fb176d22d910118f6",
+      "End": "f9a2eb73d475410588aeec9f879142f2",
+      "Id": "fab3ccbb1e2b4522a707e5de8d1754c7"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.0.5885",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "ab1fdb3ec06c453f8793387a59d81c7b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 250.0,
+        "Y": 1.42000706098804
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "FileSystem.DirectoryName",
+        "Id": "c9fbd5ea5a494cf6954bf65be2808416",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 427.334343296088,
+        "Y": 0.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "bc9c8db7cf6f44e1ac1106740501023e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 468.486114744058,
+        "Y": 92.762749675111
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "String.Concat",
+        "Id": "7bd3fb31b74a4c9a84a6be93053c1dd3",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 693.755237376408,
+        "Y": 30.709101256211
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "File.FromPath",
+        "Id": "195dacfae1eb48849908583f721b623a",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 934.176419580568,
+        "Y": 31.166084130403
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Image.ReadFromFile",
+        "Id": "9c3bd46b56c048cfbd3fe001944131d6",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1091.34596882772,
+        "Y": 31.279775676956
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Output",
+        "Id": "f56c7dc22cd94ba1bb29fd579fe17d41",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1340.34596882772,
+        "Y": 0.0
+      }
+    ],
+    "Annotations": [],
+    "X": -110.0,
+    "Y": 290.0,
+    "Zoom": 1.0
+  }
+}

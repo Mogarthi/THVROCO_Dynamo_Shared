@@ -1,0 +1,23 @@
+{
+  "license": "",
+  "file_hash": null,
+  "name": "infranea",
+  "version": "0.0.4",
+  "description": "infranea package 24-06-2019",
+  "group": "",
+  "keywords": null,
+  "dependencies": [
+    {
+      "name": "archi-lab.net",
+      "version": "2018.0.12"
+    }
+  ],
+  "contents": "testnode: custom node for testing, can be used to bugfix problems from other nodes withouth affecting the content of original nodes, Alignment.SetStartEndEndstation: input start and end stations of input alignment, infranea.DynamoClipboard : node used as clipboard for transferring nodes between scripts,  Parameter.SetValueByName : sets element parameter value based on name, Family.CreateNewType : creates new family type in the open family document, material.CreateNew_Uniclass - Creates new materials using 'Cut' settings, 'surface' settings, graphics settings and uniclass coding, based on materialName, Colors.ColorsFromString - formats string to colors, Chart.GetChart - Get chart by type and name, Curve.direction - calculates the direction of curve (cw or ccw) i, based on vector between start and endpoint of curve, Curves.directionbypoints - calculates the direction (cw or ccw) by comparing whether or not the startpoints are equal to previous and same for the endpoints of the curve, Documents.getRoot - Get document rooth w.o. file name based on document, Element.delete_NameContains - Delete alle elements in project by category, where name matches input string, Element.SearchForParameter - searches all element parameter and returns list of matching items, Elements.associateFamParameters - associate family parameters to list of elements, List.ItemsToString - converts list items to string, list to matrix - creates a matrix from (nested) lists, Materials.GetAll - gets all materials of current document, Point.xyz - get xyz coordinates from point, Python.defaultSetupTransaction - Default code for setting up transactions between Dynamo and Revit API, String.isempty - checks if string is an empty string",
+  "engine_version": "1.3.4.6666",
+  "engine": "dynamo",
+  "engine_metadata": "",
+  "site_url": "",
+  "repository_url": "",
+  "contains_binaries": false,
+  "node_libraries": []
+}

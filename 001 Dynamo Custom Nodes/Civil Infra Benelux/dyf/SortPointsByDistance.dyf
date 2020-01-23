@@ -1,0 +1,120 @@
+<Workspace Version="1.3.4.6666" X="131.672484085404" Y="-251.725450872425" zoom="1.07925372895183" ScaleFactor="1" Name="SortPointsByDistance" Description="Sorts a List of Points by Distance Between them starting with the first point in the List" ID="4d63fef7-d41b-41dd-9c7d-21edfd581434" Category="CIB.Geometry.Point.Actions">
+  <NamespaceResolutionMap>
+    <ClassMap partialName="Point" resolvedName="Autodesk.DesignScript.Geometry.Point" assemblyName="ProtoGeometry.dll" />
+  </NamespaceResolutionMap>
+  <Elements>
+    <PythonNodeModels.PythonNode guid="556e3ec8-7953-4b66-9bc3-340feb063f6c" type="PythonNodeModels.PythonNode" nickname="Python Script | Points Sort By Distance" x="397.057889684936" y="462.662647018925" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="1">
+      <PortInfo index="0" default="False" />
+      <Script>import clr
+clr.AddReference('ProtoGeometry')
+from Autodesk.DesignScript.Geometry import *
+
+clr.AddReference('DSCoreNodes')
+from DSCore import *
+#The inputs to this node will be stored as a list in the IN variables.
+dataEnteringNode = IN
+
+def tolist(obj1):
+	if hasattr(obj1,"__iter__"):
+		return obj1
+	else:
+		return [obj1]
+
+def get_length(point, p):
+	line = Line.ByStartPointEndPoint(point, p)
+	length = line.Length;
+	return length
+	
+def indexOf(list, point):
+	count = 0
+	list = tolist(list)
+	output = None
+	for p in list:
+		if p.X == point.X and p.Y == point.Y and p.Z == point.Z:
+			output = count
+			break
+		else:
+			count += 1
+			
+	output = count
+	return output			
+	
+def copy(list):
+	copied = []
+	for i in list:
+		copied.append(i)
+	return copied
+	
+def shortest(point, pointArray):
+	lengths = []
+	for p in pointArray:
+		if p.X == point.X and p.Y == point.Y and p.Z == point.Z:
+			lengths.append(0)
+		else:
+			length = get_length(point, p)
+			lengths.append(length)
+	lengths_sorted = copy(lengths);
+	lengths_sorted.sort()
+	index = lengths.IndexOf(lengths_sorted[1])
+	second_point = pointArray[index]
+	#return lengths_sorted
+	return second_point
+	
+
+points = IN[0];
+pointArray = copy(points)
+start_point = points[0]
+output = [start_point]
+lengths = []; 
+count = 0
+
+while len(pointArray) &gt;= 0:
+	try:
+		second_point = shortest(start_point, pointArray)
+		try:
+			pointArray.Remove(start_point)
+		except:
+			pass
+		output.append(second_point)
+		start_point = second_point
+		count += 1
+	except:
+		#Run out of points to Check
+		break
+
+OUT = output</Script>
+    </PythonNodeModels.PythonNode>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="d680a859-7fd2-4808-9633-e4827a538267" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="-239.661961832511" y="455.41805623991" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="// List of points to sort starting with the first point&#xD;&#xA;points : var[]" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Output guid="b1f427b9-11f6-4b90-8152-8c7e71699195" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="987.124363361496" y="412.416497629356" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+      <Symbol value="// Points sorted by Distance&#xD;&#xA;points : Point" />
+    </Dynamo.Graph.Nodes.CustomNodes.Output>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="87ef5c28-a6ad-45ad-bb9b-2f29e1412076" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Flatten" x="764.341522318209" y="487.46921741577" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="BuiltIn" function="Flatten@var[]..[]">
+      <PortInfo index="0" default="False" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+  </Elements>
+  <Connectors>
+    <Dynamo.Graph.Connectors.ConnectorModel start="556e3ec8-7953-4b66-9bc3-340feb063f6c" start_index="0" end="87ef5c28-a6ad-45ad-bb9b-2f29e1412076" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="d680a859-7fd2-4808-9633-e4827a538267" start_index="0" end="556e3ec8-7953-4b66-9bc3-340feb063f6c" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="87ef5c28-a6ad-45ad-bb9b-2f29e1412076" start_index="0" end="b1f427b9-11f6-4b90-8152-8c7e71699195" end_index="0" portType="0" />
+  </Connectors>
+  <Notes />
+  <Annotations>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="3b9b27ee-ab22-4f73-bf96-0f078956f531" annotationText="Input" left="-249.661961832511" top="409.41805623991" width="504" height="123" fontSize="30" InitialTop="455.41805623991" InitialHeight="97.8" TextblockHeight="36" backgrouund="#FFFF7BAC">
+      <Models ModelGuid="d680a859-7fd2-4808-9633-e4827a538267" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="efe91fc2-aa9e-409e-8e7e-c9137aff7c27" annotationText="Core" left="387.057889684936" top="416.662647018925" width="273" height="114" fontSize="30" InitialTop="462.662647018925" InitialHeight="97.8" TextblockHeight="36" backgrouund="#FF48B9FF">
+      <Models ModelGuid="556e3ec8-7953-4b66-9bc3-340feb063f6c" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="9aaaf5b6-1003-4657-89e3-f02994cf3620" annotationText="Output" left="754.341522318209" top="366.416497629356" width="503.782841043287" height="214.052719786415" fontSize="30" InitialTop="412.416497629356" InitialHeight="97.8" TextblockHeight="36" backgrouund="#FF71C6A8">
+      <Models ModelGuid="b1f427b9-11f6-4b90-8152-8c7e71699195" />
+      <Models ModelGuid="87ef5c28-a6ad-45ad-bb9b-2f29e1412076" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+  </Annotations>
+  <Presets />
+  <Cameras>
+    <Camera Name="Background Preview" eyeX="-8559.63926515476" eyeY="34476.6848307995" eyeZ="8808.33716656239" lookX="5040.99359164869" lookY="-35962.7168482257" lookZ="-8699.89014134425" upX="0.442665987643626" upY="0.469471568704938" upZ="-0.763965516253299" />
+  </Cameras>
+</Workspace>

@@ -1,0 +1,161 @@
+<Workspace Version="1.3.4.6666" X="417.647868747387" Y="838.639597634696" zoom="0.64810299157633" ScaleFactor="1" Name="ViewSortFiltersAlphabetically" Description="Sorts the Filters of a given View in Alpabetical order" ID="fe6606d6-27dc-4ed6-81f6-e60c57df6247" Category="CIB.Revit.Views.View.Actions">
+  <NamespaceResolutionMap>
+    <ClassMap partialName="Elements.View" resolvedName="Revit.Elements.Views.View" assemblyName="RevitNodes.dll" />
+  </NamespaceResolutionMap>
+  <Elements>
+    <Dynamo.Graph.Nodes.CustomNodes.Output guid="c87bea58-d650-4ab5-bdd8-bbfe5b0ac3df" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="102.221723393706" y="-975.13672725211" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+      <Symbol value="view : Elements.View" />
+    </Dynamo.Graph.Nodes.CustomNodes.Output>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="5398c6f7-150b-440a-8506-a2fc87db4dab" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="-565.084781534937" y="-986.2100608026" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="view : Elements.View" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <PythonNodeModels.PythonNode guid="f2f6083e-f5df-492f-b0ee-66d3a8996a2a" type="PythonNodeModels.PythonNode" nickname="Python Script | Sort Filter Alphabetically" x="-291.876693937732" y="-987.015882787611" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="1">
+      <PortInfo index="0" default="False" />
+      <Script>import clr
+clr.AddReference('ProtoGeometry')
+from Autodesk.DesignScript.Geometry import *
+
+clr.AddReference('System')
+from System.Collections.Generic import *
+
+#Import the Revit Services
+clr.AddReference("RevitServices")
+import RevitServices
+from RevitServices.Persistence import DocumentManager
+from RevitServices.Transactions import TransactionManager
+
+doc = DocumentManager.Instance.CurrentDBDocument
+uiapp = DocumentManager.Instance.CurrentUIApplication
+app = uiapp.Application
+uidoc = DocumentManager.Instance.CurrentUIApplication.ActiveUIDocument
+
+#Import the Revit Nodes
+clr.AddReference("RevitNodes")
+import Revit
+clr.ImportExtensions(Revit.Elements)
+# Import geometry conversion extension methods
+clr.ImportExtensions(Revit.GeometryConversion)
+
+#Import the Revit API
+clr.AddReference("RevitAPI")
+import Autodesk
+from Autodesk.Revit.DB import *
+
+#Import math functions
+import math
+
+#Define functions
+def tolist(obj1):
+	if hasattr(obj1,"__iter__"):
+		return obj1
+	else:
+		return [obj1]
+		
+def FeetToMm(d):
+	return float(d) * 304.8
+	
+def MmToFeet(d):
+	return float(d) / 304.8
+	
+def Flatten(a, result=None):
+	if result is None:
+		result = []
+	for x in a:
+		if isinstance(x, list):
+			Flatten(x, result)
+		else:
+			result.append(x)
+	return result
+
+def SortFiltersAlphabetically(view):
+	view = UnwrapElement(view)
+	filterIds = view.GetFilters();
+	unsortedFilters = []
+	unsortedFilterNames = []
+	for id in filterIds:
+		id = int(str(id))
+		filter = Revit.Elements.ElementSelector.ByElementId(id)
+		unsortedFilters.append(filter)
+		unsortedFilterNames.append(filter.Name)
+	
+	filters = []
+	filterNames = sorted(unsortedFilterNames)
+	for name in filterNames:
+		index = unsortedFilterNames.IndexOf(name)
+		filters.append(unsortedFilters[index])
+		
+	visibilities = []
+	overrides = []
+	for filter in filters:
+		id = ElementId(filter.Id)
+		override = view.GetFilterOverrides(id)
+		isVisible = view.GetFilterVisibility(id)
+		
+		visibilities.append(isVisible)
+		
+		view.RemoveFilter(id)
+		view.AddFilter(id)
+		view.SetFilterOverrides(id, override)
+		view.SetFilterVisibility(id, isVisible)
+	
+	return view
+	
+
+def DynamicSortFiltersAlphabetically(view):
+	output = []
+	IsList = False
+	
+	#Check if input is a List
+	if hasattr(view,"__iter__"):
+		IsList = True
+	
+	if IsList:
+		views = view
+		for view in views:
+			result = DynamicSortFiltersAlphabetically(view)
+			output.append(result)
+			
+	else:
+		output = SortFiltersAlphabetically(view)
+		#output.append(result)
+	
+	if len(tolist(output)) == 0:
+		return output[0]
+	else:
+		return output
+	
+		
+#Define Input (IN)
+view = IN[0]
+
+# Start Transaction
+TransactionManager.Instance.EnsureInTransaction(doc)
+
+OUT = SortFiltersAlphabetically(view)
+	
+
+#End Transaction
+TransactionManager.Instance.TransactionTaskDone()
+
+</Script>
+    </PythonNodeModels.PythonNode>
+  </Elements>
+  <Connectors>
+    <Dynamo.Graph.Connectors.ConnectorModel start="5398c6f7-150b-440a-8506-a2fc87db4dab" start_index="0" end="f2f6083e-f5df-492f-b0ee-66d3a8996a2a" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="f2f6083e-f5df-492f-b0ee-66d3a8996a2a" start_index="0" end="c87bea58-d650-4ab5-bdd8-bbfe5b0ac3df" end_index="0" portType="0" />
+  </Connectors>
+  <Notes />
+  <Annotations>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="4a60b09f-b29a-4dab-904f-dd307aed5ccf" annotationText="Output" left="92.221723393706" top="-1021.13672725211" width="215" height="114" fontSize="30" InitialTop="-975.13672725211" InitialHeight="97.8" TextblockHeight="36" backgrouund="#FF71C6A8">
+      <Models ModelGuid="c87bea58-d650-4ab5-bdd8-bbfe5b0ac3df" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="c30c9404-c1d0-4515-a40c-87d1f5fa02fa" annotationText="Input" left="-575.084781534937" top="-1032.2100608026" width="215" height="114" fontSize="30" InitialTop="-986.2100608026" InitialHeight="97.8" TextblockHeight="36" backgrouund="#FFBB87C6">
+      <Models ModelGuid="5398c6f7-150b-440a-8506-a2fc87db4dab" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="e3004797-be78-4107-9de6-5a056883e6ed" annotationText="Sort Filters Alphabetically" left="-301.876693937732" top="-1069.01588278761" width="281" height="150" fontSize="30" InitialTop="-987.015882787611" InitialHeight="97.8" TextblockHeight="72" backgrouund="#FF48B9FF">
+      <Models ModelGuid="f2f6083e-f5df-492f-b0ee-66d3a8996a2a" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+  </Annotations>
+  <Presets />
+</Workspace>

@@ -1,0 +1,87 @@
+<Workspace Version="1.3.4.6666" X="221.197238106639" Y="414.92395890625" zoom="0.593767140625" ScaleFactor="1" Name="Family.CreateNewType" Description="creates new family type in the open family document" ID="0365c67c-314e-47a1-a7fe-d371a25d9caa" Category="infranea.Family">
+  <NamespaceResolutionMap>
+    <ClassMap partialName="String" resolvedName="DSCore.String" assemblyName="DSCoreNodes.dll" />
+  </NamespaceResolutionMap>
+  <Elements>
+    <PythonNodeModels.PythonNode guid="75c4499d-7c4f-40b5-b185-d0d5189c9a56" type="PythonNodeModels.PythonNode" nickname="create new familyType: Python Script" x="238" y="591" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="true" inputcount="1">
+      <PortInfo index="0" default="False" />
+      <Script>import clr
+
+clr.AddReference("RevitAPI")
+from Autodesk.Revit.DB import *
+
+clr.AddReference("RevitServices")
+import RevitServices
+from RevitServices.Persistence import DocumentManager
+from RevitServices.Transactions import TransactionManager
+import Autodesk
+from Autodesk.Revit.DB import *
+
+# The inputs to this node will be stored as a list in the IN variables.
+dataEnteringNode = IN
+
+new_type_name = IN[0]
+check = 0
+
+doc = DocumentManager.Instance.CurrentDBDocument  # GETS CURRENT DOCUMENT
+
+TransactionManager.Instance.EnsureInTransaction(doc)  # ensures transaction with document core
+if doc.IsFamilyDocument:
+    fam_manager = doc.FamilyManager
+    fam = doc.OwnerFamily
+    fam_types = fam_manager.Types
+
+    if fam_manager.Types.IsEmpty:
+        fam_type = fam_manager.NewType("General")
+        fam_type_name = fam_type.Name
+    else:
+        for type in fam_types:
+            fam_type_name = type.Name
+            if new_type_name == fam_type_name:
+                check = 1
+                break
+        if check == 0:
+            try:
+                fam_type = fam_manager.NewType(new_type_name)
+                fam_type_name = fam_type.Name
+                task_msg = "succesfully create type: " + fam_type_name
+            except:
+                task_msg = "invalid input"
+                fam_type = []
+        else:
+            task_msg = "name already exists"
+            fam_type = []
+
+TransactionManager.Instance.TransactionTaskDone()  # closes transaction manager with document core
+
+OUT = fam_type, task_msg
+</Script>
+    </PythonNodeModels.PythonNode>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="83a934e8-4553-4b4b-a1c5-b2d6f7167744" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="-165" y="613.684161907221" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="new_type_name: string = &quot;General&quot;" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="da1a829a-4da4-45e2-90fa-f3942b6b7d06" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="569" y="619" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="x[0];&#xA;x[1];" ShouldFocus="false">
+      <PortInfo index="0" default="False" />
+    </Dynamo.Graph.Nodes.CodeBlockNodeModel>
+    <Dynamo.Graph.Nodes.CustomNodes.Output guid="52f7fa75-48e6-4f0c-8626-1715a4ddf082" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="773" y="589" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+      <Symbol value="family_types" />
+    </Dynamo.Graph.Nodes.CustomNodes.Output>
+    <Dynamo.Graph.Nodes.CustomNodes.Output guid="9094f3c3-94ac-4d82-a988-57f7eb48e44f" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="785" y="698.5" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+      <Symbol value="task_message" />
+    </Dynamo.Graph.Nodes.CustomNodes.Output>
+  </Elements>
+  <Connectors>
+    <Dynamo.Graph.Connectors.ConnectorModel start="75c4499d-7c4f-40b5-b185-d0d5189c9a56" start_index="0" end="da1a829a-4da4-45e2-90fa-f3942b6b7d06" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="83a934e8-4553-4b4b-a1c5-b2d6f7167744" start_index="0" end="75c4499d-7c4f-40b5-b185-d0d5189c9a56" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="da1a829a-4da4-45e2-90fa-f3942b6b7d06" start_index="0" end="52f7fa75-48e6-4f0c-8626-1715a4ddf082" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="da1a829a-4da4-45e2-90fa-f3942b6b7d06" start_index="1" end="9094f3c3-94ac-4d82-a988-57f7eb48e44f" end_index="0" portType="0" />
+  </Connectors>
+  <Notes />
+  <Annotations />
+  <Presets />
+  <Cameras>
+    <Camera Name="Background Preview" eyeX="-17" eyeY="24" eyeZ="50" lookX="12" lookY="-13" lookZ="-58" upX="0" upY="1" upZ="0" />
+  </Cameras>
+</Workspace>

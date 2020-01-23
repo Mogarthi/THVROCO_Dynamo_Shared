@@ -1,0 +1,103 @@
+<Workspace Version="1.3.4.6666" X="214.889720486521" Y="162.400833611263" zoom="0.48391633011669" ScaleFactor="1" Name="WorksetByName" Description="Creates or Gets a workset by a given name" ID="2a65f415-3c5d-4934-bf03-ef7d156a677f" Category="CIB.Revit.Elements.Workset.Create">
+  <NamespaceResolutionMap />
+  <Elements>
+    <PythonNodeModels.PythonNode guid="cfba698e-fdfd-4ec6-bea7-97391cb56955" type="PythonNodeModels.PythonNode" nickname="Python Script | Create Workset" x="365.5" y="295" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="1">
+      <PortInfo index="0" default="False" />
+      <Script>import clr
+clr.AddReference('ProtoGeometry')
+from Autodesk.DesignScript.Geometry import *
+
+clr.AddReference('System')
+from System.Collections.Generic import *
+
+#Import the Revit Services
+clr.AddReference("RevitServices")
+import RevitServices
+from RevitServices.Persistence import DocumentManager
+from RevitServices.Transactions import TransactionManager
+
+doc = DocumentManager.Instance.CurrentDBDocument
+uiapp = DocumentManager.Instance.CurrentUIApplication
+app = uiapp.Application
+uidoc = DocumentManager.Instance.CurrentUIApplication.ActiveUIDocument
+
+#Import the Revit Nodes
+clr.AddReference("RevitNodes")
+import Revit
+clr.ImportExtensions(Revit.Elements)
+# Import geometry conversion extension methods
+clr.ImportExtensions(Revit.GeometryConversion)
+
+#Import the Revit API
+clr.AddReference("RevitAPI")
+import Autodesk
+from Autodesk.Revit.DB import *
+
+#Import math functions
+import math
+
+#Define functions
+def tolist(obj1):
+	if hasattr(obj1,"__iter__"):
+		return obj1
+	else:
+		return [obj1]
+		
+def FeetToMm(d):
+	return float(d) * 304.8
+	
+def MmToFeet(d):
+	return float(d) / 304.8
+	
+def Flatten(a, result=None):
+	if result is None:
+		result = []
+	for x in a:
+		if isinstance(x, list):
+			Flatten(x, result)
+		else:
+			result.append(x)
+	return result
+
+#Define Input (IN)
+name = IN[0]
+
+# Start Transaction
+TransactionManager.Instance.EnsureInTransaction(doc)
+if doc.IsWorkshared:
+	try:
+		workset = Workset.Create(doc, name)
+	except:
+		worksets = [w for w in FilteredWorksetCollector(doc).ToWorksets()]
+		for w in worksets:
+			if name == w.Name:
+				workset = w
+else: 
+	workset = "Document is not a workshared model";
+			
+	
+#End Transaction
+TransactionManager.Instance.TransactionTaskDone()
+
+#Define Output (OUT)
+OUT = workset</Script>
+    </PythonNodeModels.PythonNode>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="be584b1e-bef8-4d3e-b682-17606d0dd3a3" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="60.5" y="292" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="// the name of the workset&#xD;&#xA;worksetName : string" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Output guid="502ac6ec-c60d-46e3-b952-348acef7dedb" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="621.5" y="286" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+      <Symbol value="// the workset matching the name&#xD;&#xA;workset : var" />
+    </Dynamo.Graph.Nodes.CustomNodes.Output>
+  </Elements>
+  <Connectors>
+    <Dynamo.Graph.Connectors.ConnectorModel start="cfba698e-fdfd-4ec6-bea7-97391cb56955" start_index="0" end="502ac6ec-c60d-46e3-b952-348acef7dedb" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="be584b1e-bef8-4d3e-b682-17606d0dd3a3" start_index="0" end="cfba698e-fdfd-4ec6-bea7-97391cb56955" end_index="0" portType="0" />
+  </Connectors>
+  <Notes />
+  <Annotations />
+  <Presets />
+  <Cameras>
+    <Camera Name="Background Preview" eyeX="-17" eyeY="24" eyeZ="50" lookX="12" lookY="-13" lookZ="-58" upX="0" upY="1" upZ="0" />
+  </Cameras>
+</Workspace>

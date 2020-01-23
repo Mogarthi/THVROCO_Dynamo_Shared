@@ -1,0 +1,108 @@
+<Workspace Version="1.3.4.6666" X="44.8745101129085" Y="25.8341605814724" zoom="1.07925372895183" ScaleFactor="1" Name="ElementSetWorkset" Description="Set the workset of an element" ID="2209b01e-a3aa-47b4-9523-8315b73dcbcb" Category="CIB.Revit.Elements.Element.Actions">
+  <NamespaceResolutionMap>
+    <ClassMap partialName="Elements.Element" resolvedName="Revit.Elements.Element" assemblyName="RevitNodes.dll" />
+    <ClassMap partialName="Elements.Eleent" resolvedName="Rhythm.Revit.Elements.Elements" assemblyName="Rhythm.dll" />
+  </NamespaceResolutionMap>
+  <Elements>
+    <PythonNodeModels.PythonNode guid="822050b0-e3a1-4cc2-b58b-dfde661fe4ac" type="PythonNodeModels.PythonNode" nickname="Python Script | Set Workset" x="229.485963228312" y="100.739154302166" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="2">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <Script>import clr
+clr.AddReference('ProtoGeometry')
+from Autodesk.DesignScript.Geometry import *
+
+clr.AddReference('System')
+from System.Collections.Generic import *
+
+#Import the Revit Services
+clr.AddReference("RevitServices")
+import RevitServices
+from RevitServices.Persistence import DocumentManager
+from RevitServices.Transactions import TransactionManager
+
+doc = DocumentManager.Instance.CurrentDBDocument
+uiapp = DocumentManager.Instance.CurrentUIApplication
+app = uiapp.Application
+uidoc = DocumentManager.Instance.CurrentUIApplication.ActiveUIDocument
+
+#Import the Revit Nodes
+clr.AddReference("RevitNodes")
+import Revit
+clr.ImportExtensions(Revit.Elements)
+# Import geometry conversion extension methods
+clr.ImportExtensions(Revit.GeometryConversion)
+
+#Import the Revit API
+clr.AddReference("RevitAPI")
+import Autodesk
+from Autodesk.Revit.DB import *
+
+#Import math functions
+import math
+
+#Define functions
+def tolist(obj1):
+	if hasattr(obj1,"__iter__"):
+		return obj1
+	else:
+		return [obj1]
+		
+def FeetToMm(d):
+	return float(d) * 304.8
+	
+def MmToFeet(d):
+	return float(d) / 304.8
+	
+def Flatten(a, result=None):
+	if result is None:
+		result = []
+	for x in a:
+		if isinstance(x, list):
+			Flatten(x, result)
+		else:
+			result.append(x)
+	return result
+
+#Define Input (IN)
+element = IN[0]
+workset = IN[1]
+
+
+# Start Transaction
+TransactionManager.Instance.EnsureInTransaction(doc)
+				
+element = UnwrapElement(element)
+parameter = element.GetParameters("Workset")[0]
+parameter.Set(int(str(workset.Id)))
+	
+#End Transaction
+TransactionManager.Instance.TransactionTaskDone()
+
+#Define Output (OUT)
+OUT = element
+	
+</Script>
+    </PythonNodeModels.PythonNode>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="553ec1e4-4bfd-4e7e-8d4d-b5639c5170d3" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="-134.514036771688" y="64.7391543021664" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="// Element to set the workset to&#xD;&#xA;element : Elements.Element" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="f7004cf4-8768-4c35-85c4-ee564993946a" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="18.6609044207419" y="142.981029386952" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="// Workset&#xD;&#xA;workset : var" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Output guid="c0ede2ea-f81e-4bde-8d54-999a8107b921" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="468.821808841484" y="98.4734925474353" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+      <Symbol value="// Element&#xD;&#xA;element : Elements.Element" />
+    </Dynamo.Graph.Nodes.CustomNodes.Output>
+  </Elements>
+  <Connectors>
+    <Dynamo.Graph.Connectors.ConnectorModel start="822050b0-e3a1-4cc2-b58b-dfde661fe4ac" start_index="0" end="c0ede2ea-f81e-4bde-8d54-999a8107b921" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="553ec1e4-4bfd-4e7e-8d4d-b5639c5170d3" start_index="0" end="822050b0-e3a1-4cc2-b58b-dfde661fe4ac" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="f7004cf4-8768-4c35-85c4-ee564993946a" start_index="0" end="822050b0-e3a1-4cc2-b58b-dfde661fe4ac" end_index="1" portType="0" />
+  </Connectors>
+  <Notes />
+  <Annotations />
+  <Presets />
+  <Cameras>
+    <Camera Name="Background Preview" eyeX="-17" eyeY="24" eyeZ="50" lookX="12" lookY="-13" lookZ="-58" upX="0" upY="1" upZ="0" />
+  </Cameras>
+</Workspace>

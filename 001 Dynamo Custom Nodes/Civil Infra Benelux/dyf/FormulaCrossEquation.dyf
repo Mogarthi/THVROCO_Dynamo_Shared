@@ -1,0 +1,44 @@
+<Workspace Version="1.3.4.6666" X="-315.217394577088" Y="-4.23201702278902" zoom="1.52831800092801" ScaleFactor="1" Name="FormulaCrossEquation" Description="Calculates value A2 for A1 x B1 == A2 x B2" ID="6a2f813f-ed25-4408-afb3-6b91be6f45d5" Category="CIB.Core.Math.Actions">
+  <NamespaceResolutionMap />
+  <Elements>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="d392a014-b9da-44a9-874f-0d3eb640b080" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="305.309429870415" y="183.75923974521" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="// Value for A in the First Formula&#xD;&#xA;A1 : double = 0" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="9bf6a655-3993-4685-971d-ababc21ab769" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="300.02148489277" y="258.343519444923" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="// Value for B in the First Formula&#xD;&#xA;B1 : double = 0" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="9c571283-7360-4b56-99e1-1b4db2c528e1" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="304.696927001296" y="335.109297215696" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="// Value for B in the Second Formula&#xD;&#xA;B2 : double = 0" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Output guid="082ed15d-c911-474f-8cfd-641da6b04bff" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="922.521187673081" y="263.659779483719" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+      <Symbol value="// Value for A in the Second Formula&#xD;&#xA;A2:double" />
+    </Dynamo.Graph.Nodes.CustomNodes.Output>
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="3baf3f64-1ffe-41fd-a8ae-9fc96dc6b8ef" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="748.147281687062" y="265.210185636246" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="x*y/y2;" ShouldFocus="false">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <PortInfo index="2" default="False" />
+    </Dynamo.Graph.Nodes.CodeBlockNodeModel>
+  </Elements>
+  <Connectors>
+    <Dynamo.Graph.Connectors.ConnectorModel start="d392a014-b9da-44a9-874f-0d3eb640b080" start_index="0" end="3baf3f64-1ffe-41fd-a8ae-9fc96dc6b8ef" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="9bf6a655-3993-4685-971d-ababc21ab769" start_index="0" end="3baf3f64-1ffe-41fd-a8ae-9fc96dc6b8ef" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="9c571283-7360-4b56-99e1-1b4db2c528e1" start_index="0" end="3baf3f64-1ffe-41fd-a8ae-9fc96dc6b8ef" end_index="2" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="3baf3f64-1ffe-41fd-a8ae-9fc96dc6b8ef" start_index="0" end="082ed15d-c911-474f-8cfd-641da6b04bff" end_index="0" portType="0" />
+  </Connectors>
+  <Notes />
+  <Annotations>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="9a668b1b-e8d1-494f-bb92-72fbe1810668" annotationText="Input" left="290.02148489277" top="137.75923974521" width="344.287944977645" height="274.350057470486" fontSize="30" InitialTop="183.75923974521" InitialHeight="258.350057470486" TextblockHeight="36" backgrouund="#FFC1D676">
+      <Models ModelGuid="d392a014-b9da-44a9-874f-0d3eb640b080" />
+      <Models ModelGuid="9bf6a655-3993-4685-971d-ababc21ab769" />
+      <Models ModelGuid="9c571283-7360-4b56-99e1-1b4db2c528e1" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="cd571b7c-75f3-4c61-bb5f-41c9d7b2f864" annotationText="Output" left="912.521187673081" top="217.659779483719" width="347" height="123" fontSize="30" InitialTop="263.659779483719" InitialHeight="107" TextblockHeight="36" backgrouund="#FFC1D676">
+      <Models ModelGuid="082ed15d-c911-474f-8cfd-641da6b04bff" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+  </Annotations>
+  <Presets />
+  <Cameras>
+    <Camera Name="Background Preview" eyeX="17.6280097961426" eyeY="7.74806594848633" eyeZ="19.8963146209717" lookX="67.5906600952148" lookY="-9.57835292816162" lookZ="-52.6380348205566" upX="-0.0824698284268379" upY="0.994521915912628" upZ="0.0642255917191505" />
+  </Cameras>
+</Workspace>

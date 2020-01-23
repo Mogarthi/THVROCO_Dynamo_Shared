@@ -1,0 +1,46 @@
+<Workspace Version="1.3.4.6666" X="282.503511713995" Y="104.630198903098" zoom="1.08024631085225" ScaleFactor="1" Name="ExcelColumnByHeader" Description="Returns the column  corresponding with the selected Header" ID="b4a0a3aa-3560-4c95-aed1-dcc6db3130f3" Category="CIB.Office.Excel.Actions">
+  <NamespaceResolutionMap>
+    <ClassMap partialName="List" resolvedName="DSCore.List" assemblyName="DSCoreNodes.dll" />
+    <ClassMap partialName="String" resolvedName="DSCore.String" assemblyName="DSCoreNodes.dll" />
+  </NamespaceResolutionMap>
+  <Elements>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="88802592-c3b2-48b5-9c96-1cfd8c1640e6" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="IndexOf" x="430.933763163687" y="235.616889884998" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="BuiltIn" function="IndexOf@var[]..[],var[]..[]">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <Dynamo.Graph.Nodes.CustomNodes.Output guid="6f86414e-47e0-4c7c-aafc-2ae7b173f2c2" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="1003.54629163437" y="130.089724808959" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+      <Symbol value="// The Items of the Corresponding Header&#xD;&#xA;Items;" />
+    </Dynamo.Graph.Nodes.CustomNodes.Output>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="dec6035d-f665-4634-94a2-5124c08ea740" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="List.GetItemAtIndex" x="673.897153744502" y="129.875484808046" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="DSCoreNodes.dll" function="DSCore.List.GetItemAtIndex@var[]..[],int">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="43088a6a-255f-420d-86dc-ef8247d9196b" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="-353.09140973209" y="39.3294819471605" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="//A flat list with strings which contain the Headers of the Columns in Excel&#xD;&#xA;Headers : string[];" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="135257e7-30db-405f-a648-7e54e551caf5" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="51.5874844135921" y="153.787153375034" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="// Excel Columns as lists&#xD;&#xA;ExcelRows:var[]..[];" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="4c38b420-3a91-475b-bc6e-dc564d9b8065" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="-1.89011259231347" y="312.523708495757" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="// The Name of the Header to search for&#xD;&#xA;HeaderName : string;" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="16a614f4-b104-4a79-9120-f114ce5ad32d" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="List.Transpose" x="435.997020320127" y="131.782431584494" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="DSCoreNodes.dll" function="DSCore.List.Transpose@var[]..[]">
+      <PortInfo index="0" default="False" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+  </Elements>
+  <Connectors>
+    <Dynamo.Graph.Connectors.ConnectorModel start="88802592-c3b2-48b5-9c96-1cfd8c1640e6" start_index="0" end="dec6035d-f665-4634-94a2-5124c08ea740" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="dec6035d-f665-4634-94a2-5124c08ea740" start_index="0" end="6f86414e-47e0-4c7c-aafc-2ae7b173f2c2" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="43088a6a-255f-420d-86dc-ef8247d9196b" start_index="0" end="88802592-c3b2-48b5-9c96-1cfd8c1640e6" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="135257e7-30db-405f-a648-7e54e551caf5" start_index="0" end="16a614f4-b104-4a79-9120-f114ce5ad32d" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="4c38b420-3a91-475b-bc6e-dc564d9b8065" start_index="0" end="88802592-c3b2-48b5-9c96-1cfd8c1640e6" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="16a614f4-b104-4a79-9120-f114ce5ad32d" start_index="0" end="dec6035d-f665-4634-94a2-5124c08ea740" end_index="0" portType="0" />
+  </Connectors>
+  <Notes />
+  <Annotations />
+  <Presets />
+  <Cameras>
+    <Camera Name="Background Preview" eyeX="17.6280097961426" eyeY="7.74806594848633" eyeZ="19.8963146209717" lookX="67.5906600952148" lookY="-9.57835292816162" lookZ="-52.6380348205566" upX="-0.0824698284268379" upY="0.994521915912628" upZ="0.0642255917191505" />
+  </Cameras>
+</Workspace>

@@ -1,0 +1,169 @@
+{
+  "Uuid": "1f193524-00df-4f28-b51c-94ffa013ee65",
+  "IsCustomNode": true,
+  "Category": "infranea.Lists",
+  "Description": "converts list items to string",
+  "Name": "List.ItemsToString",
+  "ElementResolver": {
+    "ResolutionMap": {
+      "List": {
+        "Key": "List",
+        "Value": "BuiltIn.ds"
+      }
+    }
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\nclr.AddReference('ProtoGeometry')\nfrom Autodesk.DesignScript.Geometry import *\n#The inputs to this node will be stored as a list in the IN variables.\ndef getListItems(l,c=0, g=\"\"):\n\toList1=[]\n\toList2=[]\n\ttList1=[]\n\tgroup=g #defines the grouping index of values (0 by default)\n\tcounter=c #counter for levels of nesting (to create correct structure for output)\n\tloopnum=0\n\tfor e in l: #for each element in list\n\t\tif isinstance(e, list): #if element is of type 'list'\n\t\t\tcounter=c+1 #add 1 to counter\n\t\t\tgroup=group + \"\\.\" + str(loopnum)\n\t\t\toList1.append([e, counter,group]) #rerun function\n\t\telse: \n\t\t\toList1.append([e,counter, group])#append value and nestlvl of element to outptulist\n\t\tloopnum=loopnum+1\n\t#return oList1\t\n\toList2.append(list(oList1))\n\treturn oList1 #returns list [listvalue, additional nest lvls] \n#--------------------------------end functions\n\t\ninlist=IN[0]\noutValue=[]\noutNestlvl=[]\noutGrp=[]\n\ntemplist1=[]\ntemplist2=[]\ntemplist3=[]\nt0=[]\n\ntemplist=[]\ngroupnum=0\n\n\nfor i in inlist:\n\tt0=getListItems(i,0,str(groupnum))\n\ttemplist1.Clear()\n\tfor e in t0:\n\t\ttemplist1.append(str(e[0])) #gets element value\n\toutValue.append(list(templist1))\n\tgroupnum=groupnum+1\n\t\n#Assign your output to the OUT variable.\nOUT = outValue",
+      "VariableInputPorts": true,
+      "Id": "50657c052b64407e85ddbd83cc244bc1",
+      "Inputs": [
+        {
+          "Id": "6f454694e04649d0b3a7bdfa0560ee2e",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3b14c8976b9c4419a6a694bbde23030a",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
+      "NodeType": "InputNode",
+      "Parameter": {
+        "Name": "inlist",
+        "TypeName": "List",
+        "TypeRank": 0,
+        "DefaultValue": null,
+        "Description": ""
+      },
+      "Id": "22805d9ff4094e778f4c4afe1dcf789e",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "cf21d53701b54b93b69476ec86324c79",
+          "Name": "",
+          "Description": "Symbol",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Output, DynamoCore",
+      "NodeType": "OutputNode",
+      "ElementResolver": null,
+      "Symbol": "List",
+      "Id": "d2c9bb05f2e8476e910daa18fa3782e8",
+      "Inputs": [
+        {
+          "Id": "53d9c61bd5c1497bb9b35a711a6c4f14",
+          "Name": "",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [],
+      "Replication": "Disabled",
+      "Description": "A function output, use with custom nodes"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "3b14c8976b9c4419a6a694bbde23030a",
+      "End": "53d9c61bd5c1497bb9b35a711a6c4f14",
+      "Id": "7256a8a742014682937b859d4f8621e8"
+    },
+    {
+      "Start": "cf21d53701b54b93b69476ec86324c79",
+      "End": "6f454694e04649d0b3a7bdfa0560ee2e",
+      "Id": "1b0067144abe45899171a47eb53ef4ef"
+    }
+  ],
+  "Dependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.2.1.5175",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -396739.9375,
+      "EyeY": 68310.1640625,
+      "EyeZ": -344598.40625,
+      "LookX": 69004.578125,
+      "LookY": -69167.3984375,
+      "LookZ": -66197.59375,
+      "UpX": 0.28774997591972351,
+      "UpY": 0.91706001758575439,
+      "UpZ": -0.27604484558105469
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "force nested list to string for incoming list: python script",
+        "Id": "50657c052b64407e85ddbd83cc244bc1",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 395.0,
+        "Y": 364.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Input",
+        "Id": "22805d9ff4094e778f4c4afe1dcf789e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 296.0,
+        "Y": 240.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Output",
+        "Id": "d2c9bb05f2e8476e910daa18fa3782e8",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 801.0,
+        "Y": 239.0
+      }
+    ],
+    "Annotations": [],
+    "X": 0.0,
+    "Y": 0.0,
+    "Zoom": 1.0
+  }
+}

@@ -1,0 +1,129 @@
+<Workspace Version="1.3.4.6666" X="-336.990683327394" Y="-229.137852608971" zoom="0.894168083312077" ScaleFactor="1" Name="SubcategoryGetProperties" Description="Get the properties of the Subcategory" ID="84d8bba2-1011-45a9-abf8-a446ba791491" Category="CIB.Revit.Elements.SubCategory.Query">
+  <NamespaceResolutionMap>
+    <ClassMap partialName="LinePatternElement" resolvedName="Revit.Elements.LinePatternElement" assemblyName="RevitNodes.dll" />
+    <ClassMap partialName="Material" resolvedName="Revit.Elements.Material" assemblyName="RevitNodes.dll" />
+    <ClassMap partialName="Color" resolvedName="DSCore.Color" assemblyName="DSCoreNodes.dll" />
+  </NamespaceResolutionMap>
+  <Elements>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="cffe9e96-f5ae-4fa8-902b-cf834c3f29c6" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="218.869827969729" y="414.017807029989" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="//Subcategory&#xD;&#xA;subcategory : var" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="b8ac2ece-2595-470f-afb7-25d5768d152a" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="625" y="434" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="l[0];&#xA;l[1];&#xA;l[2];&#xA;l[3];&#xA;l[4];" ShouldFocus="false">
+      <PortInfo index="0" default="False" />
+    </Dynamo.Graph.Nodes.CodeBlockNodeModel>
+    <Dynamo.Graph.Nodes.CustomNodes.Output guid="df1689ea-bff5-4d2d-b1c1-c7cfcce05a4a" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="790.44474210634" y="297.103333001317" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+      <Symbol value="//Projection Line Weight&#xD;&#xA;projectionLineWeight : int" />
+    </Dynamo.Graph.Nodes.CustomNodes.Output>
+    <Dynamo.Graph.Nodes.CustomNodes.Output guid="0b52c8a0-e142-4bc9-83be-41cf6b85bce8" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="802.853859790856" y="387.131910067626" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+      <Symbol value="//Projection Line Weight&#xD;&#xA;cutLineWeight : int" />
+    </Dynamo.Graph.Nodes.CustomNodes.Output>
+    <Dynamo.Graph.Nodes.CustomNodes.Output guid="0919dc8e-1103-43d7-ada5-5af92963153e" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="846.061414510162" y="468.425741264106" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+      <Symbol value="//Line Color&#xD;&#xA;lineColor : Color" />
+    </Dynamo.Graph.Nodes.CustomNodes.Output>
+    <Dynamo.Graph.Nodes.CustomNodes.Output guid="b035e9d4-01d1-4cee-b8e9-7ebf207b0a9f" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="844.456780566591" y="552.008688970265" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+      <Symbol value="//Line Color&#xD;&#xA;linePattern : LinePatternElement " />
+    </Dynamo.Graph.Nodes.CustomNodes.Output>
+    <Dynamo.Graph.Nodes.CustomNodes.Output guid="e71b5dc8-7bb5-40d0-9e8a-6a8ad944e80e" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="809.983701593946" y="625.364301052854" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+      <Symbol value="//Line Color&#xD;&#xA;material : Material" />
+    </Dynamo.Graph.Nodes.CustomNodes.Output>
+    <PythonNodeModels.PythonNode guid="809be0d7-9367-493f-86b8-31318e813a53" type="PythonNodeModels.PythonNode" nickname="Python Script" x="458.516347182459" y="444.142281547265" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="true" inputcount="1">
+      <PortInfo index="0" default="False" />
+      <Script>import clr
+clr.AddReference('ProtoGeometry')
+from Autodesk.DesignScript.Geometry import *
+
+clr.AddReference('DSCoreNodes')
+from DSCore import Color as DesignscriptColor
+
+# Import ToDSType(bool) extension method
+clr.AddReference('RevitNodes')
+import Revit
+clr.ImportExtensions(Revit.Elements)
+clr.ImportExtensions(Revit.GeometryConversion)
+
+# Import DocumentManager and TransactionManager
+clr.AddReference('RevitServices')
+import RevitServices
+from RevitServices.Persistence import DocumentManager
+from RevitServices.Transactions import TransactionManager
+
+# Import RevitAPI
+clr.AddReference('RevitAPI')
+import Autodesk
+from Autodesk.Revit.DB import *
+
+clr.AddReference("System.Windows.Forms")
+import System
+from System.Windows.Forms import *
+
+doc = DocumentManager.Instance.CurrentDBDocument
+uiapp = DocumentManager.Instance.CurrentUIApplication
+app = uiapp.Application
+
+#from System.Collections.Generic import *
+
+#Utility functions
+def tolist(obj1):
+	if hasattr(obj1,"__iter__"):
+		return obj1
+	else:
+		return [obj1]
+		
+def ContainsName(subCat, newName):
+	bool = False
+	for i in subCat:
+		if newName == i.Name:
+			bool = True
+			break
+		else:
+			pass
+	return bool
+
+
+#The inputs to this node will be stored as a list in the IN variable.
+subcategory = UnwrapElement(IN[0])
+output = []
+
+
+
+TransactionManager.Instance.EnsureInTransaction(doc)
+
+#LineWeights
+output.append(subcategory.GetLineWeight(GraphicsStyleType.Projection))
+output.append(subcategory.GetLineWeight(GraphicsStyleType.Cut))
+color = subcategory.LineColor
+dsColor = DesignscriptColor.ByARGB(255, color.Red, color.Green, color.Blue)
+output.append(dsColor)
+output.append(doc.GetElement(subcategory.GetLinePatternId(GraphicsStyleType.Projection)))
+output.append(subcategory.Material)
+
+TransactionManager.Instance.TransactionTaskDone()
+
+OUT = output</Script>
+    </PythonNodeModels.PythonNode>
+  </Elements>
+  <Connectors>
+    <Dynamo.Graph.Connectors.ConnectorModel start="cffe9e96-f5ae-4fa8-902b-cf834c3f29c6" start_index="0" end="809be0d7-9367-493f-86b8-31318e813a53" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="b8ac2ece-2595-470f-afb7-25d5768d152a" start_index="0" end="df1689ea-bff5-4d2d-b1c1-c7cfcce05a4a" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="b8ac2ece-2595-470f-afb7-25d5768d152a" start_index="1" end="0b52c8a0-e142-4bc9-83be-41cf6b85bce8" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="b8ac2ece-2595-470f-afb7-25d5768d152a" start_index="2" end="0919dc8e-1103-43d7-ada5-5af92963153e" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="b8ac2ece-2595-470f-afb7-25d5768d152a" start_index="3" end="b035e9d4-01d1-4cee-b8e9-7ebf207b0a9f" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="b8ac2ece-2595-470f-afb7-25d5768d152a" start_index="4" end="e71b5dc8-7bb5-40d0-9e8a-6a8ad944e80e" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="809be0d7-9367-493f-86b8-31318e813a53" start_index="0" end="b8ac2ece-2595-470f-afb7-25d5768d152a" end_index="0" portType="0" />
+  </Connectors>
+  <Notes />
+  <Annotations>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="800cc76c-4127-4e19-b260-6e1ed439ccc8" annotationText="Input" left="208.869827969729" top="368.017807029989" width="190" height="123" fontSize="30" InitialTop="414.017807029989" InitialHeight="486" TextblockHeight="36" backgrouund="#FFC1D676">
+      <Models ModelGuid="cffe9e96-f5ae-4fa8-902b-cf834c3f29c6" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+  </Annotations>
+  <Presets />
+  <Cameras>
+    <Camera Name="Background Preview" eyeX="-17" eyeY="24" eyeZ="50" lookX="12" lookY="-13" lookZ="-58" upX="0" upY="1" upZ="0" />
+  </Cameras>
+</Workspace>

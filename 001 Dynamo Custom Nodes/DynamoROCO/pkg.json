@@ -1,0 +1,18 @@
+{
+  "license": "",
+  "file_hash": null,
+  "name": "DynamoROCO",
+  "version": "2.3.0.0",
+  "description": "Dynamo Nodes for ROCO",
+  "group": "",
+  "keywords": null,
+  "dependencies": [],
+  "contents": "",
+  "engine_version": "2.3.0.0",
+  "engine": "dynamo",
+  "engine_metadata": "",
+  "site_url": "",
+  "repository_url": "",
+  "contains_binaries": true,
+  "node_libraries": ["DynamoROCO, Version=2.3.0.0, Culture=neutral, PublicKeyToken=null"]
+}
