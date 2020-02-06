@@ -1,7 +1,7 @@
 {
   "Uuid": "465bfb6d-423d-4d05-ac94-95f3f3c22474",
   "IsCustomNode": true,
-  "Category": "DynamoROCODyfs.DynamoROCO.UIObjects",
+  "Category": "DynamoROCODyfs.UIObjects",
   "Description": "Import config file names stored in workspace, output UI objects for Data-Shapes containing filenames",
   "Name": "readConfigFileDirectory",
   "ElementResolver": {

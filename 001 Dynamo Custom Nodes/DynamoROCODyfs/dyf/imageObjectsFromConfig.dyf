@@ -1,7 +1,7 @@
 {
   "Uuid": "db29d7ad-1ad6-495a-9e8b-617e532c1c27",
   "IsCustomNode": true,
-  "Category": "DynamoROCODyfs.DynamoROCO.UIObjects",
+  "Category": "DynamoROCODyfs.UIObjects",
   "Description": "Create ui objects from configuration file ",
   "Name": "imageObjectsFromConfig",
   "ElementResolver": {

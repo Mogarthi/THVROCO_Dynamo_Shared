@@ -1,4 +1,4 @@
-<Workspace Version="1.3.4.6666" X="179.865" Y="47.7225" zoom="0.8425" ScaleFactor="1" Name="NeedsDummyAlignment" Description="" ID="5f5755a5-8018-4255-a120-82440374407e" Category="DynamoROCODyfs">
+<Workspace Version="1.3.4.6666" X="179.865" Y="47.7225" zoom="0.8425" ScaleFactor="1" Name="NeedsDummyAlignment" Description="" ID="5f5755a5-8018-4255-a120-82440374407e" Category="DynamoROCODyfs.Alignments">
   <NamespaceResolutionMap />
   <Elements>
     <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="ba6f0272-188a-4354-9d31-dad0bf99f15b" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="17.5" y="110" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">

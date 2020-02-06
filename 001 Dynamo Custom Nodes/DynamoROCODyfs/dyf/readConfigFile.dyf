@@ -1,7 +1,7 @@
 {
   "Uuid": "15423c85-67ad-4eea-89be-6921c61af48e",
   "IsCustomNode": true,
-  "Category": "DynamoROCODyfs.DynamoROCO.DataFunctions",
+  "Category": "DynamoROCODyfs.DataFunctions",
   "Description": "Reads config file from filepath, outputs dictionary of content",
   "Name": "readConfigFile",
   "ElementResolver": {

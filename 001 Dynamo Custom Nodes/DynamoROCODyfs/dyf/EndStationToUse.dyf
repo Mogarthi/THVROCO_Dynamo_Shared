@@ -1,4 +1,4 @@
-<Workspace Version="1.3.4.6666" X="-42.0913851000372" Y="67.5705200020216" zoom="0.888789228297156" ScaleFactor="1" Name="EndStationToUse" Description="Depending on the value of the end station input, selects the input value or the alignment length" ID="321b7154-f2f9-4aa1-b12c-d6a049e18365" Category="Archive">
+<Workspace Version="1.3.4.6666" X="-42.0913851000372" Y="67.5705200020216" zoom="0.888789228297156" ScaleFactor="1" Name="EndStationToUse" Description="Depending on the value of the end station input, selects the input value or the alignment length" ID="321b7154-f2f9-4aa1-b12c-d6a049e18365" Category="DynamoROCODyfs.Alignments">
   <NamespaceResolutionMap />
   <Elements>
     <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="8d0df092-5fa0-4fea-8bf8-eae07e0f8236" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="123.849644436962" y="132.870837146367" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="0;" ShouldFocus="false" />

@@ -1,0 +1,63 @@
+<Workspace Version="1.3.4.6666" X="283.421118950926" Y="-29.1339081718576" zoom="1.27771698410772" ScaleFactor="1" Name="StartStationToUse" Description="Checks if the given startstation is in conflict with the startstation of the alignment " ID="0333f528-516e-436e-b8ef-be71b804c44f" Category="DynamoROCODyfs">
+  <NamespaceResolutionMap>
+    <ClassMap partialName="Curve" resolvedName="Autodesk.DesignScript.Geometry.Curve" assemblyName="ProtoGeometry.dll" />
+    <ClassMap partialName="FamilyType" resolvedName="Revit.Elements.FamilyType" assemblyName="RevitNodes.dll" />
+    <ClassMap partialName="String" resolvedName="DSCore.String" assemblyName="DSCoreNodes.dll" />
+    <ClassMap partialName="List" resolvedName="DSCore.List" assemblyName="DSCoreNodes.dll" />
+    <ClassMap partialName="Revit.Geometry.Elements" resolvedName="Revit.Geometry" assemblyName="LunchBox.dll" />
+    <ClassMap partialName="Revit.Geometry" resolvedName="Revit.Geometry" assemblyName="LunchBox.dll" />
+    <ClassMap partialName="AdaptiveComponent" resolvedName="Revit.Elements.AdaptiveComponent" assemblyName="RevitNodes.dll" />
+    <ClassMap partialName="Revit.Geometry.Element" resolvedName="Revit.Geometry" assemblyName="LunchBox.dll" />
+    <ClassMap partialName="Revit.Geometry.Geometry" resolvedName="Revit.Geometry" assemblyName="LunchBox.dll" />
+    <ClassMap partialName="PolyCurve" resolvedName="Autodesk.DesignScript.Geometry.PolyCurve" assemblyName="ProtoGeometry.dll" />
+    <ClassMap partialName="Autodesk.DesignScript.Geometry.Curve" resolvedName="Autodesk.DesignScript.Geometry.Curve" assemblyName="ProtoGeometry.dll" />
+    <ClassMap partialName="Autodesk.DesignScript.Geometry.PolyCurve" resolvedName="Autodesk.DesignScript.Geometry.PolyCurve" assemblyName="ProtoGeometry.dll" />
+    <ClassMap partialName="CivilApplication" resolvedName="CivilConnection.CivilApplication" assemblyName="Autodesk2020.dll" />
+    <ClassMap partialName="Math" resolvedName="DSCore.Math" assemblyName="DSCoreNodes.dll" />
+  </NamespaceResolutionMap>
+  <Elements>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="4723f5a8-4fe2-4e76-a59a-1160518120d6" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Alignment.Start" x="250" y="125.816466150049" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="..\..\CivilConnection2020\bin\Autodesk2020.dll" function="CivilConnection.Alignment.Start">
+      <PortInfo index="0" default="False" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="ae373e1a-9d1f-49d5-919e-0ef09342a60d" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="&gt;" x="535.058323543366" y="0" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="Operators" function="&gt;@var[]..[],var[]..[]">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <CoreNodeModels.Logic.If guid="0029dcff-49f8-4c6c-bc19-0214d4487c31" type="CoreNodeModels.Logic.If" nickname="If" x="835.650583888735" y="43.6281372867497" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <PortInfo index="2" default="False" />
+    </CoreNodeModels.Logic.If>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="e9390da8-6d28-46dd-95d5-3ed925844b9c" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="0" y="0" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="alignment : Alignment" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="ec4b9bad-66b5-40ac-ace9-bce70e8bddcb" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="-2.34793779633048" y="150" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="startstation" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Output guid="634cf726-73e2-467a-9610-948ff591186a" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="1037.65058388874" y="0" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+      <Symbol value="result" />
+    </Dynamo.Graph.Nodes.CustomNodes.Output>
+  </Elements>
+  <Connectors>
+    <Dynamo.Graph.Connectors.ConnectorModel start="4723f5a8-4fe2-4e76-a59a-1160518120d6" start_index="0" end="ae373e1a-9d1f-49d5-919e-0ef09342a60d" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="4723f5a8-4fe2-4e76-a59a-1160518120d6" start_index="0" end="0029dcff-49f8-4c6c-bc19-0214d4487c31" end_index="2" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="ae373e1a-9d1f-49d5-919e-0ef09342a60d" start_index="0" end="0029dcff-49f8-4c6c-bc19-0214d4487c31" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="0029dcff-49f8-4c6c-bc19-0214d4487c31" start_index="0" end="634cf726-73e2-467a-9610-948ff591186a" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="e9390da8-6d28-46dd-95d5-3ed925844b9c" start_index="0" end="4723f5a8-4fe2-4e76-a59a-1160518120d6" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="ec4b9bad-66b5-40ac-ace9-bce70e8bddcb" start_index="0" end="ae373e1a-9d1f-49d5-919e-0ef09342a60d" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="ec4b9bad-66b5-40ac-ace9-bce70e8bddcb" start_index="0" end="0029dcff-49f8-4c6c-bc19-0214d4487c31" end_index="1" portType="0" />
+  </Connectors>
+  <Notes />
+  <Annotations>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="00190b22-8c59-499a-b966-76dd3de0afae" annotationText="Startstation of Alignment" left="240" top="-46" width="732.650583888735" height="264.816466150049" fontSize="30" InitialTop="0" InitialHeight="208.301824799676" TextblockHeight="36" backgrouund="#FFC1D676">
+      <Models ModelGuid="4723f5a8-4fe2-4e76-a59a-1160518120d6" />
+      <Models ModelGuid="ae373e1a-9d1f-49d5-919e-0ef09342a60d" />
+      <Models ModelGuid="0029dcff-49f8-4c6c-bc19-0214d4487c31" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+  </Annotations>
+  <Presets />
+  <Cameras>
+    <Camera Name="Background Preview" eyeX="21.5333194732666" eyeY="20.0960750579834" eyeZ="23.8342666625977" lookX="-26.533317565918" lookY="-9.09607601165771" lookZ="-31.8342666625977" upX="-2.53402069564247E-14" upY="1" upZ="2.21966542368612E-14" />
+  </Cameras>
+</Workspace>

@@ -1,7 +1,7 @@
 {
   "Uuid": "686ae292-8086-44e3-bb08-535aae98eef5",
   "IsCustomNode": true,
-  "Category": "DynamoROCODyfs",
+  "Category": "DynamoROCODyfs.UIObjects",
   "Description": "",
   "Name": "LoadRocoLogo",
   "ElementResolver": {

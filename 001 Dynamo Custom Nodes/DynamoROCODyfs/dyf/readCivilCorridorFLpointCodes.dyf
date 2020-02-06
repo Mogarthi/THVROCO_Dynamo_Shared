@@ -1,7 +1,7 @@
 {
   "Uuid": "d53fa68a-0a25-4629-b844-21d1dd75be49",
   "IsCustomNode": true,
-  "Category": "DynamoROCODyfs.DynamoROCO.UIObjects",
+  "Category": "DynamoROCODyfs.UIObjects",
   "Description": "Reads the open civil documents for corridor featurelinepoints and outputs treeview with  docname | corridorname | FLPointName|",
   "Name": "readCivilCorridorFLpointCodes",
   "ElementResolver": {

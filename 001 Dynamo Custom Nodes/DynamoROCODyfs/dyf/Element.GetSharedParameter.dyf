@@ -1,0 +1,170 @@
+{
+  "Uuid": "0a3abe64-13f0-4e48-ba69-2670ac568670",
+  "IsCustomNode": true,
+  "Category": "DynamoROCODyfs.Elements",
+  "Description": "Gets all shared parameters of object",
+  "Name": "Element.GetSharedParameter",
+  "ElementResolver": {
+    "ResolutionMap": {
+      "List": {
+        "Key": "List",
+        "Value": "BuiltIn.ds"
+      }
+    }
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\r\nclr.AddReference('RevitAPI')\r\nfrom Autodesk.Revit.DB import *\r\nfrom Autodesk.Revit.DB.UnitUtils import *\r\n\r\nclr.AddReference(\"RevitNodes\")\r\nimport Revit\r\nfrom Revit.Elements import *\r\nclr.ImportExtensions(Revit.Elements)\r\n\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom RevitServices.Transactions import TransactionManager\r\n\t\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nTransactionManager.Instance.EnsureInTransaction(doc)\r\n\r\n\r\noutDict= {}\r\n\r\noutList =[]\r\n\r\nitems = IN[0]\r\nif \"LIST\" in str(type(items)).ToUpper():\r\n\tfor item in items:\r\n\t\tunwrapItem = UnwrapElement(item)\r\n\t\titemParam=item.Parameters\r\n\t\tfor param in itemParam:\r\n\t\t\tunwrappedParam = unwrapItem.GetParameters(param.Name)[0]\r\n\t\t\tif unwrappedParam.IsShared:\r\n\t\t\t\toutDict[str(unwrappedParam.GUID)] = {\"element\":item.Id, \"guid\":unwrappedParam.GUID,\"Name\":param.Name,\"Value\":param.Value}\r\n\t\toutList.append(outDict)\r\nelse:\r\n\titem = items\r\n\tunwrapItem = UnwrapElement(item)\r\n\titemParam=item.Parameters\r\n\tfor param in itemParam:\r\n\t\tunwrappedParam = unwrapItem.GetParameters(param.Name)[0]\r\n\t\tif unwrappedParam.IsShared:\r\n\t\t\toutDict[str(unwrappedParam.GUID)] = {\"element\":item.Id, \"guid\":unwrappedParam.GUID,\"Name\":param.Name,\"Value\":param.Value}\r\n\toutList.append(outDict)\r\n\t\r\nTransactionManager.Instance.TransactionTaskDone()\r\n\r\nOUT = outList",
+      "VariableInputPorts": true,
+      "Id": "4088793513c64e429670d6aa7f3c078d",
+      "Inputs": [
+        {
+          "Id": "272d1b763bd3485e8b394181a8c950e1",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "5e1dbea2fc7e4a91bb8e73b39001aae5",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
+      "NodeType": "InputNode",
+      "Parameter": {
+        "Name": "element",
+        "TypeName": "var",
+        "TypeRank": -1,
+        "DefaultValue": null,
+        "Description": ""
+      },
+      "Id": "82a124333003479089239b542ff4393c",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "c04d5c92db7745f9a9f2a9aaa357dbc7",
+          "Name": "",
+          "Description": "Symbol",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Output, DynamoCore",
+      "NodeType": "OutputNode",
+      "ElementResolver": null,
+      "Symbol": "parameters",
+      "Id": "4bd1a2c1e11f4298b2b5c591390c6ef4",
+      "Inputs": [
+        {
+          "Id": "5fa253815a61427caca38ce99759a4bd",
+          "Name": "",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [],
+      "Replication": "Disabled",
+      "Description": "A function output, use with custom nodes"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "5e1dbea2fc7e4a91bb8e73b39001aae5",
+      "End": "5fa253815a61427caca38ce99759a4bd",
+      "Id": "74e33ea067514b15bf1c12c7f5202565"
+    },
+    {
+      "Start": "c04d5c92db7745f9a9f2a9aaa357dbc7",
+      "End": "272d1b763bd3485e8b394181a8c950e1",
+      "Id": "662f634b79b640c1a394050f6513ede7"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.0.5885",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Element_GetSharedParameter: Python Script",
+        "Id": "4088793513c64e429670d6aa7f3c078d",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 368.0,
+        "Y": 532.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Input",
+        "Id": "82a124333003479089239b542ff4393c",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 96.5,
+        "Y": 512.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Output",
+        "Id": "4bd1a2c1e11f4298b2b5c591390c6ef4",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 741.5,
+        "Y": 538.0
+      }
+    ],
+    "Annotations": [],
+    "X": 122.34081344288313,
+    "Y": -61.819364015196811,
+    "Zoom": 1.2777169841077241
+  }
+}
