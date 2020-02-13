@@ -1,0 +1,18 @@
+{
+  "license": "",
+  "file_hash": null,
+  "name": "LantisModelInquiry",
+  "version": "1.0.0.0",
+  "description": "Inquire / Check the Lantis Model",
+  "group": "",
+  "keywords": null,
+  "dependencies": [],
+  "contents": "",
+  "engine_version": "2.3.0.0",
+  "engine": "dynamo",
+  "engine_metadata": "",
+  "site_url": "",
+  "repository_url": "",
+  "contains_binaries": true,
+  "node_libraries": [ "LantisModelInquiry, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" ]
+}

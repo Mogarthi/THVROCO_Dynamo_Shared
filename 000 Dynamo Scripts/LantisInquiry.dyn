@@ -1,0 +1,407 @@
+{
+  "Uuid": "452fb450-0a9e-4d02-9ed4-e0b7963d7716",
+  "IsCustomNode": false,
+  "Description": null,
+  "Name": "LantisInquiry",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "LantisModelInquiry.Selection.ElementsByParameter",
+      "Id": "58f01f7517ab4bc28cbfcd5d2344bbcd",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "5d5f1bd6805644c78ffab03f9906c48a",
+          "Name": "LantisElementInfo[]",
+          "Description": "LantisElementInfo[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Selection.ElementsByParameter ( ): LantisElementInfo[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"OWV_SE_logisch\";",
+      "Id": "1c6c0338560c48c08af22ba373a4ded4",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "12117ca60094480ea10cb03509d49097",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "LantisModelInquiry.LantisElementInfo.Name",
+      "Id": "0035dbcb61144ce08a5dede847613633",
+      "Inputs": [
+        {
+          "Id": "ed6650def25b4a45b55a2fbf928ee8a6",
+          "Name": "lantisElementInfo",
+          "Description": "LantisModelInquiry.LantisElementInfo",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "93ee228f7ae944a1a0f534bf5e64e4af",
+          "Name": "string",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "LantisElementInfo.Name: string"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "LantisModelInquiry.Selection.Logicals@LantisModelInquiry.LantisElementInfo[],string",
+      "Id": "fc1c16ee122f4893b45d2aa144071b4e",
+      "Inputs": [
+        {
+          "Id": "453c4c4a959a4fa38bc2baadb7dfed70",
+          "Name": "LantisElements",
+          "Description": "LantisElementInfo[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "d6949d93991748da87ce97de9679cfe3",
+          "Name": "ParameterName",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "55a720f917ca4530bfeeaf2150e21d7b",
+          "Name": "Logical",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "68798990f64b4793a160aefe9717680f",
+          "Name": "Non Logical",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Selection.Logicals (LantisElements: LantisElementInfo[], ParameterName: string): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "LantisModelInquiry.Selection.ConformTypeAndParameter@LantisModelInquiry.LantisElementInfo[],string",
+      "Id": "35c50d4f90a14f5787fba47033a9c9eb",
+      "Inputs": [
+        {
+          "Id": "c7b0b14a385d4bf9acf42fd56f39a384",
+          "Name": "LantisElements",
+          "Description": "LantisElementInfo[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "b093c36549d44f1babae0278af41d573",
+          "Name": "ParameterName",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "5d4319c6e050441e8a2b0336f2d3fef5",
+          "Name": "Structure",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "e07f27b28dc047db91b42bc12ca7e8c5",
+          "Name": "Conformity",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Selection.ConformTypeAndParameter (LantisElements: LantisElementInfo[], ParameterName: string): var[]..[]"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "40332b5469da4605b0df0dcfcf1aa9a3",
+      "Inputs": [
+        {
+          "Id": "adb6084aa2f548a499ce8c20351651b8",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "0afdfbc64e2b433ab1480d853605f6a2",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "",
+      "Id": "e814d2d9b8da4655a615d8d8a25ad4b9",
+      "Inputs": [],
+      "Outputs": [],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "de1e2e3e4c4b420bb4d9316c5661105f",
+      "Inputs": [
+        {
+          "Id": "4c3cc341987146ca825b05fc7a236ad8",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "1a9a66c190144046b9670d7b8d694c2b",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "5d5f1bd6805644c78ffab03f9906c48a",
+      "End": "ed6650def25b4a45b55a2fbf928ee8a6",
+      "Id": "b20d06a4f8a042f7b4d64407e0c3bf8a"
+    },
+    {
+      "Start": "5d5f1bd6805644c78ffab03f9906c48a",
+      "End": "453c4c4a959a4fa38bc2baadb7dfed70",
+      "Id": "0e618350adc744afb8c1caff1cfd49f3"
+    },
+    {
+      "Start": "12117ca60094480ea10cb03509d49097",
+      "End": "d6949d93991748da87ce97de9679cfe3",
+      "Id": "61d60f3449f94cbba16a00091ecd57fb"
+    },
+    {
+      "Start": "12117ca60094480ea10cb03509d49097",
+      "End": "b093c36549d44f1babae0278af41d573",
+      "Id": "15ced8c561184446959b9eb85255068b"
+    },
+    {
+      "Start": "55a720f917ca4530bfeeaf2150e21d7b",
+      "End": "c7b0b14a385d4bf9acf42fd56f39a384",
+      "Id": "f9827bc50dca40288998e71d8c1dd52d"
+    },
+    {
+      "Start": "5d4319c6e050441e8a2b0336f2d3fef5",
+      "End": "adb6084aa2f548a499ce8c20351651b8",
+      "Id": "6d765a456296456e9f4463a35b069599"
+    },
+    {
+      "Start": "e07f27b28dc047db91b42bc12ca7e8c5",
+      "End": "4c3cc341987146ca825b05fc7a236ad8",
+      "Id": "05522a1d48054cda93afcfaa18d85c82"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "LantisModelInquiry",
+      "Version": "1.0.0.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "58f01f7517ab4bc28cbfcd5d2344bbcd",
+        "0035dbcb61144ce08a5dede847613633",
+        "fc1c16ee122f4893b45d2aa144071b4e",
+        "35c50d4f90a14f5787fba47033a9c9eb"
+      ]
+    }
+  ],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.0.5885",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Selection.ElementsByParameter",
+        "Id": "58f01f7517ab4bc28cbfcd5d2344bbcd",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 299.5,
+        "Y": 250.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "1c6c0338560c48c08af22ba373a4ded4",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 358.51162527317103,
+        "Y": 498.94723285974612
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "LantisElementInfo.Name",
+        "Id": "0035dbcb61144ce08a5dede847613633",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 786.5,
+        "Y": 244.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Selection.Logicals",
+        "Id": "fc1c16ee122f4893b45d2aa144071b4e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 725.39004387111322,
+        "Y": 383.154184779577
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Selection.ConformTypeAndParameter",
+        "Id": "35c50d4f90a14f5787fba47033a9c9eb",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1391.5898515710924,
+        "Y": 467.93197139262958
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "40332b5469da4605b0df0dcfcf1aa9a3",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1916.1846898918436,
+        "Y": 477.71550608800158
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "e814d2d9b8da4655a615d8d8a25ad4b9",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 803.0,
+        "Y": 513.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Watch",
+        "Id": "de1e2e3e4c4b420bb4d9316c5661105f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1665.2326183328562,
+        "Y": 700.55075334518972
+      }
+    ],
+    "Annotations": [],
+    "X": -262.03683639079759,
+    "Y": -31.241190359780035,
+    "Zoom": 0.65898910449449932
+  }
+}
