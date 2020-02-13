@@ -26,7 +26,7 @@
     {
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
-      "Code": "import clr\r\nclr.AddReference('RevitAPI')\r\nfrom Autodesk.Revit.DB import *\r\nfrom Autodesk.Revit.DB.UnitUtils import *\r\n\r\nclr.AddReference(\"RevitNodes\")\r\nimport Revit\r\nfrom Revit.Elements import *\r\nclr.ImportExtensions(Revit.Elements)\r\n\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom RevitServices.Transactions import TransactionManager\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nTransactionManager.Instance.EnsureInTransaction(doc)\r\n\r\n\r\n\r\ndef setParamValue(param, value):\r\n\tunitType = param.Definition.UnitType\r\n\tif UnitType.UT_Length == unitType:\r\n\t\tvalue = ConvertToInternalUnits(value, DisplayUnitType.DUT_METERS)\r\n\telif UnitType.UT_Volume == unitType:\r\n\t\tvalue = ConvertToInternalUnits(value, DisplayUnitType.DUT_CUBIC_METERS)\r\n\telif UnitType.UT_Area == unitType:\r\n\t\tvalue = ConvertToInternalUnits(value, DisplayUnitType.DUT_SQUARE_METERS)\r\n\telif UnitType.UT_Angle == unitType:\r\n\t\tvalue = ConvertToInternalUnits(value, DisplayUnitType.DUT_GRADS)\r\n\telse:\r\n\t\tvalue = value\r\n\tparam.Set(value)\r\n\t\t\r\nsuccesDict = {}\r\nerrorDict = {}\r\noutDict= {}\r\n\r\nitem = UnwrapElement(IN[0])\r\nparamDict = IN[1]\r\n\r\nfor key in paramDict:\r\n\ttry:\r\n\t\tunwrapItem = UnwrapElement(item)\r\n\t\titemParam = unwrapItem.GetParameters(key)[0]\r\n\t\tsetParamValue( itemParam, paramDict[key])\r\n\t\tsuccesDict[\"element\"] = item\t\t\r\n\t\tsuccesDict[key]= paramDict[key] \r\n\t\tsuccesDict[str(\"Type\"+key)] = itemParam.Definition.UnitType\r\n\texcept:\r\n\t\terrorDict[key]= paramDict[key]\r\n\t\tpass\r\noutDict[\"succes\"]= succesDict\r\noutDict[\"failed\"]= errorDict\r\nTransactionManager.Instance.TransactionTaskDone()\r\n\r\nOUT = outDict",
+      "Code": "import clr\r\nclr.AddReference('RevitAPI')\r\nfrom Autodesk.Revit.DB import *\r\nfrom Autodesk.Revit.DB.UnitUtils import *\r\n\r\nclr.AddReference(\"RevitNodes\")\r\nimport Revit\r\nfrom Revit.Elements import *\r\nclr.ImportExtensions(Revit.Elements)\r\n\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom RevitServices.Transactions import TransactionManager\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nTransactionManager.Instance.EnsureInTransaction(doc)\r\n\r\n\r\n\r\ndef setParamValue(param, value):\r\n\tunitType = param.Definition.UnitType\r\n\tdoc = DocumentManager.Instance.CurrentDBDocument\r\n\tdocDUT = doc.GetUnits().GetFormatOptions(unitType).DisplayUnits\r\n\ttry: \r\n\t\tvalue = ConvertToInternalUnits(value, docDUT)\r\n\texcept:\r\n\t\tvalue = value\r\n\tparam.Set(value)\r\n\t\t\r\nsuccesDict = {}\r\nerrorDict = {}\r\noutDict= {}\r\n\r\nitem = UnwrapElement(IN[0])\r\nparamDict = IN[1]\r\n\r\nfor key in paramDict:\r\n\ttry:\r\n\t\tunwrapItem = UnwrapElement(item)\r\n\t\titemParam = unwrapItem.GetParameters(key)[0]\r\n\t\tsetParamValue( itemParam, paramDict[key])\r\n\t\tsuccesDict[\"element\"] = item\t\t\r\n\t\tsuccesDict[key]= paramDict[key] \r\n\t\t#succesDict[str(\"Type\"+key)] = itemParam.Definition.UnitType\r\n\texcept:\r\n\t\terrorDict[key]= paramDict[key]\r\n\t\tpass\r\noutDict[\"succes\"]= succesDict\r\noutDict[\"failed\"]= errorDict\r\nTransactionManager.Instance.TransactionTaskDone()\r\n\r\nOUT = outDict",
       "VariableInputPorts": true,
       "Id": "d34e829195854155be299839413cef21",
       "Inputs": [
@@ -142,15 +142,15 @@
     },
     "Camera": {
       "Name": "Background Preview",
-      "EyeX": -17.0,
-      "EyeY": 24.0,
-      "EyeZ": 50.0,
-      "LookX": 12.0,
-      "LookY": -13.0,
-      "LookZ": -58.0,
-      "UpX": 0.0,
+      "EyeX": 21.5333194732666,
+      "EyeY": 20.0960750579834,
+      "EyeZ": 23.834266662597656,
+      "LookX": -26.533317565917969,
+      "LookY": -9.0960760116577148,
+      "LookZ": -31.834266662597656,
+      "UpX": -2.5340206956424652E-14,
       "UpY": 1.0,
-      "UpZ": 0.0
+      "UpZ": 2.2196654236861235E-14
     },
     "NodeViews": [
       {
@@ -160,7 +160,7 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 926.7359701783389,
+        "X": 927.58970903913723,
         "Y": 267.18013533979308
       },
       {
