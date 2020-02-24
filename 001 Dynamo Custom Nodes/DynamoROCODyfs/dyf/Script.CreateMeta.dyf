@@ -1,0 +1,461 @@
+{
+  "Uuid": "499072b9-3410-41b3-8b78-a10a371ba28a",
+  "IsCustomNode": true,
+  "Category": "DynamoROCODyfs.Script",
+  "Description": "Creates script meta data to put onto object parameters",
+  "Name": "Script.CreateMeta",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Importing Reference Modules\n# CLR ( Common Language Runtime Module )\nimport clr\n# Adding the DynamoRevitDS.dll module to work with the Dynamo API\nclr.AddReference('DynamoRevitDS')\nimport Dynamo \n\n# access to the current Dynamo instance and workspace\ndynamoRevit = Dynamo.Applications.DynamoRevit()\ncurrentWorkspace = dynamoRevit.RevitDynamoModel.CurrentWorkspace\n\n# Access current version of dynamo\nversion=dynamoRevit.RevitDynamoModel.Version\n\n# checks version of dynamo and adjusts output according to version\nif version.StartsWith(\"1.\"):\n\t\n\t# Gets file name which includes full path\n\tfilename=currentWorkspace.FileName\n\t\n\t\n\t# Splits out file path to just file name\n\tOUT=filename\n\nelif version.StartsWith(\"2.\"):\n\tOUT=currentWorkspace.Name\n\nelse:\n\tOUT=\"Not supported\"",
+      "VariableInputPorts": true,
+      "Id": "3a0da597253247f6a6853c9e1a93dc2b",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "fb79e0b9e7314769b446aa987b238072",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "ScriptName",
+      "Id": "3e9d01ddbeb2437d8eab4b22287034c9",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "9c3629d161044b1b8aea5b4387276e74",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "username",
+      "Id": "407688bd26494c8fbb87a96f193824aa",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "9be42e9ff33c4b649a40e98bef668c6c",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Creates a string."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.FromObject, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "af47514df81b422b98247cd6680b9160",
+      "Inputs": [
+        {
+          "Id": "a4785fb16c024209a726baefb07f8980",
+          "Name": "obj",
+          "Description": "Object to be serialized",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b9460965cf374fa7b6e65d0b8e09544f",
+          "Name": "str",
+          "Description": "Result of math computation",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Convert an object to a string representation."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DesignScript.Builtin.Dictionary.ByKeysValues@string[],var[]..[]",
+      "Id": "091a5c6090bd40a7a7b77ba35abe0f10",
+      "Inputs": [
+        {
+          "Id": "826b977bbd244342bce8e040da3908cc",
+          "Name": "keys",
+          "Description": "The string keys of the Dictionary\n\nstring[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "aa52a48d28c144c0ab6421816d544325",
+          "Name": "values",
+          "Description": "The values of the Dictionary\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "23f3be68a0ea4c7ca63f8ec1790b5056",
+          "Name": "dictionary",
+          "Description": "The result Dictionary",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Produces a Dictionary with the supplied keys and values. The number of entries is the shorter of keys or values.\n\nDictionary.ByKeysValues (keys: string[], values: var[]..[]): Dictionary"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DesignScript.Builtin.Dictionary.SetValueAtKeys@string[],var[]..[]",
+      "Id": "4871377b53f14af8b70ae1a50ff670e2",
+      "Inputs": [
+        {
+          "Id": "b39cd862b5fe436b8d8c798e56ab8421",
+          "Name": "dictionary",
+          "Description": "DesignScript.Builtin.Dictionary",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ce3e3dd20f58440d8a236fd845f03d24",
+          "Name": "keys",
+          "Description": "The keys in the Dictionary to set. If the same key already exists, the value at that key will be modified.\n\nstring[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "57a44d61ca4a47f69cd42527d4390344",
+          "Name": "values",
+          "Description": "The corresponding values to insert.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "1fb49d785af8411ea320b7c44de46f1e",
+          "Name": "dictionary",
+          "Description": "A new Dictionary with the entries inserted.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Produce a new Dictionary with a list of keys set to the new values, possibly overwriting existing key-value pairs. These two lists are expected to be of the same length. If not, the shorter of the two bounds the number of insertions.\n\nDictionary.SetValueAtKeys (keys: string[], values: var[]..[]): Dictionary"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "scriptMeta;",
+      "Id": "2120cd5d0f8d4ab49dfc3566e588723b",
+      "Inputs": [
+        {
+          "Id": "ce8eb3ea1cbf4f78906b28a385537256",
+          "Name": "scriptMeta",
+          "Description": "scriptMeta",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "8c59ca28fdcf4c118f00159225a43c74",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "0f31eee6-404a-45a8-8c44-bd0b220c5326",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "871908ac51e44765b8ccad999416570f",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "f838222f4cf94c83807b081ada00a93b",
+          "Name": "name",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns the user name of the person who is currently logged on to Windows on the machine the script is executed on."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Output, DynamoCore",
+      "NodeType": "OutputNode",
+      "ElementResolver": null,
+      "Symbol": "scriptMeta",
+      "Id": "5903031b2b6243609e1ac55040e15e6c",
+      "Inputs": [
+        {
+          "Id": "da4db0f4db904fce9d12cb1de15d196c",
+          "Name": "",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [],
+      "Replication": "Disabled",
+      "Description": "A function output, use with custom nodes"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "fb79e0b9e7314769b446aa987b238072",
+      "End": "a4785fb16c024209a726baefb07f8980",
+      "Id": "f5bcfe384668416f94ba2c7c2ccc0e3b"
+    },
+    {
+      "Start": "9c3629d161044b1b8aea5b4387276e74",
+      "End": "826b977bbd244342bce8e040da3908cc",
+      "Id": "45c0c7055ad7482fa4ee6386d027d1e6"
+    },
+    {
+      "Start": "9be42e9ff33c4b649a40e98bef668c6c",
+      "End": "ce3e3dd20f58440d8a236fd845f03d24",
+      "Id": "f5b16fff51904e209ff6c7c2e85b2621"
+    },
+    {
+      "Start": "b9460965cf374fa7b6e65d0b8e09544f",
+      "End": "aa52a48d28c144c0ab6421816d544325",
+      "Id": "3aec7a72ad794a1790ae4ff7000073bf"
+    },
+    {
+      "Start": "23f3be68a0ea4c7ca63f8ec1790b5056",
+      "End": "b39cd862b5fe436b8d8c798e56ab8421",
+      "Id": "53bacd3f5034493e98aa9dcf55b34e7a"
+    },
+    {
+      "Start": "1fb49d785af8411ea320b7c44de46f1e",
+      "End": "ce8eb3ea1cbf4f78906b28a385537256",
+      "Id": "7ce157ff34494adba796ad52783fd223"
+    },
+    {
+      "Start": "8c59ca28fdcf4c118f00159225a43c74",
+      "End": "da4db0f4db904fce9d12cb1de15d196c",
+      "Id": "c1c4252bd3de42ea997dab9b380297c0"
+    },
+    {
+      "Start": "f838222f4cf94c83807b081ada00a93b",
+      "End": "57a44d61ca4a47f69cd42527d4390344",
+      "Id": "b07357bf49ac4cd6847f97885aefb1ae"
+    }
+  ],
+  "Dependencies": [
+    "0f31eee6-404a-45a8-8c44-bd0b220c5326"
+  ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Clockwork for Dynamo 2.x",
+      "Version": "2.1.2",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "871908ac51e44765b8ccad999416570f"
+      ]
+    }
+  ],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.0.5885",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -21.877321354732587,
+      "EyeY": 37.832655331326684,
+      "EyeZ": 9.92234893622329,
+      "LookX": -1.1720904005469563,
+      "LookY": -0.40181267756747019,
+      "LookZ": -1.4062560503783637,
+      "UpX": -2.5340206956424652E-14,
+      "UpY": 1.0,
+      "UpZ": 2.2196654236861235E-14
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "3a0da597253247f6a6853c9e1a93dc2b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 517.134172040759,
+        "Y": 530.13866495124671
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "String",
+        "Id": "3e9d01ddbeb2437d8eab4b22287034c9",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 672.39095222435913,
+        "Y": 454.80871795204689
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "String",
+        "Id": "407688bd26494c8fbb87a96f193824aa",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 678.79251813884912,
+        "Y": 650.80970038124792
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "String from Object",
+        "Id": "af47514df81b422b98247cd6680b9160",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 672.88831664015925,
+        "Y": 529.54199573394794
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Dictionary.ByKeysValues",
+        "Id": "091a5c6090bd40a7a7b77ba35abe0f10",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 869.54026246605918,
+        "Y": 433.99596329344672
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Dictionary.SetValueAtKeys",
+        "Id": "4871377b53f14af8b70ae1a50ff670e2",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1169.1938790600691,
+        "Y": 601.43107966834827
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "2120cd5d0f8d4ab49dfc3566e588723b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1490.9615939090691,
+        "Y": 520.83615377664751
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "System.UserName",
+        "Id": "871908ac51e44765b8ccad999416570f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 397.50050458831925,
+        "Y": 703.33882294054706
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Output",
+        "Id": "5903031b2b6243609e1ac55040e15e6c",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1808.6199365774569,
+        "Y": 527.84280883807889
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "01bd7e43e9694e1c908a3b8528e69892",
+        "Title": "Create script meta data file",
+        "Nodes": [
+          "3a0da597253247f6a6853c9e1a93dc2b",
+          "3e9d01ddbeb2437d8eab4b22287034c9",
+          "407688bd26494c8fbb87a96f193824aa",
+          "af47514df81b422b98247cd6680b9160",
+          "091a5c6090bd40a7a7b77ba35abe0f10",
+          "4871377b53f14af8b70ae1a50ff670e2",
+          "2120cd5d0f8d4ab49dfc3566e588723b",
+          "871908ac51e44765b8ccad999416570f"
+        ],
+        "Left": 387.50050458831925,
+        "Top": 380.99596329344672,
+        "Width": 1310.4610893207498,
+        "Height": 415.34285964710034,
+        "FontSize": 36.0,
+        "InitialTop": 433.99596329344672,
+        "InitialHeight": 392.34285964710034,
+        "TextblockHeight": 43.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": -462.42137912838666,
+    "Y": -157.08046414425712,
+    "Zoom": 0.8887892282971559
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "Uuid": "4114e218-2ae0-4b31-ae5f-9f08865c6061",
+  "IsCustomNode": true,
+  "Category": "DynamoROCODyfs.Document",
+  "Description": "Get project info as element",
+  "Name": "Document.ProjectInfoElement",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\n\r\nelementDict = dict()\r\nprojinfo = doc.ProjectInformation\r\nelementDict[\"OrganizationName\"]= projinfo.OrganizationName\r\nelementDict[\"OrganizationDescription\"]= projinfo.OrganizationDescription\r\nelementDict[\"BuildingName\"]= projinfo.BuildingName\r\n\r\ntry:\r\n\telementDict[\"Author\"]=projinfo.Author\r\nexcept:\r\n\telementDict[\"Author\"] = None\r\n\r\nelementDict[\"IssueDate\"]=projinfo.IssueDate\r\nelementDict[\"Status\"]=projinfo.Status\r\n#elementlist.append(projinfo.ClientName)\r\n#elementlist.append(projinfo.Address)\r\n#elementlist.append(projinfo.Name)\r\n#elementlist.append(projinfo.Number)\r\nelementDict[\"Parameters\"] = projinfo.Parameters\r\nOUT = projinfo",
+      "VariableInputPorts": true,
+      "Id": "9157673c1f3d42f4827e160d25f5b9fe",
+      "Inputs": [
+        {
+          "Id": "0c245cd12d2b4b7894fa443ee86ac80f",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "7afb693743b6472ab3745dc97f1e4162",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Output, DynamoCore",
+      "NodeType": "OutputNode",
+      "ElementResolver": null,
+      "Symbol": "ProjectInfo",
+      "Id": "f10ee974b5d643a6b5eece6e7d61117c",
+      "Inputs": [
+        {
+          "Id": "c21e7f46d2b4427a9b62e62e8abd5482",
+          "Name": "",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [],
+      "Replication": "Disabled",
+      "Description": "A function output, use with custom nodes"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
+      "NodeType": "InputNode",
+      "Parameter": {
+        "Name": "toggle",
+        "TypeName": "bool",
+        "TypeRank": 0,
+        "DefaultValue": "true",
+        "Description": ""
+      },
+      "Id": "e3fae605cd3f4c97b215d3f62279c892",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "0c9a07ef12364e95a2d8d51c808e15c0",
+          "Name": "",
+          "Description": "Symbol",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "7afb693743b6472ab3745dc97f1e4162",
+      "End": "c21e7f46d2b4427a9b62e62e8abd5482",
+      "Id": "46271818b14d4c449689a82d37c6fa47"
+    },
+    {
+      "Start": "0c9a07ef12364e95a2d8d51c808e15c0",
+      "End": "0c245cd12d2b4b7894fa443ee86ac80f",
+      "Id": "7ded4c02106744479fc0fe18d8497a0c"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.0.5885",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": 21.5333194732666,
+      "EyeY": 20.0960750579834,
+      "EyeZ": 23.834266662597656,
+      "LookX": -26.533317565917969,
+      "LookY": -9.0960760116577148,
+      "LookZ": -31.834266662597656,
+      "UpX": -2.5340206956424652E-14,
+      "UpY": 1.0,
+      "UpZ": 2.2196654236861235E-14
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "9157673c1f3d42f4827e160d25f5b9fe",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 990.11102107077,
+        "Y": 101.97013569223449
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Output",
+        "Id": "f10ee974b5d643a6b5eece6e7d61117c",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1165.5,
+        "Y": 102.5
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Input",
+        "Id": "e3fae605cd3f4c97b215d3f62279c892",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 733.5,
+        "Y": 100.5
+      }
+    ],
+    "Annotations": [],
+    "X": -5.0,
+    "Y": 226.0,
+    "Zoom": 1.0
+  }
+}

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CookbookRevitHelpers</name>
+    </assembly>
+    <members>
+        <member name="M:CookbookRevitHelpers.ProcessedObjects.FromRecipesAndElements(System.Collections.Generic.Dictionary{System.String,DynamoBIMCookbook.Recipe},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{Autodesk.Revit.DB.Element}},DynamoBIMCookbook.ProcessedModel,System.String,System.String,System.DateTime,System.String)">
+            <summary>
+            Creates a list of ProcessObject 
+            </summary>
+            <param name="Recipes"></param>
+            <param name="Elements"></param>
+            <param name="Model"></param>
+            <param name="DesignPhase"></param>
+            <param name="VersionGuid"></param>
+            <param name="VersionTime"></param>
+            <param name="User"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CookbookRevitHelpers.SelectAndFilter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CookbookRevitHelpers.SelectAndFilter.AllInViewByParameterName(System.String)">
+            <summary>
+            Selects all elements in avtive view;
+            Filters the elements by
+                - having a Family
+                - having the desired parameter 
+            </summary>
+            <param name="ParameterName">Name of the parameter to filter on.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CookbookRevitHelpers.SelectAndFilter.FilterOnMatchingKeys(System.Collections.Generic.List{System.String},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{Autodesk.Revit.DB.Element}})">
+            <summary>
+            Returns all elements from the dictionary where the key match a string from the input keys
+            </summary>
+            <param name="Keys">List of strings to match</param>
+            <param name="Elements">Dictionary(string, List(Element)) to match</param>
+            <returns></returns>
+        </member>
+        <member name="M:CookbookRevitHelpers.SelectAndFilter.GetParameterValuesOnObjects(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{Autodesk.Revit.DB.Element}},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,DynamoBIMCookbook.RevitParameter}})">
+            <summary>
+            
+            </summary>
+            <param name="RevitElements"></param>
+            <param name="dBParameters"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -18,7 +18,7 @@
     {
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
-      "Code": "import clr\r\nclr.AddReference('RevitAPI')\r\nfrom Autodesk.Revit.DB import *\r\nfrom Autodesk.Revit.DB.UnitUtils import *\r\n\r\nclr.AddReference(\"RevitNodes\")\r\nimport Revit\r\nfrom Revit.Elements import *\r\nclr.ImportExtensions(Revit.Elements)\r\n\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom RevitServices.Transactions import TransactionManager\r\n\t\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nTransactionManager.Instance.EnsureInTransaction(doc)\r\n\r\n\r\noutDict= {}\r\n\r\noutList =[]\r\n\r\nitems = IN[0]\r\nif \"LIST\" in str(type(items)).ToUpper():\r\n\tfor item in items:\r\n\t\tunwrapItem = UnwrapElement(item)\r\n\t\titemParam=item.Parameters\r\n\t\tfor param in itemParam:\r\n\t\t\tunwrappedParam = unwrapItem.GetParameters(param.Name)[0]\r\n\t\t\tif unwrappedParam.IsShared:\r\n\t\t\t\toutDict[str(unwrappedParam.GUID)] = {\"element\":item.Id, \"guid\":unwrappedParam.GUID,\"Name\":param.Name,\"Value\":param.Value}\r\n\t\toutList.append(outDict)\r\nelse:\r\n\titem = items\r\n\tunwrapItem = UnwrapElement(item)\r\n\titemParam=item.Parameters\r\n\tfor param in itemParam:\r\n\t\tunwrappedParam = unwrapItem.GetParameters(param.Name)[0]\r\n\t\tif unwrappedParam.IsShared:\r\n\t\t\toutDict[str(unwrappedParam.GUID)] = {\"element\":item.Id, \"guid\":unwrappedParam.GUID,\"Name\":param.Name,\"Value\":param.Value}\r\n\toutList.append(outDict)\r\n\t\r\nTransactionManager.Instance.TransactionTaskDone()\r\n\r\nOUT = outList",
+      "Code": "import clr\r\nclr.AddReference('RevitAPI')\r\nfrom Autodesk.Revit.DB import *\r\nfrom Autodesk.Revit.DB.UnitUtils import *\r\n\r\nclr.AddReference(\"RevitNodes\")\r\nimport Revit\r\nfrom Revit.Elements import *\r\nclr.ImportExtensions(Revit.Elements)\r\n\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom RevitServices.Transactions import TransactionManager\r\n\t\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nTransactionManager.Instance.EnsureInTransaction(doc)\r\n\r\n\r\noutDict= {}\r\n\r\noutList =[]\r\n\r\nitems = IN[0]\r\nif \"LIST\" in str(type(items)).ToUpper():\r\n\tfor item in items:\r\n\t\tunwrapItem = UnwrapElement(item)\r\n\t\titemParam=item.Parameters\r\n\t\tfor param in itemParam:\r\n\t\t\tunwrappedParam = unwrapItem.GetParameters(param.Name)[0]\r\n\t\t\tif unwrappedParam.IsShared:\r\n\t\t\t\toutDict[str(unwrappedParam.GUID)] = {\"element\":item, \"elementId\":item.Id,  \"elementUId\":item.UniqueId, \"guid\":unwrappedParam.GUID,\"Name\":param.Name,\"Value\":param.Value}\r\n\t\toutList.append(outDict)\r\nelse:\r\n\titem = items\r\n\tunwrapItem = UnwrapElement(item)\r\n\titemParam=item.Parameters\r\n\tfor param in itemParam:\r\n\t\tunwrappedParam = unwrapItem.GetParameters(param.Name)[0]\r\n\t\tif unwrappedParam.IsShared:\r\n\t\t\toutDict[str(unwrappedParam.GUID)] = {\"element\":item, \"elementId\":item.Id, \"elementUId\":item.UniqueId, \"guid\":unwrappedParam.GUID,\"Name\":param.Name,\"Value\":param.Value}\r\n\toutList.append(outDict)\r\n\t\r\nTransactionManager.Instance.TransactionTaskDone()\r\n\r\nOUT = outList",
       "VariableInputPorts": true,
       "Id": "4088793513c64e429670d6aa7f3c078d",
       "Inputs": [
@@ -120,43 +120,43 @@
     },
     "Camera": {
       "Name": "Background Preview",
-      "EyeX": -17.0,
-      "EyeY": 24.0,
-      "EyeZ": 50.0,
-      "LookX": 12.0,
-      "LookY": -13.0,
-      "LookZ": -58.0,
-      "UpX": 0.0,
+      "EyeX": 21.5333194732666,
+      "EyeY": 20.0960750579834,
+      "EyeZ": 23.834266662597656,
+      "LookX": -26.533317565917969,
+      "LookY": -9.0960760116577148,
+      "LookZ": -31.834266662597656,
+      "UpX": -2.5340206956424652E-14,
       "UpY": 1.0,
-      "UpZ": 0.0
+      "UpZ": 2.2196654236861235E-14
     },
     "NodeViews": [
       {
-        "ShowGeometry": true,
-        "Name": "Element_GetSharedParameter: Python Script",
         "Id": "4088793513c64e429670d6aa7f3c078d",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "Element_GetSharedParameter: Python Script",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 368.0,
         "Y": 532.0
       },
       {
-        "ShowGeometry": true,
-        "Name": "Input",
         "Id": "82a124333003479089239b542ff4393c",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "Input",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 96.5,
         "Y": 512.0
       },
       {
-        "ShowGeometry": true,
-        "Name": "Output",
         "Id": "4bd1a2c1e11f4298b2b5c591390c6ef4",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "Output",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 741.5,
         "Y": 538.0

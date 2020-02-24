@@ -1,0 +1,320 @@
+{
+  "Uuid": "6f793043-4a18-4d50-ad9e-f78d8894cb38",
+  "IsCustomNode": true,
+  "Category": "DynamoROCODyfs.Lists",
+  "Description": "Filters targetlist based on string: \r\n| is used to define 'or'\r\n, is used to define 'and'",
+  "Name": "List.Filterbystring",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n# functions\r\n\r\ndef unique(list0): \r\n    # insert the list to the set \r\n    list_set = set(list0) \r\n    # convert the set to the list \r\n    unique_list = (list(list_set)) \r\n    return unique_list\r\n    \r\n# The inputs to this node will be stored as a list in the IN variables.\r\nfilters=IN[0]\r\ntargetlist = IN[1]\r\nignorecase=IN[2]\r\n\r\noutdict={}\r\ntempdict={}\r\nlist1=[]\r\ntarget_templist=[]\r\ntarget_temp = list(targetlist)\r\ntarget_outlist=[]\r\ni=0\r\n# Place your code below this line\r\nfor filtr in filters:\r\n    if \"str\" in str(type(filtr)):\r\n        list1.append(filtr.split(\",\"))\r\n    else:\r\n        list1.append([\"@/NSF/@\"])\r\n    i += 1\r\n\r\nif ignorecase:  # setting all items to lower instead of capitalized, then reassinging them in the to edit list.\r\n    j = 0\r\n    for sublist in list1:\r\n        k = 0\r\n        for item in sublist:\r\n            sublist[k] = item.lower()\r\n            k += 1\r\n        list1[j] = sublist\r\n        j += 1\r\n    j = 0\r\n    for item in target_temp:\r\n        target_temp[j] = item.lower()\r\n        j += 1\r\n\r\noutdict[\"filters\"] = list1\r\n\r\nfor sublist in list1:                   #FOR SUBLIST IN LIST OF SEARCH QUERIES\r\n    target_templist.Clear()             #CLEAR TEMP LIST OF TARGETS\r\n    count0 = 0                          #SETTING REFERENCE VALUE 0\r\n    for target in target_temp:          #FOR EACH SEARCH QUERY\r\n        count1 = 0                      #COUNT MATCHES=O\r\n        for item in sublist:            #FOR EACH SEARCH ITEM IN THE SEARCH QUERY\r\n            if \"|\" in item:             # filter based on OR value\r\n                item = item.split(\"|\")  #split the match cases\r\n                for i in item:          #if 1 of the matches is in the string, add 1 to the counter\r\n                    if i in target:\r\n                        count1 += 1\r\n                        break\r\n            elif \"!=\" in item[:2]:       #if search query contains \"not\" symbol\r\n                if item[2:] in target:\r\n                    count1 -= 1         #reduces count of checks\r\n                else:\r\n                \tcount1 += 1\r\n            elif item in target:        #if target contains stringvalue\r\n                count1 += 1\r\n        if count1 == len(sublist):\r\n            target_templist.append(targetlist[count0])\r\n        count0 += 1\r\n    target_outlist.append(unique(list(target_templist)))\r\noutdict[\"match\"] = target_outlist\r\n# Assign your output to the OUT variable.\r\nOUT = outdict",
+      "VariableInputPorts": true,
+      "Id": "cc41e3ef9d094b3395377947287d66e1",
+      "Inputs": [
+        {
+          "Id": "2b6d7b7634b548cfb75d7f36aec1a185",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "2ba82c155ff7482ea5ca8d6b352a7335",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "caf328c4bf2244c18276bbaccd9f96a3",
+          "Name": "IN[2]",
+          "Description": "Input #2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "f4ab6bc6586a41e8a8476eacc87fe95c",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "filters;\ntargetList;\nignoreCase;",
+      "Id": "d7c064f081174d8fa701dcb99a49bf70",
+      "Inputs": [
+        {
+          "Id": "9b59e95ef7484030b366e7760dd82675",
+          "Name": "filters",
+          "Description": "filters",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "5c372a11401245139a9d142ab87b728e",
+          "Name": "targetList",
+          "Description": "targetList",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "8a03cbc46d0343cd80123ea220139166",
+          "Name": "ignoreCase",
+          "Description": "ignoreCase",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "e243dcbc828f4f969102b4bc26ef97d5",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "c9e9b26ec26a440ea1f51ae0dd5d3533",
+          "Name": "",
+          "Description": "Value of expression at line 2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "8ae1e778c87244448a68bd145c9004e0",
+          "Name": "",
+          "Description": "Value of expression at line 3",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
+      "NodeType": "InputNode",
+      "Parameter": {
+        "Name": "TargetList",
+        "TypeName": "var",
+        "TypeRank": -1,
+        "DefaultValue": null,
+        "Description": ""
+      },
+      "Id": "c9bb9c21e6fa4a2ea5748c53796cea29",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "f6a2fb6ca3514692aea59f2bae0cee83",
+          "Name": "",
+          "Description": "Symbol",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
+      "NodeType": "InputNode",
+      "Parameter": {
+        "Name": "Filterlist",
+        "TypeName": "var",
+        "TypeRank": -1,
+        "DefaultValue": null,
+        "Description": ""
+      },
+      "Id": "7aeada675b8b44e39f4e47ff87258bdc",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "22c3e2a8b41b408c8217f36a5c93e885",
+          "Name": "",
+          "Description": "Symbol",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
+      "NodeType": "InputNode",
+      "Parameter": {
+        "Name": "ignorCase",
+        "TypeName": "bool",
+        "TypeRank": 0,
+        "DefaultValue": "true",
+        "Description": ""
+      },
+      "Id": "7962ceaa1e7544fc844bf2359476d1ea",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "8eb1285889984653b39c4810d3a4dc8e",
+          "Name": "",
+          "Description": "Symbol",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "e243dcbc828f4f969102b4bc26ef97d5",
+      "End": "2b6d7b7634b548cfb75d7f36aec1a185",
+      "Id": "47049ff8c70f4ae0b4e15239754d8f69"
+    },
+    {
+      "Start": "c9e9b26ec26a440ea1f51ae0dd5d3533",
+      "End": "2ba82c155ff7482ea5ca8d6b352a7335",
+      "Id": "7c390787831448888d35300152d18f07"
+    },
+    {
+      "Start": "8ae1e778c87244448a68bd145c9004e0",
+      "End": "caf328c4bf2244c18276bbaccd9f96a3",
+      "Id": "8b3698f9a0bf484a9424ca322848a9ea"
+    },
+    {
+      "Start": "f6a2fb6ca3514692aea59f2bae0cee83",
+      "End": "5c372a11401245139a9d142ab87b728e",
+      "Id": "b8e2ad2939714bdfb2a9f1cd4a8dd147"
+    },
+    {
+      "Start": "22c3e2a8b41b408c8217f36a5c93e885",
+      "End": "9b59e95ef7484030b366e7760dd82675",
+      "Id": "b25545cfcac341bf9b162afd92123a95"
+    },
+    {
+      "Start": "8eb1285889984653b39c4810d3a4dc8e",
+      "End": "8a03cbc46d0343cd80123ea220139166",
+      "Id": "c0324298d6144f86be41f44f2043f5ec"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.0.5885",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": 21.5333194732666,
+      "EyeY": 20.0960750579834,
+      "EyeZ": 23.834266662597656,
+      "LookX": -26.533317565917969,
+      "LookY": -9.0960760116577148,
+      "LookZ": -31.834266662597656,
+      "UpX": -2.5340206956424652E-14,
+      "UpY": 1.0,
+      "UpZ": 2.2196654236861235E-14
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "cc41e3ef9d094b3395377947287d66e1",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1173.0975808467992,
+        "Y": 783.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "d7c064f081174d8fa701dcb99a49bf70",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 912.0,
+        "Y": 788.24784664525
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Input",
+        "Id": "c9bb9c21e6fa4a2ea5748c53796cea29",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 710.5,
+        "Y": 729.5
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Input",
+        "Id": "7aeada675b8b44e39f4e47ff87258bdc",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 719.5,
+        "Y": 800.5
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Input",
+        "Id": "7962ceaa1e7544fc844bf2359476d1ea",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 670.5,
+        "Y": 873.5
+      }
+    ],
+    "Annotations": [],
+    "X": 0.0,
+    "Y": 0.0,
+    "Zoom": 1.0
+  }
+}

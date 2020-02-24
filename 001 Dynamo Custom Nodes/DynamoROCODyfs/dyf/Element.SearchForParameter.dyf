@@ -158,8 +158,8 @@
       "NodeType": "InputNode",
       "Parameter": {
         "Name": "searchFor",
-        "TypeName": "var",
-        "TypeRank": -1,
+        "TypeName": "string",
+        "TypeRank": 0,
         "DefaultValue": null,
         "Description": ""
       },
@@ -232,9 +232,9 @@
       "NodeType": "InputNode",
       "Parameter": {
         "Name": "ignoreCase",
-        "TypeName": "var",
-        "TypeRank": -1,
-        "DefaultValue": null,
+        "TypeName": "bool",
+        "TypeRank": 0,
+        "DefaultValue": "true",
         "Description": ""
       },
       "Id": "cdb49a603f934251b7fa6bff9d761e79",
@@ -365,15 +365,15 @@
     },
     "Camera": {
       "Name": "Background Preview",
-      "EyeX": -17.0,
-      "EyeY": 24.0,
-      "EyeZ": 50.0,
-      "LookX": 12.0,
-      "LookY": -13.0,
-      "LookZ": -58.0,
-      "UpX": 0.0,
+      "EyeX": 21.5333194732666,
+      "EyeY": 20.0960750579834,
+      "EyeZ": 23.834266662597656,
+      "LookX": -26.533317565917969,
+      "LookY": -9.0960760116577148,
+      "LookZ": -31.834266662597656,
+      "UpX": -2.5340206956424652E-14,
       "UpY": 1.0,
-      "UpZ": 0.0
+      "UpZ": 2.2196654236861235E-14
     },
     "NodeViews": [
       {
@@ -468,8 +468,8 @@
       }
     ],
     "Annotations": [],
-    "X": -1745.7105316260663,
-    "Y": -179.70473561876008,
+    "X": -515.71053162606631,
+    "Y": -344.70473561876008,
     "Zoom": 1.4761802392636132
   }
 }

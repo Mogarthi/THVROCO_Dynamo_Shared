@@ -1,0 +1,550 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DynamoBIMCookbook</name>
+    </assembly>
+    <members>
+        <member name="T:DynamoBIMCookbook.baseItem">
+            <summary>
+            Base class for orientdB Cookbook Vertici
+            Properties are usable on all OrientdB Cookbook Nodes
+            </summary>
+        </member>
+        <member name="F:DynamoBIMCookbook.baseItem._parent">
+            <summary>
+            Used on objects with a parent child relationship
+            Many-to-one (parent)
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.baseItem.RID">
+            <summary>
+            Returns the databse Id of the vertex.
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.baseItem.Name">
+            <summary>
+            Returns the name of the vertex.
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.baseItem.Description">
+            <summary>
+            Returns the description on the vertex.
+            </summary>
+        </member>
+        <member name="T:DynamoBIMCookbook.Book">
+            <summary>
+            The Cookbook Book class
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.Book.RecipeParameter">
+            <summary>
+            The parameter on the objects pointing to an associated recipe.
+            </summary>
+        </member>
+        <member name="M:DynamoBIMCookbook.Book.ByName(System.String,System.String,System.Int32,System.String,System.String,System.String)">
+            <summary>
+            Connects to the Cookbook Database and reads the requested book
+            </summary>
+            <param name="BookName">The requested book's name</param>
+            <param name="Host">IP address of DNS address of the database server</param>
+            <param name="Port">Port of the database binary server (typical 2424)</param>
+            <param name="User">Username</param>
+            <param name="Passwd">Password</param>
+            <param name="ModelType">Model Type RVT or C3D</param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoBIMCookbook.Book.ByROCOForRevit">
+            <summary>
+            Returns the ROCO Cookbook in Revit mode
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoBIMCookbook.Book.ByLantisForRevit">
+            <summary>
+            Returns the Lantis Cookbook in Revit mode
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoBIMCookbook.Book.ByROCOForC3D">
+            <summary>
+            Returns the ROCO Cookbook in C3D mode
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoBIMCookbook.Book.ByLantisForC3D">
+            <summary>
+            Returns the Lantis Cookbook in C3D mode
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoBIMCookbook.Calculation">
+            <summary>
+            Exposing the BIMCookbook's calculations class (vertici)
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.Calculation.Formula">
+            <summary>
+            Returning the formula on the calculation
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.Calculation.Constants">
+            <summary>
+            Returning the constants used in the calculation (JSON)
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.Calculation.Parameters">
+            <summary>
+            Returns the parameters used in the formuls
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.Calculation.Units">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DynamoBIMCookbook.Calculation.InDbByJSON(DynamoBIMCookbook.Book,System.String)">
+            <summary>
+            Creates a new Calculations Vertex in the database.
+            If the vertex exists it update the properties by the new values.
+            </summary>
+            <param name="Book">The Book the calculation is associated to.</param>
+            <param name="JSON"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoBIMCookbook.Calculation.ByModel(DynamoBIMCookbook.ProcessedModel)">
+            <summary>
+            Creates a list of calculations associated to the processed model
+            </summary>
+            <param name="Model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoBIMCookbook.Calculation.AddParameterEdgesInDb(DynamoBIMCookbook.Calculation,System.String)">
+            <summary>
+            Adding UsesModelParameters edges in te database from the calculation to the respective edges
+            </summary>
+            <param name="Calculation"></param>
+            <param name="Parameters"></param>
+        </member>
+        <member name="M:DynamoBIMCookbook.Calculation.UpdateInDb(DynamoBIMCookbook.Calculation,System.String,System.String,System.String)">
+            <summary>
+            Updates the calculation vertex in the database
+            </summary>
+            <param name="Calculation"></param>
+            <param name="Description"></param>
+            <param name="Formula"></param>
+            <param name="Constants"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoBIMCookbook.CollateDefinition">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.CollateDefinition.Index">
+            <summary>
+            The index in the process sequence of collation definitions on a recipegroup
+            </summary>
+        </member>
+        <member name="T:DynamoBIMCookbook.Ingredient">
+            <summary>
+            Exposing the BIMCookbook's ingredients class (vertici)
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.Ingredient.RecipeCode">
+            <summary>
+            Returning the formula on the calculation
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.Ingredient.Remark">
+            <summary>
+            Returning the formula on the calculation
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.Ingredient.GroupFormula">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.Ingredient.Calculation">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DynamoBIMCookbook.Ingredient.ByJSON(DynamoBIMCookbook.Book,System.String)">
+            <summary>
+            Creates a new Calculations Vertex in the database.
+            If the vertex exists it update the properties by the new values.
+            </summary>
+            <param name="Book">The Book the calculation is associated to.</param>
+            <param name="JSON"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoBIMCookbook.Ingredient.ByRecipe(DynamoBIMCookbook.Recipe)">
+            <summary>
+            Returns all ingredients associated to the recipe
+            </summary>
+            <param name="Recipe"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoBIMCookbook.Ingredient.AddCalculationEdges(DynamoBIMCookbook.Ingredient,System.String)">
+            <summary>
+            Adding CalculatedBy edge from the ingtredient to the calculation
+            </summary>
+            <param name="Ingredient"></param>
+            <param name="Calculation"></param>
+        </member>
+        <member name="M:DynamoBIMCookbook.Ingredient.Update(DynamoBIMCookbook.Ingredient,System.String,System.String,System.String,System.String)">
+            <summary>
+            Updates the ingredient vertex in the database
+            </summary>
+            <param name="Name"></param>
+            <param name="Ingredient"></param>
+            <param name="Description"></param>
+            <param name="RecipeCode"></param>
+            <param name="Remark"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoBIMCookbook.PostProcessingObject">
+            <summary>
+            Object for post-processing the ProcessingObjects
+            </summary>
+        </member>
+        <member name="M:DynamoBIMCookbook.PostProcessingObject.ByModel(DynamoBIMCookbook.ProcessedModel)">
+            <summary>
+            
+            </summary>
+            <param name="Model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoBIMCookbook.ProcessedGroup">
+            <summary>
+            The Processed group class
+            </summary>
+        </member>
+        <member name="T:DynamoBIMCookbook.ProcessedIngredient">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:DynamoBIMCookbook.ProcessedModel">
+            <summary>
+            The Cookbook Processed model class
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.ProcessedModel.FileGuid">
+            <summary>
+            Returns the file guid of the processed model.
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.ProcessedModel.CadFile">
+            <summary>
+            Returns the CAD file of processed model.
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.ProcessedModel.ModelType">
+            <summary>
+            Returns the model type of processed model.
+            </summary>
+        </member>
+        <member name="M:DynamoBIMCookbook.ProcessedModel.ByRevitModel(DynamoBIMCookbook.Book,System.String,System.String)">
+            <summary>
+            Creates a new processed document in the database.
+            If FileGuid already exists in the dB a new root object is made, otherwise a new version link is created to the original root.
+            </summary>
+            <param name="Book">The book (master dataset) this processed model object belongs to.</param>
+            <param name="FileGuid">The (unchangeable) file guid for this model.</param>
+            <param name="ModelFileName">The filename and path for the model.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoBIMCookbook.ProcessedModel.UnfinishedByBook(DynamoBIMCookbook.Book)">
+            <summary>
+            Returns all ProcessedModels objects needing postprocessing
+            </summary>
+            <param name="Book">The Book containing the associated models</param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoBIMCookbook.ProcessedModel.PostProcess(DynamoBIMCookbook.ProcessedModel)">
+            <summary>
+            Processes the objects and parameters to recipes and ingredients (Processed)
+            </summary>
+            <param name="Model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoBIMCookbook.ProcessedModel.ExportToJSONFile(DynamoBIMCookbook.ProcessedModel,System.String)">
+            <summary>
+            Exports the processed model to a JSON file 
+            </summary>
+            <param name="Model">The model to export</param>
+            <param name="ExportPath">Path containing the filename to export to</param>
+        </member>
+        <member name="T:DynamoBIMCookbook.ProcessedParameter">
+            <summary>
+            The processed parameter class
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.ProcessedParameter.Value">
+            <summary>
+            Returns the value of the parameter
+            </summary>
+        </member>
+        <member name="M:DynamoBIMCookbook.ProcessedParameter.ByRevitParam(DynamoBIMCookbook.ProcessedObject,DynamoBIMCookbook.RevitParameter,System.String)">
+            <summary>
+            Creates a processed parameter (parameter containing a value of an object)
+            </summary>
+            <param name="ProcessedObject">The processed object this parameter is associated to.</param>
+            <param name="Parameter">The Revit parameter to process.</param>
+            <param name="Value">The parameter's value on the object</param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoBIMCookbook.ProcessedParameter.ByRevitParametersAndValues(DynamoBIMCookbook.ProcessedObject,System.Collections.Generic.Dictionary{System.String,DynamoBIMCookbook.RevitParameter},System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Creates processed parameters based on a dictionaries of values and parameters
+            Keys in both dictionaries must be the same.
+            </summary>
+            <param name="ProcessedObject"></param>
+            <param name="Parameters">Dictionary of Revit Parameters</param>
+            <param name="Values">Dictionary of Values</param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoBIMCookbook.ProcessedParameter.ByListOfProcessedObjects(System.Collections.Generic.List{DynamoBIMCookbook.ProcessedObject},System.Collections.Generic.List{System.Collections.Generic.Dictionary{System.String,DynamoBIMCookbook.RevitParameter}},System.Collections.Generic.List{System.Collections.Generic.Dictionary{System.String,System.String}})">
+            <summary>
+            Creates processed parameters based on a dictionaries of values and parameters
+            Keys in both dictionaries must be the same.
+            </summary>
+            <param name="ProcessedObjects"></param>
+            <param name="Parameters">Dictionary of Revit Parameters</param>
+            <param name="Values">Dictionary of Values</param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoBIMCookbook.ProcessedParameter.ByDictOfProcessedObjects(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,DynamoBIMCookbook.ProcessedObject}},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,DynamoBIMCookbook.RevitParameter}},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.String}}})">
+            <summary>
+            Creates processed parameters based on a dictionaries of values and parameters
+            Keys in both dictionaries must be the same.
+            </summary>
+            <param name="ProcessedObjectsDict">Dictionary(recipecode, Dictionary(objectID, ProcessedObject))</param>
+            <param name="ParametersByRecipeDict">Dictionary(ParamName, RevitParameter))</param>
+            <param name="ValuesDict">Dictionary(objectID, Dictionary(ParamName, Values)</param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoBIMCookbook.ProcessedParameter.ByProcessedObject(DynamoBIMCookbook.ProcessedObject)">
+            <summary>
+            Returns all processedparameters associated with the object
+            </summary>
+            <param name="Object"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoBIMCookbook.ProcessedObject">
+            <summary>
+            The Processed Object class
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.ProcessedObject.ORID">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.ProcessedObject.ObjectId">
+            <summary>
+            The model object Id
+            </summary>
+        </member>
+        <member name="M:DynamoBIMCookbook.ProcessedObject.ByRevitModel(DynamoBIMCookbook.ProcessedModel,DynamoBIMCookbook.Recipe,System.String,System.String,System.DateTime,System.String,System.String)">
+            <summary>
+            Creates a new processed document in the database.
+            If FileGuid already exists in the dB a new root object is made, otherwise a new version link is created to the original root.
+            </summary>
+            <param name="ProcessedModel">The processed model associated to the object.</param>
+            <param name="Recipe">The recipe associated to the object.</param>
+            <param name="DesignPhase">The deisng phase of the model.</param>
+            <param name="VersionGuid">The Guid for this version of the processed object.</param>
+            <param name="VersionTime">The timestamp on this version of the processed object</param>
+            <param name="ObjectId">Object id in the model</param>
+            <param name="User"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoBIMCookbook.ProcessedRecipe">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.ProcessedRecipe.Group">
+            <summary>
+            Returns the processed group of the recipe
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.ProcessedRecipe.ProcessedObject">
+            <summary>
+            Returns the processed object used for the recipe
+            </summary>
+        </member>
+        <member name="M:DynamoBIMCookbook.ProcessedRecipe.ByProcessedGroupAndObject(DynamoBIMCookbook.ProcessedGroup,DynamoBIMCookbook.Recipe,System.String)">
+            <summary>
+            Creates a new ProcessedRecipe in the database and returns the object
+            </summary>
+            <param name="Group"></param>
+            <param name="Recipe"></param>
+            <param name="Discipline"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoBIMCookbook.RecipeGroup">
+            <summary>
+            The recipegroup class
+            </summary>
+        </member>
+        <member name="M:DynamoBIMCookbook.RecipeGroup.ByRecipeAndName(DynamoBIMCookbook.Recipe,System.String)">
+            <summary>
+            Returns the recipe group for the recipe.
+            </summary>
+            <param name="Recipe">The recipe to investigate</param>
+            <param name="Name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoBIMCookbook.RecipeGroup.ByBook(DynamoBIMCookbook.Book)">
+            <summary>
+            Returns a flat list of all recipe groups in the a book.
+            The hierarchy is preserved via the parent relation in the group.
+            </summary>
+            <param name="Book">The book containing the requested recipe groups.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoBIMCookbook.RecipeGroup.ByParent(DynamoBIMCookbook.RecipeGroup)">
+            <summary>
+            Returns a flat list of all child-recipe-groups in the parent group.
+            The hierarchy is preserved via the parent relation in the group.
+            </summary>
+            <param name="ParentGroup">The parent group for all requested subgroups</param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoBIMCookbook.RecipeGroup.ByRecipe(DynamoBIMCookbook.Recipe)">
+            <summary>
+            Returns all recipe groups directly associated to the recipe.
+            No group association is returned.
+            </summary>
+            <param name="Recipe">The associated recipe</param>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoBIMCookbook.RevitParameter">
+            <summary>
+            The RevitParameters object
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.RevitParameter.SharedGuid">
+            <summary>
+            Returns the Revit shared parameter Guid
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.RevitParameter.NameInDb">
+            <summary>
+            Naam van de parameter in de database
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.RevitParameter.NameInRevit">
+            <summary>
+            Naam van de parameter in Revit
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.RevitParameter.Description">
+            <summary>
+            Parameter description in database
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.RevitParameter.Units">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DynamoBIMCookbook.RevitParameter.ByJSON(DynamoBIMCookbook.Book,System.String)">
+            <summary>
+            Creates a new Parameter and RevitSharedParameter Vertex in the database.
+            If the any of the vertici exists it is updated with the new values.
+            </summary>
+            <param name="Book"></param>
+            <param name="JSON">{"ParamName": Parameter Name, "ParamDescription": Parameter Description, "Units": Units, "Remarks": value, "Shared_Guid": Revit parmaeter shared Guid, "Name": Revit Parameter Name}</param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoBIMCookbook.RevitParameter.SharedIdByRecipe(DynamoBIMCookbook.Recipe)">
+            <summary>
+            Returns all parameters used on a recipe. Including all parameters used in associated recipe groups
+            </summary>
+            <param name="Recipe"></param>
+            <returns>Dictionary(Shared_Guid, Parameter)</returns>
+        </member>
+        <member name="M:DynamoBIMCookbook.RevitParameter.NamesByRecipe(DynamoBIMCookbook.Recipe)">
+            <summary>
+            Returns all parameters used on a recipe. Including all parameters used in associated recipe groups
+            </summary>
+            <param name="Recipe"></param>
+            <returns>Dictionary(Name, Parameter)</returns>
+        </member>
+        <member name="M:DynamoBIMCookbook.RevitParameter.NamesByRecipes(System.Collections.Generic.List{DynamoBIMCookbook.Recipe})">
+            <summary>
+            
+            </summary>
+            <param name="Recipes"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DynamoBIMCookbook.Recipe">
+            <summary>
+            The Recipe class
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.Recipe.RecipeCode">
+            <summary>
+            The estimate code (classification code) for the recipe. 
+            </summary>
+        </member>
+        <member name="P:DynamoBIMCookbook.Recipe.MatchingValue">
+            <summary>
+            The value on the recipe parameter associating this recipe.
+            </summary>
+        </member>
+        <member name="M:DynamoBIMCookbook.Recipe.ByCode(DynamoBIMCookbook.Book,System.String)">
+            <summary>
+            Returns the recipe with the specified code.
+            </summary>
+            <param name="Book"></param>
+            <param name="RecipeId">The recipe id, according to the parameter defined by the book</param>
+            <returns>A Recipe object</returns>
+        </member>
+        <member name="M:DynamoBIMCookbook.Recipe.ByJSON(DynamoBIMCookbook.Book,System.String)">
+            <summary>
+            Creates a new Recipe Vertex in the database.
+            If the recipe exists it is updated with the new values.
+            </summary>
+            <param name="Book">The Book the recipe is associated to.</param>
+            <param name="JSON">List of vales for the properties.</param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoBIMCookbook.Recipe.ByBook(DynamoBIMCookbook.Book)">
+            <summary>
+            Returns all recipes associated to a book.
+            </summary>
+            <param name="Book">The book object containing the requested recipes</param>
+            <returns>A Dictionary(MatchingValue, Recipe)</returns>
+        </member>
+        <member name="M:DynamoBIMCookbook.Recipe.ByRecipeGroup(DynamoBIMCookbook.RecipeGroup)">
+            <summary>
+            Returns all recipes associated to the recipegroup
+            </summary>
+            <param name="RecipeGroup"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DynamoBIMCookbook.Recipe.AddRecipeEdgesInDb(DynamoBIMCookbook.Book,System.String)">
+            <summary>
+            Adding the Needs edge from the recipe to the ingredient
+            </summary>
+            <param name="Book"></param>
+            <param name="JSON"></param>
+        </member>
+        <member name="M:DynamoBIMCookbook.Recipe.UpdateInDb(DynamoBIMCookbook.Recipe,System.String,System.String,System.String)">
+            <summary>
+            Updates the recipe vertex in the database
+            </summary>
+            <param name="Name"></param>
+            <param name="Recipe"></param>
+            <param name="Description"></param>
+            <param name="MatchingValue"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -3,7 +3,7 @@
   "IsCustomNode": true,
   "Category": "DynamoROCODyfs.Document",
   "Description": "Get current project parameter elements from document",
-  "Name": "CurrentDocument_GetProjectParameters",
+  "Name": "CurrentDocument.GetProjectParameters",
   "ElementResolver": {
     "ResolutionMap": {}
   },
