@@ -1,0 +1,285 @@
+{
+  configData: {
+    "#adaptivePoints": "GMA4",
+    "dateCreated": "10/01/2020",
+    "author": "DKE",
+    "configFileName": "GMA4_create_tunnel_objects",
+    "configFileDescription": ""
+  },
+  imageDict: {
+    "Logo": "config_files\\ROCO.jpg",
+    "ReferenceImage": "config_files\\Principle_sketch_tunnel_selecting_families.png"
+  },
+  scriptDataDict: {
+    "1": {
+      "name": "roof|floor",
+      "fam_search": "GMA4,roof|floor",
+      "defaultParameters": {
+        "ROCO_CLE_Width_Total": "30.10",
+        "ROCO_CTE_Classification.ROCO.PL.Code": "",
+        "ROCO_CTE_Classification.ROCO.PL.Description": "",
+        "ROCO_CTE_Classification.ROCO.PE.Code": "",
+        "ROCO_CTE_Classification.ROCO.PE.Description": "",
+        "ROCO_CTE_Classification.Uniclass.EF.Code": "EF_20_XX_XX_XX",
+        "ROCO_CTE_Classification.Uniclass.EF.Description": "Structural elements",
+        "ROCO_CTE_Classification.Uniclass.SL.Code": "",
+        "ROCO_CTE_Classification.Uniclass.SL.Description": "",
+        "ROCO_CTE_Classification.Uniclass.Ss.Code": "Ss_37_50_92_XX",
+        "ROCO_CTE_Classification.Uniclass.Ss.Description": "Tunnel structure systems"
+      },
+      "numberParams": [
+        "ROCO_CLE_Width_Total"
+      ],
+      "recipeCodes": []
+    },
+    "2": {
+      "name": "floor",
+      "fam_search": "GMA4,floor",
+      "defaultParameters": {
+        "ROCO_CLE_Width_Total": "30.10",
+        "ROCO_CTE_Classification.ROCO.PL.Code": "",
+        "ROCO_CTE_Classification.ROCO.PL.Description": "",
+        "ROCO_CTE_Classification.ROCO.PE.Code": "",
+        "ROCO_CTE_Classification.ROCO.PE.Description": "",
+        "ROCO_CTE_Classification.Uniclass.EF.Code": "EF_20_XX_XX_XX",
+        "ROCO_CTE_Classification.Uniclass.EF.Description": "Structural elements",
+        "ROCO_CTE_Classification.Uniclass.SL.Code": "",
+        "ROCO_CTE_Classification.Uniclass.SL.Description": "",
+        "ROCO_CTE_Classification.Uniclass.Ss.Code": "Ss_37_50_92_XX",
+        "ROCO_CTE_Classification.Uniclass.Ss.Description": "Tunnel structure systems"
+      },
+      "numberParams": [
+        "ROCO_CLE_Width_Total"
+      ],
+      "recipeCodes": []
+    },
+    "3": {
+      "name": "outer_wall_left",
+      "fam_search": "GMA4,wall,!=[Pr_20_85,!=[Pr_20_93",
+      "defaultParameters": {
+        "ROCO_CLE_Height_Total": "6",
+        "ROCO_CTE_Classification.ROCO.PL.Code": "",
+        "ROCO_CTE_Classification.ROCO.PL.Description": "",
+        "ROCO_CTE_Classification.ROCO.PE.Code": "",
+        "ROCO_CTE_Classification.ROCO.PE.Description": "",
+        "ROCO_CTE_Classification.Uniclass.EF.Code": "EF_20_XX_XX_XX",
+        "ROCO_CTE_Classification.Uniclass.EF.Description": "Structural elements",
+        "ROCO_CTE_Classification.Uniclass.SL.Code": "",
+        "ROCO_CTE_Classification.Uniclass.SL.Description": "",
+        "ROCO_CTE_Classification.Uniclass.Ss.Code": "Ss_37_50_92_XX",
+        "ROCO_CTE_Classification.Uniclass.Ss.Description": "Tunnel structure systems"
+      },
+      "numberParams": [
+        "ROCO_CLE_Height_Total"
+      ],
+      "recipeCodes": []
+    },
+    "4": {
+      "name": "inner_wall_left",
+      "fam_search": "GMA4,wall,!=[Pr_20_85,!=[Pr_20_93",
+      "defaultParameters": {
+        "ROCO_CLE_Height_Total": "6",
+        "ROCO_CTE_Classification.ROCO.PL.Code": "",
+        "ROCO_CTE_Classification.ROCO.PL.Description": "",
+        "ROCO_CTE_Classification.ROCO.PE.Code": "",
+        "ROCO_CTE_Classification.ROCO.PE.Description": "",
+        "ROCO_CTE_Classification.Uniclass.EF.Code": "EF_20_XX_XX_XX",
+        "ROCO_CTE_Classification.Uniclass.EF.Description": "Structural elements",
+        "ROCO_CTE_Classification.Uniclass.SL.Code": "",
+        "ROCO_CTE_Classification.Uniclass.SL.Description": "",
+        "ROCO_CTE_Classification.Uniclass.Ss.Code": "Ss_37_50_92_XX",
+        "ROCO_CTE_Classification.Uniclass.Ss.Description": "Tunnel structure systems"
+      },
+      "numberParams": [
+        "ROCO_CLE_Height_Total"
+      ],
+      "recipeCodes": []
+    },
+    "5": {
+      "name": "inner_wall_right",
+      "fam_search": "GMA4,wall,!=[Pr_20_85,!=[Pr_20_93",
+      "defaultParameters": {
+        "ROCO_CLE_Height_Total": "6",
+        "ROCO_CTE_Classification.ROCO.PL.Code": "",
+        "ROCO_CTE_Classification.ROCO.PL.Description": "",
+        "ROCO_CTE_Classification.ROCO.PE.Code": "",
+        "ROCO_CTE_Classification.ROCO.PE.Description": "",
+        "ROCO_CTE_Classification.Uniclass.EF.Code": "EF_20_XX_XX_XX",
+        "ROCO_CTE_Classification.Uniclass.EF.Description": "Structural elements",
+        "ROCO_CTE_Classification.Uniclass.SL.Code": "",
+        "ROCO_CTE_Classification.Uniclass.SL.Description": "",
+        "ROCO_CTE_Classification.Uniclass.Ss.Code": "Ss_37_50_92_XX",
+        "ROCO_CTE_Classification.Uniclass.Ss.Description": "Tunnel structure systems"
+      },
+      "numberParams": [
+        "ROCO_CLE_Height_Total"
+      ],
+      "recipeCodes": []
+    },
+    "6": {
+      "name": "outer_wall_right",
+      "fam_search": "GMA4,wall,!=[Pr_20_85,!=[Pr_20_93",
+      "defaultParameters": {
+        "ROCO_CLE_Height_Total": "6",
+        "ROCO_CTE_Classification.ROCO.PL.Code": "",
+        "ROCO_CTE_Classification.ROCO.PL.Description": "",
+        "ROCO_CTE_Classification.ROCO.PE.Code": "",
+        "ROCO_CTE_Classification.ROCO.PE.Description": "",
+        "ROCO_CTE_Classification.Uniclass.EF.Code": "EF_20_XX_XX_XX",
+        "ROCO_CTE_Classification.Uniclass.EF.Description": "Structural elements",
+        "ROCO_CTE_Classification.Uniclass.SL.Code": "",
+        "ROCO_CTE_Classification.Uniclass.SL.Description": "",
+        "ROCO_CTE_Classification.Uniclass.Ss.Code": "Ss_37_50_92_XX",
+        "ROCO_CTE_Classification.Uniclass.Ss.Description": "Tunnel structure systems"
+      },
+      "numberParams": [
+        "ROCO_CLE_Height_Total"
+      ],
+      "recipeCodes": []
+    },
+    "7": {
+      "name": "outer_jersey_left",
+      "fam_search": "GMA4,jersey",
+      "defaultParameters": {
+        "ROCO_CTE_Classification.ROCO.PL.Code": "",
+        "ROCO_CTE_Classification.ROCO.PL.Description": "",
+        "ROCO_CTE_Classification.ROCO.PE.Code": "",
+        "ROCO_CTE_Classification.ROCO.PE.Description": "",
+        "ROCO_CTE_Classification.Uniclass.EF.Code": "EF_75_50_XX_XX",
+        "ROCO_CTE_Classification.Uniclass.EF.Description": "Safety and protection",
+        "ROCO_CTE_Classification.Uniclass.SL.Code": "",
+        "ROCO_CTE_Classification.Uniclass.SL.Description": "",
+        "ROCO_CTE_Classification.Uniclass.Ss.Code": "Ss_25_16_94_16",
+        "ROCO_CTE_Classification.Uniclass.Ss.Description": "Concrete safety barrier (CSB) systems"
+      },
+      "numberParams": [],
+      "recipeCodes": []
+    },
+    "8": {
+      "name": "inner_jersey_left",
+      "fam_search": "GMA4,jersey",
+      "defaultParameters": {
+        "ROCO_CTE_Classification.ROCO.PL.Code": "",
+        "ROCO_CTE_Classification.ROCO.PL.Description": "",
+        "ROCO_CTE_Classification.ROCO.PE.Code": "",
+        "ROCO_CTE_Classification.ROCO.PE.Description": "",
+        "ROCO_CTE_Classification.Uniclass.EF.Code": "EF_75_50_XX_XX",
+        "ROCO_CTE_Classification.Uniclass.EF.Description": "Safety and protection",
+        "ROCO_CTE_Classification.Uniclass.SL.Code": "",
+        "ROCO_CTE_Classification.Uniclass.SL.Description": "",
+        "ROCO_CTE_Classification.Uniclass.Ss.Code": "Ss_25_16_94_16",
+        "ROCO_CTE_Classification.Uniclass.Ss.Description": "Concrete safety barrier (CSB) systems"
+      },
+      "numberParams": [],
+      "recipeCodes": []
+    },
+    "9": {
+      "name": "outer_jersey_right",
+      "fam_search": "GMA4,jersey",
+      "defaultParameters": {
+        "ROCO_CTE_Classification.ROCO.PL.Code": "",
+        "ROCO_CTE_Classification.ROCO.PL.Description": "",
+        "ROCO_CTE_Classification.ROCO.PE.Code": "",
+        "ROCO_CTE_Classification.ROCO.PE.Description": "",
+        "ROCO_CTE_Classification.Uniclass.EF.Code": "EF_75_50_XX_XX",
+        "ROCO_CTE_Classification.Uniclass.EF.Description": "Safety and protection",
+        "ROCO_CTE_Classification.Uniclass.SL.Code": "",
+        "ROCO_CTE_Classification.Uniclass.SL.Description": "",
+        "ROCO_CTE_Classification.Uniclass.Ss.Code": "Ss_25_16_94_16",
+        "ROCO_CTE_Classification.Uniclass.Ss.Description": "Concrete safety barrier (CSB) systems"
+      },
+      "numberParams": [],
+      "recipeCodes": []
+    },
+    "10": {
+      "name": "inner_jersey_right",
+      "fam_search": "GMA4,jersey",
+      "defaultParameters": {
+        "ROCO_CTE_Classification.ROCO.PL.Code": "",
+        "ROCO_CTE_Classification.ROCO.PL.Description": "",
+        "ROCO_CTE_Classification.ROCO.PE.Code": "",
+        "ROCO_CTE_Classification.ROCO.PE.Description": "",
+        "ROCO_CTE_Classification.Uniclass.EF.Code": "EF_75_50_XX_XX",
+        "ROCO_CTE_Classification.Uniclass.EF.Description": "Safety and protection",
+        "ROCO_CTE_Classification.Uniclass.SL.Code": "",
+        "ROCO_CTE_Classification.Uniclass.SL.Description": "",
+        "ROCO_CTE_Classification.Uniclass.Ss.Code": "Ss_25_16_94_16",
+        "ROCO_CTE_Classification.Uniclass.Ss.Description": "Concrete safety barrier (CSB) systems"
+      },
+      "numberParams": [],
+      "recipeCodes": []
+    },
+    "11": {
+      "name": "outer_cladding_left",
+      "fam_search": "GMA4,cladding",
+      "defaultParameters": {
+        "ROCO_CTE_Classification.ROCO.PL.Code": "",
+        "ROCO_CTE_Classification.ROCO.PL.Description": "",
+        "ROCO_CTE_Classification.ROCO.PE.Code": "",
+        "ROCO_CTE_Classification.ROCO.PE.Description": "",
+        "ROCO_CTE_Classification.Uniclass.EF.Code": "",
+        "ROCO_CTE_Classification.Uniclass.EF.Description": "",
+        "ROCO_CTE_Classification.Uniclass.SL.Code": "",
+        "ROCO_CTE_Classification.Uniclass.SL.Description": "",
+        "ROCO_CTE_Classification.Uniclass.Ss.Code": "Ss_25_20_15_16",
+        "ROCO_CTE_Classification.Uniclass.Ss.Description": "Concrete panel cladding systems"
+      },
+      "numberParams": [],
+      "recipeCodes": []
+    },
+    "12": {
+      "name": "inner_cladding_left",
+      "fam_search": "GMA4,cladding",
+      "defaultParameters": {
+        "ROCO_CTE_Classification.ROCO.PL.Code": "",
+        "ROCO_CTE_Classification.ROCO.PL.Description": "",
+        "ROCO_CTE_Classification.ROCO.PE.Code": "",
+        "ROCO_CTE_Classification.ROCO.PE.Description": "",
+        "ROCO_CTE_Classification.Uniclass.EF.Code": "",
+        "ROCO_CTE_Classification.Uniclass.EF.Description": "",
+        "ROCO_CTE_Classification.Uniclass.SL.Code": "",
+        "ROCO_CTE_Classification.Uniclass.SL.Description": "",
+        "ROCO_CTE_Classification.Uniclass.Ss.Code": "Ss_25_20_15_16",
+        "ROCO_CTE_Classification.Uniclass.Ss.Description": "Concrete panel cladding systems"
+      },
+      "numberParams": [],
+      "recipeCodes": []
+    },
+    "13": {
+      "name": "inner_cladding_right",
+      "fam_search": "GMA4,cladding",
+      "defaultParameters": {
+        "ROCO_CTE_Classification.ROCO.PL.Code": "",
+        "ROCO_CTE_Classification.ROCO.PL.Description": "",
+        "ROCO_CTE_Classification.ROCO.PE.Code": "",
+        "ROCO_CTE_Classification.ROCO.PE.Description": "",
+        "ROCO_CTE_Classification.Uniclass.EF.Code": "",
+        "ROCO_CTE_Classification.Uniclass.EF.Description": "",
+        "ROCO_CTE_Classification.Uniclass.SL.Code": "",
+        "ROCO_CTE_Classification.Uniclass.SL.Description": "",
+        "ROCO_CTE_Classification.Uniclass.Ss.Code": "Ss_25_20_15_16",
+        "ROCO_CTE_Classification.Uniclass.Ss.Description": "Concrete panel cladding systems"
+      },
+      "numberParams": [],
+      "recipeCodes": []
+    },
+    "14": {
+      "name": "outer_cladding_right",
+      "fam_search": "GMA4,cladding",
+      "defaultParameters": {
+        "ROCO_CTE_Classification.ROCO.PL.Code": "",
+        "ROCO_CTE_Classification.ROCO.PL.Description": "",
+        "ROCO_CTE_Classification.ROCO.PE.Code": "",
+        "ROCO_CTE_Classification.ROCO.PE.Description": "",
+        "ROCO_CTE_Classification.Uniclass.EF.Code": "",
+        "ROCO_CTE_Classification.Uniclass.EF.Description": "",
+        "ROCO_CTE_Classification.Uniclass.SL.Code": "",
+        "ROCO_CTE_Classification.Uniclass.SL.Description": "",
+        "ROCO_CTE_Classification.Uniclass.Ss.Code": "Ss_25_20_15_16",
+        "ROCO_CTE_Classification.Uniclass.Ss.Description": "Concrete panel cladding systems"
+      },
+      "numberParams": [],
+      "recipeCodes": []
+    }
+  }
+}

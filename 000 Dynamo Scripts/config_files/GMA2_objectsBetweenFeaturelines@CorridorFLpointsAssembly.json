@@ -1,0 +1,25 @@
+{
+  configData: {
+    "#adaptivePoints": "GMA2",
+    "dateCreated": "27/02/2020",
+    "author": "DKE",
+    "configFileName": "GMA2_objectsBetweenFeaturelines",
+    "configFileDescription": ""
+  },
+  imageDict: {
+    "Logo": "config_files\\ROCO.jpg",
+    "ReferenceImage": "config_files\\Principle_between_FLPoints_Subassembly.png"
+  },
+  scriptDataDict: {
+    "1": {
+      "name": "Object_between_featurelines",
+      "fam_search": "GMA2",
+      "defaultParameters": {
+		"ROCO_CNU_":"1234"
+      },
+      "numberParams": ["ROCO_CNU_"
+      ],
+      "recipeCodes": []
+    }
+  }
+}
