@@ -22,7 +22,7 @@
     {
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
-      "Code": "# Importing Reference Modules\n# CLR ( Common Language Runtime Module )\nimport clr\n# Adding the DynamoRevitDS.dll module to work with the Dynamo API\nclr.AddReference('DynamoRevitDS')\nimport Dynamo \n\n# access to the current Dynamo instance and workspace\ndynamoRevit = Dynamo.Applications.DynamoRevit()\ncurrentWorkspace = dynamoRevit.RevitDynamoModel.CurrentWorkspace\n\n# Access current version of dynamo\nversion=dynamoRevit.RevitDynamoModel.Version\n\n# checks version of dynamo and adjusts output according to version\nif version.StartsWith(\"1.\"):\n\t\n\t# Gets file name which includes full path\n\tfilename=currentWorkspace.FileName\n\t\n\t# Splits out file path to just file name\n\tOUT=filename\n\nelif version.StartsWith(\"2.\"):\n\tOUT=currentWorkspace.Name\n\nelse:\n\tOUT=\"Not supported\"",
+      "Code": "# Importing Reference Modules\n# CLR ( Common Language Runtime Module )\nimport clr\n# Adding the DynamoRevitDS.dll module to work with the Dynamo API\nclr.AddReference('DynamoRevitDS')\nimport Dynamo \n\n# access to the current Dynamo instance and workspace\ndynamoRevit = Dynamo.Applications.DynamoRevit()\ncurrentWorkspace = dynamoRevit.RevitDynamoModel.CurrentWorkspace\n\n# Access current version of dynamo\nversion=dynamoRevit.RevitDynamoModel.Version\n\n# checks version of dynamo and adjusts output according to version\nif version.StartsWith(\"1.\"):\n\t\n\t# Gets file name which includes full path\n\tfilename=currentWorkspace.FileName\n\t\n\t\n\t# Splits out file path to just file name\n\tOUT=filename\n\nelif version.StartsWith(\"2.\"):\n\tOUT=currentWorkspace.FileName\n\nelse:\n\tOUT=\"Not supported\"",
       "VariableInputPorts": true,
       "Id": "ab1fdb3ec06c453f8793387a59d81c7b",
       "Inputs": [
@@ -267,83 +267,83 @@
     },
     "Camera": {
       "Name": "Background Preview",
-      "EyeX": -17.0,
-      "EyeY": 24.0,
-      "EyeZ": 50.0,
-      "LookX": 12.0,
-      "LookY": -13.0,
-      "LookZ": -58.0,
-      "UpX": 0.0,
+      "EyeX": -21.877321354732587,
+      "EyeY": 37.832655331326684,
+      "EyeZ": 9.92234893622329,
+      "LookX": -1.1720904005469563,
+      "LookY": -0.40181267756747019,
+      "LookZ": -1.4062560503783637,
+      "UpX": -2.5340206956424652E-14,
       "UpY": 1.0,
-      "UpZ": 0.0
+      "UpZ": 2.2196654236861235E-14
     },
     "NodeViews": [
       {
-        "ShowGeometry": true,
-        "Name": "Python Script",
         "Id": "ab1fdb3ec06c453f8793387a59d81c7b",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "Python Script",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 250.0,
-        "Y": 1.42000706098804
+        "Y": 1.4200070609880395
       },
       {
-        "ShowGeometry": true,
-        "Name": "FileSystem.DirectoryName",
         "Id": "c9fbd5ea5a494cf6954bf65be2808416",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "FileSystem.DirectoryName",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 427.334343296088,
         "Y": 0.0
       },
       {
-        "ShowGeometry": true,
-        "Name": "Code Block",
         "Id": "bc9c8db7cf6f44e1ac1106740501023e",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "Code Block",
+        "ShowGeometry": true,
         "Excluded": false,
-        "X": 468.486114744058,
-        "Y": 92.762749675111
+        "X": 416.486114744058,
+        "Y": 96.762749675111
       },
       {
-        "ShowGeometry": true,
-        "Name": "String.Concat",
         "Id": "7bd3fb31b74a4c9a84a6be93053c1dd3",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "String.Concat",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 693.755237376408,
         "Y": 30.709101256211
       },
       {
-        "ShowGeometry": true,
-        "Name": "File.FromPath",
         "Id": "195dacfae1eb48849908583f721b623a",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "File.FromPath",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 934.176419580568,
         "Y": 31.166084130403
       },
       {
-        "ShowGeometry": true,
-        "Name": "Image.ReadFromFile",
         "Id": "9c3bd46b56c048cfbd3fe001944131d6",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "Image.ReadFromFile",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 1091.34596882772,
         "Y": 31.279775676956
       },
       {
-        "ShowGeometry": true,
-        "Name": "Output",
         "Id": "f56c7dc22cd94ba1bb29fd579fe17d41",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
+        "Name": "Output",
+        "ShowGeometry": true,
         "Excluded": false,
         "X": 1340.34596882772,
         "Y": 0.0
