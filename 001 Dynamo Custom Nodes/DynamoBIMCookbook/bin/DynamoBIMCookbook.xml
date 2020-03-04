@@ -125,24 +125,16 @@
             <param name="Calculation"></param>
             <param name="Parameters"></param>
         </member>
-        <member name="M:DynamoBIMCookbook.Calculation.UpdateInDb(DynamoBIMCookbook.Calculation,System.String,System.String,System.String)">
+        <member name="M:DynamoBIMCookbook.Calculation.UpdateInDb(DynamoBIMCookbook.CalculationDefinition)">
             <summary>
             Updates the calculation vertex in the database
             </summary>
-            <param name="Calculation"></param>
-            <param name="Description"></param>
-            <param name="Formula"></param>
-            <param name="Constants"></param>
+            <param name="Definition"></param>
             <returns></returns>
         </member>
         <member name="T:DynamoBIMCookbook.CollateDefinition">
             <summary>
             
-            </summary>
-        </member>
-        <member name="P:DynamoBIMCookbook.CollateDefinition.Index">
-            <summary>
-            The index in the process sequence of collation definitions on a recipegroup
             </summary>
         </member>
         <member name="T:DynamoBIMCookbook.Ingredient">
@@ -170,7 +162,7 @@
             
             </summary>
         </member>
-        <member name="M:DynamoBIMCookbook.Ingredient.ByJSON(DynamoBIMCookbook.Book,System.String)">
+        <member name="M:DynamoBIMCookbook.Ingredient.InDbByJSON(DynamoBIMCookbook.Book,System.String)">
             <summary>
             Creates a new Calculations Vertex in the database.
             If the vertex exists it update the properties by the new values.
@@ -184,24 +176,6 @@
             Returns all ingredients associated to the recipe
             </summary>
             <param name="Recipe"></param>
-            <returns></returns>
-        </member>
-        <member name="M:DynamoBIMCookbook.Ingredient.AddCalculationEdges(DynamoBIMCookbook.Ingredient,System.String)">
-            <summary>
-            Adding CalculatedBy edge from the ingtredient to the calculation
-            </summary>
-            <param name="Ingredient"></param>
-            <param name="Calculation"></param>
-        </member>
-        <member name="M:DynamoBIMCookbook.Ingredient.Update(DynamoBIMCookbook.Ingredient,System.String,System.String,System.String,System.String)">
-            <summary>
-            Updates the ingredient vertex in the database
-            </summary>
-            <param name="Name"></param>
-            <param name="Ingredient"></param>
-            <param name="Description"></param>
-            <param name="RecipeCode"></param>
-            <param name="Remark"></param>
             <returns></returns>
         </member>
         <member name="T:DynamoBIMCookbook.PostProcessingObject">
@@ -372,11 +346,6 @@
             Returns the processed group of the recipe
             </summary>
         </member>
-        <member name="P:DynamoBIMCookbook.ProcessedRecipe.ProcessedObject">
-            <summary>
-            Returns the processed object used for the recipe
-            </summary>
-        </member>
         <member name="M:DynamoBIMCookbook.ProcessedRecipe.ByProcessedGroupAndObject(DynamoBIMCookbook.ProcessedGroup,DynamoBIMCookbook.Recipe,System.String)">
             <summary>
             Creates a new ProcessedRecipe in the database and returns the object
@@ -498,6 +467,11 @@
             The value on the recipe parameter associating this recipe.
             </summary>
         </member>
+        <member name="P:DynamoBIMCookbook.Recipe.Remark">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:DynamoBIMCookbook.Recipe.ByCode(DynamoBIMCookbook.Book,System.String)">
             <summary>
             Returns the recipe with the specified code.
@@ -506,7 +480,7 @@
             <param name="RecipeId">The recipe id, according to the parameter defined by the book</param>
             <returns>A Recipe object</returns>
         </member>
-        <member name="M:DynamoBIMCookbook.Recipe.ByJSON(DynamoBIMCookbook.Book,System.String)">
+        <member name="M:DynamoBIMCookbook.Recipe.InDbByJSON(DynamoBIMCookbook.Book,System.String)">
             <summary>
             Creates a new Recipe Vertex in the database.
             If the recipe exists it is updated with the new values.
@@ -535,16 +509,6 @@
             </summary>
             <param name="Book"></param>
             <param name="JSON"></param>
-        </member>
-        <member name="M:DynamoBIMCookbook.Recipe.UpdateInDb(DynamoBIMCookbook.Recipe,System.String,System.String,System.String)">
-            <summary>
-            Updates the recipe vertex in the database
-            </summary>
-            <param name="Name"></param>
-            <param name="Recipe"></param>
-            <param name="Description"></param>
-            <param name="MatchingValue"></param>
-            <returns></returns>
         </member>
     </members>
 </doc>

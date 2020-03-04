@@ -1,0 +1,26 @@
+{
+  configData: {
+    "#adaptivePoints": "GMA4",
+    "dateCreated": "04/03/2020",
+    "author": "DKE",
+    "configFileName": "create_GMA4_objects@CorridorFLpoints",
+    "configFileDescription": ""
+  },
+  imageDict: {
+    "Logo": "config_files\\ROCO.jpg",
+    "ReferenceImage": "config_files\\Principle_sketch_tunnel_selecting_families.png"
+  },
+  scriptDataDict: {
+    "1": {
+      "name": "Not predefined object",
+      "fam_search": "GMA4",
+      "defaultParameters": {
+        "Comment": ""
+      },
+      "numberParams": [
+        "ROCO_CLE_Width_Total"
+      ],
+      "recipeCodes": []
+    }
+  }
+}

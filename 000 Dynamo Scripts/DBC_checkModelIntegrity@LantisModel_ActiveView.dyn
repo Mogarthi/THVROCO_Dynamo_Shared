@@ -20,8 +20,8 @@
     {
       "Id": "05430921404248238ce289238d44388e",
       "Name": "Logic check of objects in RevitProject: Watch",
-      "Type": "string",
-      "InitialValue": "total elements in active view= 8380;\n logical elements= 4389 (52.374702%)",
+      "Type": "unknown",
+      "InitialValue": "",
       "Description": "Visualize the output of node."
     },
     {
@@ -34,6 +34,13 @@
     {
       "Id": "2b0f65e9f8b6465484c0677a53cd3ce9",
       "Name": "Required projectparameters on projectinfo",
+      "Type": "unknown",
+      "InitialValue": "",
+      "Description": "Visualize the output of node."
+    },
+    {
+      "Id": "506049941e4c419db1009dc22ca9ec45",
+      "Name": "Element conformity",
       "Type": "unknown",
       "InitialValue": "",
       "Description": "Visualize the output of node."
@@ -1650,6 +1657,35 @@
       ],
       "Replication": "Disabled",
       "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "506049941e4c419db1009dc22ca9ec45",
+      "Inputs": [
+        {
+          "Id": "ea39cb3471984bdc8f86fcb7caf7237b",
+          "Name": "",
+          "Description": "Node to evaluate.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "09dab01d25fd46298471e9b57f2baaf7",
+          "Name": "",
+          "Description": "Watch contents.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualize the output of node."
     }
   ],
   "Connectors": [
@@ -1872,6 +1908,11 @@
       "Start": "20d7c365f258431d8f4fae807d5b0c79",
       "End": "341337b10cf44d08b069495f4401b63c",
       "Id": "6a5e3cd17e344c7292e83e7e5a347868"
+    },
+    {
+      "Start": "27e3273ce2694f9dbc1474ca41b8e95f",
+      "End": "ea39cb3471984bdc8f86fcb7caf7237b",
+      "Id": "704358c7ab804d41ae1d0bafa0b17958"
     },
     {
       "Start": "6da8cd298a744a7d985eff70c886e37e",
@@ -2454,6 +2495,16 @@
         "Excluded": false,
         "X": 8323.87513133708,
         "Y": 1613.385262857468
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element conformity",
+        "Id": "506049941e4c419db1009dc22ca9ec45",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": true,
+        "Excluded": false,
+        "X": 8356.58868839884,
+        "Y": -799.00070588276947
       }
     ],
     "Annotations": [
@@ -2463,15 +2514,16 @@
         "Nodes": [
           "05430921404248238ce289238d44388e",
           "2d2d0e6b4fba4805986c6fb5f5f23c9f",
-          "2b0f65e9f8b6465484c0677a53cd3ce9"
+          "2b0f65e9f8b6465484c0677a53cd3ce9",
+          "506049941e4c419db1009dc22ca9ec45"
         ],
         "Left": 8313.87513133708,
         "Top": -1125.5381823453231,
         "Width": 307.95950632435415,
-        "Height": 3097.9234452027913,
+        "Height": 2832.9234452027913,
         "FontSize": 36.0,
         "InitialTop": -1072.5381823453231,
-        "InitialHeight": 595.9791717681685,
+        "InitialHeight": 2830.9234452027913,
         "TextblockHeight": 43.0,
         "Background": "#FFC1D676"
       },
@@ -2550,13 +2602,13 @@
         "Height": 352.01435220385679,
         "FontSize": 36.0,
         "InitialTop": 772.25340584194942,
-        "InitialHeight": 393.57917672313624,
+        "InitialHeight": 351.01435220385679,
         "TextblockHeight": 43.0,
         "Background": "#FFD4B6DB"
       }
     ],
-    "X": -1635.0698074505246,
-    "Y": -1312.3810123738033,
-    "Zoom": 1.5064991560536818
+    "X": -5231.7735159688737,
+    "Y": 1235.5430514828697,
+    "Zoom": 0.71938600589136881
   }
 }

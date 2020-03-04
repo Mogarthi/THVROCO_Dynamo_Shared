@@ -1,0 +1,129 @@
+{
+  "Uuid": "154c8d55-aec9-401e-85da-122638097b06",
+  "IsCustomNode": true,
+  "Category": "DynamoROCODyfs.Document",
+  "Description": "Fysically select objects in document by elementID",
+  "Name": "Document.SelectElementByID",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference(\"System\")\r\nfrom System.Collections.Generic import List\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\nclr.AddReference(\"RevitAPIUI\")\r\nfrom Autodesk.Revit.UI.Selection import *\r\nclr.AddReference('RevitAPI')\r\nfrom Autodesk.Revit.DB import *\r\n\r\n\r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\nElementList = IN[0]\r\n\r\n# Place your code below this line\r\nUIdoc = DocumentManager.Instance.CurrentUIDocument\r\ndbDocument = DocumentManager.Instance.CurrentDBDocument\r\n\r\nelem_id=list()\r\n\r\nfor id in ElementList:\r\n\telem_id.append(ElementId(id))\r\n\r\nicol= List[ElementId](elem_id)\r\nelement_ids = UIdoc.Selection.SetElementIds(icol)\r\n\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = element_ids",
+      "VariableInputPorts": true,
+      "Id": "e2f0f5beda65423c968bcfb9296db749",
+      "Inputs": [
+        {
+          "Id": "d8f24cda14d441708563def7eeb3e1cc",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "7cc34a7ca3c74a99ba9979fcb7a5e565",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
+      "NodeType": "InputNode",
+      "Parameter": {
+        "Name": "elementId",
+        "TypeName": "double",
+        "TypeRank": 1,
+        "DefaultValue": null,
+        "Description": ""
+      },
+      "Id": "2f00ea647d8a4a15b40bf2d9f914091f",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "cc02d890080d48c388bd5f88173c9ec6",
+          "Name": "",
+          "Description": "Symbol",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "cc02d890080d48c388bd5f88173c9ec6",
+      "End": "d8f24cda14d441708563def7eeb3e1cc",
+      "Id": "59b1ac66f26740008c6856ae7bf39803"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.0.5885",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -21.877321354732587,
+      "EyeY": 37.832655331326684,
+      "EyeZ": 9.92234893622329,
+      "LookX": -1.1720904005469563,
+      "LookY": -0.40181267756747019,
+      "LookZ": -1.4062560503783637,
+      "UpX": -2.5340206956424652E-14,
+      "UpY": 1.0,
+      "UpZ": 2.2196654236861235E-14
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": false,
+        "Name": "CurrentDocumentSelection: Python Script",
+        "Id": "e2f0f5beda65423c968bcfb9296db749",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 992.77230608140235,
+        "Y": 502.04958959590112
+      },
+      {
+        "ShowGeometry": false,
+        "Name": "Input",
+        "Id": "2f00ea647d8a4a15b40bf2d9f914091f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 693.88576152391965,
+        "Y": 497.07535181519216
+      }
+    ],
+    "Annotations": [],
+    "X": -1149.6142018205755,
+    "Y": -352.58328055378888,
+    "Zoom": 1.7835993623828124
+  }
+}
