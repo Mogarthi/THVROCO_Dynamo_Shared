@@ -1,0 +1,133 @@
+{
+  "Uuid": "356821ad-507b-4c2e-9043-f17f4775b1ca",
+  "IsCustomNode": false,
+  "Description": null,
+  "Name": "RVT_FixCoordinateSystem",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "b01b5184-d7bc-412a-b243-1e6fc52695bb",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "2f4b8523923c493ca8221bd7fc2aec7e",
+      "Inputs": [
+        {
+          "Id": "a40f516799b24015bad8d73625842917",
+          "Name": "coordinateSystemId",
+          "Description": "string\nDefault value : \"Belge72/b.Lambert72A\"",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b67301f30f09461899db83b39e9952bf",
+          "Name": "errorMessage",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Changes the coordinate system without changing the project reference points (Project Basepoint and Survey Point). Requires string id of the coordinate system to work."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"Belge72/b.Lambert72A\";",
+      "Id": "3e9a485a06334c4e975a65cef5e035bf",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "d7e607da026841179c043ef3bc1e1b8f",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "d7e607da026841179c043ef3bc1e1b8f",
+      "End": "a40f516799b24015bad8d73625842917",
+      "Id": "f6c60f3c142f4cc7a7b9c38b4b61cdb5"
+    }
+  ],
+  "Dependencies": [
+    "b01b5184-d7bc-412a-b243-1e6fc52695bb"
+  ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "ROCO Dyf Packages",
+      "Version": "1.0.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "2f4b8523923c493ca8221bd7fc2aec7e"
+      ]
+    }
+  ],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.0.5885",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "Id": "2f4b8523923c493ca8221bd7fc2aec7e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "SetCoordinateSystem",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 769.0,
+        "Y": 394.0
+      },
+      {
+        "Id": "3e9a485a06334c4e975a65cef5e035bf",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 339.0,
+        "Y": 476.0
+      }
+    ],
+    "Annotations": [],
+    "X": 0.0,
+    "Y": 0.0,
+    "Zoom": 1.0
+  }
+}

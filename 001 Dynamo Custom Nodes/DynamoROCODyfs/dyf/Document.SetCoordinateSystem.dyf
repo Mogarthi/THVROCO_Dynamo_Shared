@@ -1,0 +1,165 @@
+{
+  "Uuid": "b01b5184-d7bc-412a-b243-1e6fc52695bb",
+  "IsCustomNode": true,
+  "Category": "DynamoROCODyfs.Document.Location",
+  "Description": "Changes the coordinate system without changing the project reference points (Project Basepoint and Survey Point). Requires string id of the coordinate system to work.",
+  "Name": "SetCoordinateSystem",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\r\nclr.AddReference('RevitAPI')\r\nfrom Autodesk.Revit.DB import *\r\nfrom Autodesk.Revit.DB.UnitUtils import *\r\n\r\nclr.AddReference(\"RevitNodes\")\r\nimport Revit\r\nfrom Revit.Elements import *\r\nclr.ImportExtensions(Revit.Elements)\r\n\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\nfrom RevitServices.Transactions import TransactionManager\r\n\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\nTransactionManager.Instance.EnsureInTransaction(doc)\r\nstringOut = \"\"\r\n\r\ntry:\r\n\tdoc.SiteLocation.SetGeoCoordinateSystem(IN[0])\r\nexcept:\r\n\tstringOut= stringOut + \"Failed to change coordinate system\" \r\n\tif IN[0]==\"\":\r\n\t\tstringOut= stringOut+ \", No coordinate system defined\"\r\n\tif IN[0]==None:\r\n\t\tstringOut= stringOut+ \", no input defined\"\r\n\telif IN[0]!=\"\":\r\n\t\tstringOut= stringOut+\", Coordinate system not recognized\"\r\n\r\n\t\r\nOUT= stringOut",
+      "VariableInputPorts": true,
+      "Id": "af721c41f0a64a1fa0111323847f3919",
+      "Inputs": [
+        {
+          "Id": "f11682ed61104fa7a2c6d039a0650f89",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "052539fed8e74b61baeacd8dd5cd7a94",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
+      "NodeType": "InputNode",
+      "Parameter": {
+        "Name": "coordinateSystemId",
+        "TypeName": "string",
+        "TypeRank": 0,
+        "DefaultValue": "\"Belge72/b.Lambert72A\"",
+        "Description": ""
+      },
+      "Id": "9c0fa5777093488daee51d4bfeacc566",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "3e47a525654f475d9decfc0fd50412e3",
+          "Name": "",
+          "Description": "Symbol",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Output, DynamoCore",
+      "NodeType": "OutputNode",
+      "ElementResolver": null,
+      "Symbol": "errorMessage",
+      "Id": "e08ff4ba1a9b4288934c30a9a3df92b3",
+      "Inputs": [
+        {
+          "Id": "c56b18086e434e1da48c0e4d3df61836",
+          "Name": "",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [],
+      "Replication": "Disabled",
+      "Description": "A function output, use with custom nodes"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "052539fed8e74b61baeacd8dd5cd7a94",
+      "End": "c56b18086e434e1da48c0e4d3df61836",
+      "Id": "84fe78a6f5fd4dabb04c2c77c38bda69"
+    },
+    {
+      "Start": "3e47a525654f475d9decfc0fd50412e3",
+      "End": "f11682ed61104fa7a2c6d039a0650f89",
+      "Id": "fd3429d8db5541bbaaee8ad3fc070f52"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.0.5885",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "Id": "af721c41f0a64a1fa0111323847f3919",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "setParam: Python Script",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 1366.4434478999356,
+        "Y": 544.18013533979308
+      },
+      {
+        "Id": "9c0fa5777093488daee51d4bfeacc566",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Input",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 848.0,
+        "Y": 540.0
+      },
+      {
+        "Id": "e08ff4ba1a9b4288934c30a9a3df92b3",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Output",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 1602.0,
+        "Y": 547.0
+      }
+    ],
+    "Annotations": [],
+    "X": 0.0,
+    "Y": 0.0,
+    "Zoom": 1.0
+  }
+}
