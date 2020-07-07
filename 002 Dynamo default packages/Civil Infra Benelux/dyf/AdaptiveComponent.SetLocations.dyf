@@ -1,0 +1,156 @@
+<Workspace Version="1.3.4.6666" X="-74.5956794477129" Y="374.144027243482" zoom="1.17828586559478" ScaleFactor="1" Name="AdaptiveComponent.SetLocations" Description="Updates the location of the Adaptive components. The amount of Points should be the same as the amount of Adaptive points of the Elements" ID="9ad58179-7be5-4d58-996b-b8e1faac5bd9" Category="CIB.Revit.Elements.AdaptiveComponent.Actions">
+  <NamespaceResolutionMap>
+    <ClassMap partialName="Point" resolvedName="Autodesk.DesignScript.Geometry.Point" assemblyName="ProtoGeometry.dll" />
+    <ClassMap partialName="AdaptiveComponent" resolvedName="Revit.Elements.AdaptiveComponent" assemblyName="RevitNodes.dll" />
+    <ClassMap partialName="List" resolvedName="DSCore.List" assemblyName="DSCoreNodes.dll" />
+  </NamespaceResolutionMap>
+  <Elements>
+    <PythonNodeModels.PythonNode guid="289c600d-ae09-4011-b0cc-c13cc43f8d12" type="PythonNodeModels.PythonNode" nickname="Python Script" x="971.041643789443" y="199.599573392" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="2">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <Script>###################################################
+##   TBI Dynamo Python Node Template
+###################################################
+
+import clr
+clr.AddReference('ProtoGeometry')
+from Autodesk.DesignScript.Geometry import *
+
+# Import ToDSType(bool) extension method
+clr.AddReference('RevitNodes')
+import Revit
+
+# conversion methoeds
+clr.ImportExtensions(Revit.Elements)
+clr.ImportExtensions(Revit.GeometryConversion)
+
+# Import DocumentManager and TransactionManager
+clr.AddReference('RevitServices')
+import RevitServices
+from RevitServices.Persistence import DocumentManager
+from RevitServices.Transactions import TransactionManager
+
+clr.AddReference('RevitAPI')
+import Autodesk
+from Autodesk.Revit.DB import *
+
+doc = DocumentManager.Instance.CurrentDBDocument
+uiapp = DocumentManager.Instance.CurrentUIApplication
+app = uiapp.Application
+
+# Utility functions
+# revit owned, False if created, True if fetcht
+def maybeToDSType(element, revitOwned):
+	try:
+		return element.ToDSType(revitOwned)
+	except:
+		return element
+
+def islist(l):
+	if type(l) is list:
+    		return True
+	return False
+
+#The inputs to this node will be stored as a list in the IN variable.
+dataEnteringNode = IN
+els = [UnwrapElement(x) for x in IN[0]]
+pointsl = IN[1]
+
+
+TransactionManager.Instance.EnsureInTransaction(doc)
+
+r = []
+for el, pts in zip(els, pointsl):
+	try:
+		apts = AdaptiveComponentInstanceUtils.GetInstancePlacementPointElementRefIds(el)
+		if len(pts) != len(apts):
+			r.append(None)
+			continue
+	
+		for pt, apt in zip(pts, apts):
+			tapt = doc.GetElement(apt)
+			trans = pt.ToXyz().Subtract(tapt.Position)
+			ElementTransformUtils.MoveElement(doc, apt, trans)
+		
+		r.append(maybeToDSType(el, True))
+	except:
+		r.append(None)
+		raise
+
+TransactionManager.Instance.TransactionTaskDone()
+
+OUT = r</Script>
+    </PythonNodeModels.PythonNode>
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="b0a99820-0c47-4033-adbd-6bfb2a5c4a40" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="473.437594487856" y="336.79009023806" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="2;" ShouldFocus="false" />
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="5507f791-1f47-4f0b-9dea-2e0f20c94151" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="28.0824070676947" y="0.381031269011658" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="//The AdaptiveComponent Instances &#xD;&#xA;adaptiveComponent" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="1aa21bb0-fae3-4b72-8087-68c1cdc855bd" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="33.3368263822043" y="96.1121200503786" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="// The List with new location Points&#xD;&#xA;Points" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Output guid="bf590de2-41fb-4168-bb56-2f6ab46c0033" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="1623.73772465063" y="0" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+      <Symbol value="//The AdaptiveComponent Instances &#xD;&#xA;adaptiveComponent : AdaptiveComponent" />
+    </Dynamo.Graph.Nodes.CustomNodes.Output>
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="31b12793-5137-4b76-bffa-4f4215b16928" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="603.827036255723" y="153.887392178686" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="Flatten({item});" ShouldFocus="false">
+      <PortInfo index="0" default="False" />
+    </Dynamo.Graph.Nodes.CodeBlockNodeModel>
+    <PythonNodeModels.PythonNode guid="63ec050d-0fa1-433c-88a3-7332a14cb36b" type="PythonNodeModels.PythonNode" nickname="Python Script" x="672.27635615886" y="274.694373280434" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="2">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <Script>import clr
+clr.AddReference('ProtoGeometry')
+from Autodesk.DesignScript.Geometry import *
+
+def islist(l):
+	if type(l) is list:
+		return True
+	return False
+
+def depth(l):
+	if isinstance(l, list):
+		return 1 + max(depth(item) for item in l)
+	else:
+		return 0
+
+#The inputs to this node will be stored as a list in the IN variables.
+dataEnteringNode = IN
+l = IN[0]
+x = IN[1]
+
+d = depth(l)
+
+if d &lt; x:
+	for n in range(0, (x-d)):
+		l = [l]
+elif d &gt; x:
+	for n in range(0, (d-x)):
+		l = [item for sublist in l for item in sublist]
+
+
+#Assign your output to the OUT variable.
+OUT = l</Script>
+    </PythonNodeModels.PythonNode>
+    <PythonNodeModels.PythonNode guid="425fcfb1-ac01-49c5-b5df-8a5c3f8949ee" type="PythonNodeModels.PythonNode" nickname="Python Script" x="1188.76835144109" y="3.27903837825681" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="2">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <Script>check = IN[0]
+items = IN[1]
+if isinstance(check, (list)): OUT = items
+else: OUT = items[0]</Script>
+    </PythonNodeModels.PythonNode>
+  </Elements>
+  <Connectors>
+    <Dynamo.Graph.Connectors.ConnectorModel start="289c600d-ae09-4011-b0cc-c13cc43f8d12" start_index="0" end="425fcfb1-ac01-49c5-b5df-8a5c3f8949ee" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="b0a99820-0c47-4033-adbd-6bfb2a5c4a40" start_index="0" end="63ec050d-0fa1-433c-88a3-7332a14cb36b" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="5507f791-1f47-4f0b-9dea-2e0f20c94151" start_index="0" end="31b12793-5137-4b76-bffa-4f4215b16928" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="5507f791-1f47-4f0b-9dea-2e0f20c94151" start_index="0" end="425fcfb1-ac01-49c5-b5df-8a5c3f8949ee" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="1aa21bb0-fae3-4b72-8087-68c1cdc855bd" start_index="0" end="63ec050d-0fa1-433c-88a3-7332a14cb36b" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="31b12793-5137-4b76-bffa-4f4215b16928" start_index="0" end="289c600d-ae09-4011-b0cc-c13cc43f8d12" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="63ec050d-0fa1-433c-88a3-7332a14cb36b" start_index="0" end="289c600d-ae09-4011-b0cc-c13cc43f8d12" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="425fcfb1-ac01-49c5-b5df-8a5c3f8949ee" start_index="0" end="bf590de2-41fb-4168-bb56-2f6ab46c0033" end_index="0" portType="0" />
+  </Connectors>
+  <Notes />
+  <Annotations />
+  <Presets />
+</Workspace>

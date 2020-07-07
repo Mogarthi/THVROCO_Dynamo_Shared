@@ -4,7 +4,7 @@
         <name>CookbookRevitHelpers</name>
     </assembly>
     <members>
-        <member name="M:CookbookRevitHelpers.ProcessedObjects.FromRecipesAndElements(System.Collections.Generic.Dictionary{System.String,DynamoBIMCookbook.Recipe},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{Autodesk.Revit.DB.Element}},DynamoBIMCookbook.ProcessedModel,System.String,System.String,System.DateTime,System.String)">
+        <member name="M:CookbookRevitHelpers.ProcessedObjects.FromRecipesAndElements(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{DynamoBIMCookbook.Recipe}},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{Autodesk.Revit.DB.Element}},DynamoBIMCookbook.ProcessedModel,System.String,System.String,System.DateTime,System.String)">
             <summary>
             Creates a list of ProcessObject 
             </summary>
@@ -40,13 +40,13 @@
             <param name="Elements">Dictionary(string, List(Element)) to match</param>
             <returns></returns>
         </member>
-        <member name="M:CookbookRevitHelpers.SelectAndFilter.GetParameterValuesOnObjects(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{Autodesk.Revit.DB.Element}},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,DynamoBIMCookbook.RevitParameter}})">
+        <member name="M:CookbookRevitHelpers.SelectAndFilter.GetParameterValuesOnObjects(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,DynamoBIMCookbook.RevitParameter}},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{Autodesk.Revit.DB.Element}})">
             <summary>
             
             </summary>
             <param name="RevitElements"></param>
-            <param name="dBParameters"></param>
-            <returns></returns>
+            <param name="DatabaseParameters"></param>
+            <returns></returns>                       
         </member>
     </members>
 </doc>

@@ -22,7 +22,7 @@
     {
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
-      "Code": "# Importing Reference Modules\n# CLR ( Common Language Runtime Module )\nimport clr\n# Adding the DynamoRevitDS.dll module to work with the Dynamo API\nclr.AddReference('DynamoRevitDS')\nimport Dynamo \n\n# access to the current Dynamo instance and workspace\ndynamoRevit = Dynamo.Applications.DynamoRevit()\ncurrentWorkspace = dynamoRevit.RevitDynamoModel.CurrentWorkspace\n\n# Access current version of dynamo\nversion=dynamoRevit.RevitDynamoModel.Version\n\n# checks version of dynamo and adjusts output according to version\nif version.StartsWith(\"1.\"):\n\t\n\t# Gets file name which includes full path\n\tfilename=currentWorkspace.FileName\n\t\n\t# Splits out file path to just file name\n\tOUT=filename\n\nelif version.StartsWith(\"2.\"):\n\tOUT=currentWorkspace.Name\n\nelse:\n\tOUT=\"Not supported\"",
+      "Code": "# Importing Reference Modules\n# CLR ( Common Language Runtime Module )\nimport clr\n# Adding the DynamoRevitDS.dll module to work with the Dynamo API\nclr.AddReference('DynamoRevitDS')\nimport Dynamo \n\n# access to the current Dynamo instance and workspace\ndynamoRevit = Dynamo.Applications.DynamoRevit()\ncurrentWorkspace = dynamoRevit.RevitDynamoModel.CurrentWorkspace\n\n# Access current version of dynamo\nversion=dynamoRevit.RevitDynamoModel.Version\n\n# checks version of dynamo and adjusts output according to version\nif version.StartsWith(\"1.\"):\n\t\n\t# Gets file name which includes full path\n\tfilename=currentWorkspace.FileName\n\t\n\t# Splits out file path to just file name\n\tOUT=filename\n\nelif version.StartsWith(\"2.\"):\n\tOUT=currentWorkspace.FileName\n\nelse:\n\tOUT=\"Not supported\"",
       "VariableInputPorts": true,
       "Id": "ab1fdb3ec06c453f8793387a59d81c7b",
       "Inputs": [
@@ -267,15 +267,15 @@
     },
     "Camera": {
       "Name": "Background Preview",
-      "EyeX": -17.0,
-      "EyeY": 24.0,
-      "EyeZ": 50.0,
-      "LookX": 12.0,
-      "LookY": -13.0,
-      "LookZ": -58.0,
-      "UpX": 0.0,
+      "EyeX": -21.877321354732587,
+      "EyeY": 37.832655331326684,
+      "EyeZ": 9.92234893622329,
+      "LookX": -1.1720904005469563,
+      "LookY": -0.40181267756747019,
+      "LookZ": -1.4062560503783637,
+      "UpX": -2.5340206956424652E-14,
       "UpY": 1.0,
-      "UpZ": 0.0
+      "UpZ": 2.2196654236861235E-14
     },
     "NodeViews": [
       {
@@ -286,7 +286,7 @@
         "IsSetAsOutput": false,
         "Excluded": false,
         "X": 250.0,
-        "Y": 1.42000706098804
+        "Y": 0.4200070609880413
       },
       {
         "ShowGeometry": true,
@@ -305,8 +305,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 468.486114744058,
-        "Y": 92.762749675111
+        "X": 393.486114744058,
+        "Y": 107.762749675111
       },
       {
         "ShowGeometry": true,

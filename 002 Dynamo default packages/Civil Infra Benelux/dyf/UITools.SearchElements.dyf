@@ -1,0 +1,221 @@
+<Workspace Version="1.3.4.6666" X="176.630432626418" Y="182.690016761191" zoom="0.397516938950318" ScaleFactor="1" Name="UITools.SearchElements" Description="Opens a UI in which all the Element names are displayed. The user can type in a Search Term to search all the items." ID="6f644483-7233-49ed-8cbf-cda3bf010eff" Category="CIB.UITools.Create">
+  <NamespaceResolutionMap>
+    <ClassMap partialName="Elements.Element" resolvedName="Revit.Elements.Element" assemblyName="RevitNodes.dll" />
+    <ClassMap partialName="Elements" resolvedName="Rhythm.Revit.Elements.Elements" assemblyName="Rhythm.dll" />
+    <ClassMap partialName="List" resolvedName="DSCore.List" assemblyName="DSCoreNodes.dll" />
+  </NamespaceResolutionMap>
+  <Elements>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="b454d950-c10e-4289-86e8-0302e4a7b0c0" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="List.Clean" x="348.582066563279" y="144.108959146087" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="DSCoreNodes.dll" function="DSCore.List.Clean@var[]..[],bool">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="True" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <PythonNodeModels.PythonNode guid="3365e9ce-2b2f-4aae-87d6-368dd87eac1d" type="PythonNodeModels.PythonNode" nickname="Python Script" x="610.5" y="0" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="3">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <PortInfo index="2" default="False" />
+      <Script># Enable Python support and load DesignScript library
+import clr
+clr.AddReference('ProtoGeometry')
+
+clr.AddReference('System.Drawing')
+from System.Drawing import *
+
+clr.AddReference('System.Windows.Forms')
+from System.Windows.Forms import *
+
+class SearchForm(Form):
+	def __init__(self, items, names):
+		self.InitializeComponent(items, names)
+	
+	def InitializeComponent(self, items, names):
+		self.Items = items
+		self.Names = names
+		self.FoundNames = names
+		self.FoundItems = items
+		self.SelectedItems = []
+		
+		
+		self._listBox = ListBox()
+		self._searchBox = TextBox()
+		self.button = Button()
+		self.AllButton = Button()
+		self.NoneButton = Button()
+		self.SuspendLayout()
+		# 
+		# listBox
+		# 
+		self._listBox.BackColor = SystemColors.Window
+		self._listBox.Font = Font("Microsoft Sans Serif", 9.75, FontStyle.Regular, GraphicsUnit.Point, 0)
+		self._listBox.FormattingEnabled = True
+		self._listBox.ItemHeight = 16
+			
+		self._listBox.Location = Point(13, 39)
+		self._listBox.Name = "listBox"
+		self._listBox.Size = Size(223, 260)
+		self._listBox.TabIndex = 0
+		self._listBox.SelectionMode = SelectionMode.MultiSimple
+		for name in self.Names:
+			self._listBox.Items.Add(name)
+		# 
+		# searchBox
+		# 
+		self._searchBox.BackColor = SystemColors.Window
+		self._searchBox.Font = Font("Microsoft Sans Serif", 9.75, FontStyle.Regular, GraphicsUnit.Point, 0)
+		self._searchBox.Location = Point(13, 13)
+		self._searchBox.Name = "searchBox"
+		self._searchBox.Size = Size(222, 22)
+		self._searchBox.TabIndex = 1
+		self._searchBox.Text = "Search for ..."
+		self._searchBox.TextChanged += self.SearchBoxTextChanged
+		# 
+		# OKButton
+		# 
+		self.button.FlatStyle = FlatStyle.Popup
+		self.button.ForeColor = Color.Black
+		self.button.Location = Point(170, 308)
+		self.button.Name = "button1"
+		self.button.Size = Size(60, 23)
+		self.button.TabIndex = 2
+		self.button.Text = "OK"
+		self.button.UseVisualStyleBackColor = True
+		self.button.Click += self.ButtonClicked
+		# 
+		# Select All
+		# 
+		self.AllButton.FlatStyle = FlatStyle.Popup
+		self.AllButton.ForeColor = Color.Black
+		self.AllButton.Location = Point(10, 308)
+		self.AllButton.Name = "AllButton"
+		self.AllButton.Size = Size(65, 23)
+		self.AllButton.TabIndex = 2
+		self.AllButton.Text = "Select All"
+		self.AllButton.UseVisualStyleBackColor = True
+		self.AllButton.Click += self.AllButtonClicked
+		# 
+		# Select None
+		# 
+		self.NoneButton.FlatStyle = FlatStyle.Popup
+		self.NoneButton.ForeColor = Color.Black
+		self.NoneButton.Location = Point(83, 308)
+		self.NoneButton.Name = "NoneButton"
+		self.NoneButton.Size = Size(80, 23)
+		self.NoneButton.TabIndex = 2
+		self.NoneButton.Text = "Select None"
+		self.NoneButton.UseVisualStyleBackColor = True
+		self.NoneButton.Click += self.NoneButtonClicked
+		# 
+		# Form1
+		# 
+		self.BackColor = Color.White
+		self.ClientSize = Size(247, 342)
+		self.Controls.Add(self.button)
+		self.Controls.Add(self.AllButton)
+		self.Controls.Add(self.NoneButton)
+		self.Controls.Add(self._searchBox)
+		self.Controls.Add(self._listBox)
+		self.ForeColor = Color.White
+		self.MaximizeBox = False
+		self.MinimizeBox = False
+		self.Name = "Form1"
+		self.ShowIcon = False
+		self.SizeGripStyle = SizeGripStyle.Hide
+		self.StartPosition = FormStartPosition.CenterScreen
+		self.Text = "Select Items"
+		self.ResumeLayout(False)
+		self.PerformLayout()
+	
+	def ButtonClicked(self, sender, args):
+		indices = self._listBox.SelectedIndices
+		for index in indices:
+			item = self.FoundItems[index]
+			self.SelectedItems.Add(item)
+		self.Close()
+		
+	def AllButtonClicked(self, sender, args):
+		self._listBox.SelectedItems.Clear()
+		for i in range(len(self._listBox.Items)):
+			self._listBox.SetSelected(i, True)
+		
+	def NoneButtonClicked(self, sender, args):
+		self._listBox.SelectedItems.Clear()
+		
+	def SearchBoxTextChanged(self, sender, args):
+		searchTerm = self._searchBox.Text
+		self._listBox.Items.Clear()
+		self.FoundNames = []
+		self.FoundItems = []
+		if searchTerm != "":
+			for i in range(len(names)):
+				name = names[i]
+				item = items[i]
+				if name.ToUpper().Contains(searchTerm.ToUpper()):
+					self._listBox.Items.Add(name)
+					self.FoundNames.Add(name)
+					self.FoundItems.Add(item)
+		else:
+			self.FoundItems = self.Items
+			self.FoundNames = self.Names
+			for name in self.FoundNames:
+				self._listBox.Items.Add(name)
+					
+					
+		
+# The inputs to this node will be stored as a list in the IN variables.
+items = IN[0]
+names = IN[1]
+rerun = IN[2]
+
+if rerun:
+	searchForm = SearchForm(items, names)
+	searchForm.ShowDialog()
+	OUT = searchForm.SelectedItems
+else:
+	searchForm = SearchForm(items, names)
+	searchForm.ShowDialog()
+	OUT = searchForm.SelectedItems</Script>
+    </PythonNodeModels.PythonNode>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="14b97fb5-ed3f-4866-82fb-6e4ff66688a1" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="Element.Name" x="326.5" y="25" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="false" assembly="RevitNodes.dll" function="Revit.Elements.Element.Name">
+      <PortInfo index="0" default="False" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="25715ac3-ff8e-46f0-b8a0-9516e6950eac" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="253.670344932031" y="232.691720116793" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="false;" ShouldFocus="false" />
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="72fb2f55-469f-4c74-9ea7-7ec3f8b76dcf" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="-99.787329028194" y="15.1528799079509" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="// A List with Elements&#xD;&#xA;elements : var[]" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="49cebcae-1969-4cd2-ab71-426f87a1bec8" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="-374.924278746901" y="129.223288998755" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="//Reruns the Nodes. Switch between True/False to Rerun the Node&#xD;&#xA;Rerun : bool = true" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Output guid="2a555600-40c0-4f46-8f81-a782284ca84e" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="809.5" y="0" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+      <Symbol value="// A List with Elements&#xD;&#xA;SelectedElements : var[]" />
+    </Dynamo.Graph.Nodes.CustomNodes.Output>
+  </Elements>
+  <Connectors>
+    <Dynamo.Graph.Connectors.ConnectorModel start="b454d950-c10e-4289-86e8-0302e4a7b0c0" start_index="0" end="14b97fb5-ed3f-4866-82fb-6e4ff66688a1" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="b454d950-c10e-4289-86e8-0302e4a7b0c0" start_index="0" end="3365e9ce-2b2f-4aae-87d6-368dd87eac1d" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="3365e9ce-2b2f-4aae-87d6-368dd87eac1d" start_index="0" end="2a555600-40c0-4f46-8f81-a782284ca84e" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="14b97fb5-ed3f-4866-82fb-6e4ff66688a1" start_index="0" end="3365e9ce-2b2f-4aae-87d6-368dd87eac1d" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="25715ac3-ff8e-46f0-b8a0-9516e6950eac" start_index="0" end="b454d950-c10e-4289-86e8-0302e4a7b0c0" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="72fb2f55-469f-4c74-9ea7-7ec3f8b76dcf" start_index="0" end="b454d950-c10e-4289-86e8-0302e4a7b0c0" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="49cebcae-1969-4cd2-ab71-426f87a1bec8" start_index="0" end="3365e9ce-2b2f-4aae-87d6-368dd87eac1d" end_index="2" portType="0" />
+  </Connectors>
+  <Notes />
+  <Annotations>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="5c69d26c-eaf4-4c28-9a0b-273bf848f915" annotationText="Filter Content and Make UI" left="243.670344932031" top="-46" width="500.829655067969" height="346.691720116793" fontSize="30" InitialTop="0" InitialHeight="517" TextblockHeight="36" backgrouund="#FFFFAA45">
+      <Models ModelGuid="b454d950-c10e-4289-86e8-0302e4a7b0c0" />
+      <Models ModelGuid="3365e9ce-2b2f-4aae-87d6-368dd87eac1d" />
+      <Models ModelGuid="14b97fb5-ed3f-4866-82fb-6e4ff66688a1" />
+      <Models ModelGuid="25715ac3-ff8e-46f0-b8a0-9516e6950eac" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="8f5fbf5b-1af8-46b3-aff9-a52dc336614c" annotationText="Input" left="-384.924278746901" top="-30.8471200920491" width="570" height="237.070409090804" fontSize="30" InitialTop="15.1528799079509" InitialHeight="221.070409090804" TextblockHeight="36" backgrouund="#FFFF7BAC">
+      <Models ModelGuid="72fb2f55-469f-4c74-9ea7-7ec3f8b76dcf" />
+      <Models ModelGuid="49cebcae-1969-4cd2-ab71-426f87a1bec8" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="e07759f7-d3a3-47ef-9d9d-d0a7249496d0" annotationText="Output" left="799.5" top="-46" width="248" height="123" fontSize="30" InitialTop="0" InitialHeight="107" TextblockHeight="36" backgrouund="#FF71C6A8">
+      <Models ModelGuid="2a555600-40c0-4f46-8f81-a782284ca84e" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+  </Annotations>
+  <Presets />
+  <Cameras>
+    <Camera Name="Background Preview" eyeX="-17" eyeY="24" eyeZ="50" lookX="12" lookY="-13" lookZ="-58" upX="0" upY="1" upZ="0" />
+  </Cameras>
+</Workspace>

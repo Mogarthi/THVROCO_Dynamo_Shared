@@ -36,6 +36,9 @@
     </namespace>
 	<namespace name="Rhythm.Revit.Worksharing">
       <category>Rhythm.Revit.Worksharing</category>
+	</namespace>
+	<namespace name="Rhythm.Geometry.Tessellation">
+      <category>Rhythm.Geometry.Tessellation</category>
     </namespace>
   </namespaces>
 </doc>

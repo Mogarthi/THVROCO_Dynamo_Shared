@@ -1,0 +1,622 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BIMBook</name>
+    </assembly>
+    <members>
+        <member name="T:BIMBook.baseItem">
+            <summary>
+            Base class for orientdB Cookbook Vertici
+            Properties are usable on all OrientdB Cookbook Nodes
+            </summary>
+        </member>
+        <member name="F:BIMBook.baseItem._parent">
+            <summary>
+            Used on objects with a parent child relationship
+            Many-to-one (parent)
+            </summary>
+        </member>
+        <member name="P:BIMBook.baseItem.Owner">
+            <summary>
+            Retuns the Book the vertext is associated to
+            </summary>
+        </member>
+        <member name="P:BIMBook.baseItem.Name">
+            <summary>
+            Returns the name of the vertex.
+            </summary>
+        </member>
+        <member name="P:BIMBook.baseItem.Description">
+            <summary>
+            Returns the description on the vertex.
+            </summary>
+        </member>
+        <member name="T:BIMBook.ProcessedIngredient">
+            <summary>
+            Exposes the ProcessedIngredient vertex in the database.
+            A ProcessedIngredient represents the frozen state of the Ingredient.
+            </summary>
+        </member>
+        <member name="M:BIMBook.ProcessedIngredient.ByVersionAndIngredient(BIMBook.ModelVersion,BIMBook.Ingredient)">
+            <summary>
+             
+            </summary>
+            <param name="version"></param>
+            <param name="ingredient"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BIMBook.ProcessedKnot">
+            <summary>
+            Exposes the ProccesdKnots vertici in the database
+            A ProcessedKnot represents the frozen state (at the moment of processing) of the BIKnot and the ICknot and thus the Ingredient and it's Calculation.
+            It has a group of processed results depending on the aggregation definitions connected to the Ingredient.
+            But all use the same:
+                - Ingredient,
+                - Calculation,
+                - MatchingParameter and MatchingValue combination.
+            </summary>
+        </member>
+        <member name="M:BIMBook.ProcessedKnot.ByVersionAndBIKnot(BIMBook.ModelVersion,BIMBook.BIKnot)">
+            <summary>
+            Creates a new ProcessedKnot object based on the Version and the Book-Ingredient-Knot
+            </summary>
+            <param name="version"></param>
+            <param name="knot"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BIMBook.ProcessedKnot.Store(BIMBook.ModelVersion,BIMBook.ProcessedIngredient)">
+            <summary>
+            Creates the Processedknot vertex in the database
+            </summary>
+            <param name="version">The version assiciated to the Processed knot</param>
+            <param name="ingredient">A Processed Ingredient Object associated to the Processed knot</param>
+        </member>
+        <member name="M:BIMBook.ProcessedKnot.Update">
+            <summary>
+            Updates the Processed Knot vertex in the database with the information stored in the object
+            </summary>
+        </member>
+        <member name="T:BIMBook.Recipe">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:BIMBook.Recipe.ByJSON(BIMBook.Book,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="Book"></param>
+            <param name="JSON"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BIMBook.ICKnot.ByJSON(BIMBook.Book,System.String)">
+            <summary>
+            Creates a new Calculations Vertex in the database.
+            If the vertex exists it update the properties by the new values.
+            </summary>
+            <param name="Book">The Book the calculation is associated to.</param>
+            <param name="JSON"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BIMBook.Book">
+            <summary>
+            Exposes the database BIMCookBook class
+            </summary>
+        </member>
+        <member name="P:BIMBook.Book.DefaultRecipeParameter">
+            <summary>
+            The parameter on the objects pointing to an associated recipe.
+            </summary>
+        </member>
+        <member name="M:BIMBook.Book.ByName(System.String,System.String,System.Int32,System.String,System.String)">
+            <summary>
+            Connects to the Cookbook v3 Database and reads the requested book
+            </summary>
+            <param name="BookName">The requested book's name</param>
+            <param name="Host">IP address of DNS address of the database server</param>
+            <param name="Port">Port of the database binary server (typical 2424)</param>
+            <param name="User">Username</param>
+            <param name="Passwd">Password</param>
+            <returns></returns>
+        </member>
+        <member name="M:BIMBook.Book.ByROCO">
+            <summary>
+            Returns the ROCO Cookbook v3
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BIMBook.Book.ExportTemplateToExcel(BIMBook.Book,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="Book"></param>
+            <param name="ExportPath"></param>
+        </member>
+        <member name="T:BIMBook.Calculation">
+            <summary>
+            Exposes the databse Ccalculations class (vertici)
+            </summary>
+        </member>
+        <member name="P:BIMBook.Calculation.Formula">
+            <summary>
+            Returning the formula on the calculation
+            </summary>
+        </member>
+        <member name="P:BIMBook.Calculation.Constants">
+            <summary>
+            Returning the constants used in the calculation (JSON)
+            </summary>
+        </member>
+        <member name="P:BIMBook.Calculation.Parameters">
+            <summary>
+            Returns the parameters used in the formula
+            </summary>
+        </member>
+        <member name="P:BIMBook.Calculation.Units">
+            <summary>
+            Returns the unit of the parameter
+            </summary>
+        </member>
+        <member name="M:BIMBook.Calculation.Update(BIMBook.JSONCalculationDef)">
+            <summary>
+            Updates the calculation vertex in the database
+            </summary>
+            <param name="Definition"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BIMBook.Calculation.ByJSON(BIMBook.Book,System.String)">
+            <summary>
+            Creates a new Calculations Vertex in the database (v3).
+            If the vertex exists it update the properties by the new values.
+            </summary>
+            <param name="Book">The Book the calculation is associated to.</param>
+            <param name="JSON"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BIMBook.DesignPhase.ByJSON(BIMBook.Book,System.String)">
+            <summary>
+            Creates a new design-phase Vertex in the database.
+            If the vertex exists it update the properties by the new values.
+            </summary>
+            <param name="Book">The Book the design-phase is associated to.</param>
+            <param name="JSON"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BIMBook.DesignPhase.ByDatabase(BIMBook.Book)">
+            <summary>
+            
+            </summary>
+            <param name="Book"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BIMBook.Discipline.ByJSON(BIMBook.Book,System.String)">
+            <summary>
+            Creates a new Discipline Vertex in the database.
+            If the vertex exists it update the properties by the new values.
+            </summary>
+            <param name="Book">The Book the discipline is associated to.</param>
+            <param name="JSON"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BIMBook.Discipline.ByDatabase(BIMBook.Book)">
+            <summary>
+            
+            </summary>
+            <param name="Book"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BIMBook.Ingredient">
+            <summary>
+            Exposing the BIMCookbook's ingredients class (vertici)
+            </summary>
+        </member>
+        <member name="P:BIMBook.Ingredient.Prefix">
+            <summary>
+            The Recipe Code Prefix
+            </summary>
+        </member>
+        <member name="P:BIMBook.Ingredient.RecipeCode">
+            <summary>
+            The Recipe Code
+            /// </summary>
+        </member>
+        <member name="P:BIMBook.Ingredient.Index">
+            <summary>
+            The Recipe Code Index
+            </summary>
+        </member>
+        <member name="P:BIMBook.Ingredient.AggregateFunction">
+            <summary>
+            The Aggregate Function on the ingredient
+            </summary>
+        </member>
+        <member name="P:BIMBook.Ingredient.AggregateDefinition">
+            <summary>
+             The Aggregate Definition on the Ingredient
+            </summary>
+        </member>
+        <member name="P:BIMBook.Ingredient.Remarks">
+            <summary>
+            Remarks on the Ingredient
+            </summary>
+        </member>
+        <member name="M:BIMBook.Ingredient.ByJSON(BIMBook.Book,System.String)">
+            <summary>
+            Creates a new Calculations Vertex in the database.
+            If the vertex exists it update the properties by the new values.
+            </summary>
+            <param name="Book">The Book the calculation is associated to.</param>
+            <param name="JSON"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BIMBook.Ingredient.ByBook(BIMBook.Book,BIMBook.DesignPhase,BIMBook.Discipline)">
+            <summary>
+            Returns all recipes associated to a book organized in nested dictionaries.
+            </summary>
+            <param name="Book">The book object containing the requested recipes</param>
+            <param name="DesignPhase"></param>
+            <param name="Discipline"></param>
+            <returns>A Dictionary(MatchingParameterName, Dictionary(MatchingValue, List(Ingredient)))</returns>
+        </member>
+        <member name="T:BIMBook.ModelVersion">
+            <summary>
+            Esposes the VersionKnots vertici in the database
+            </summary>
+        </member>
+        <member name="P:BIMBook.ModelVersion.Owner">
+            <summary>
+            Retuns the Book the vertext is associated to
+            </summary>
+        </member>
+        <member name="P:BIMBook.ModelVersion.ORID">
+            <summary>
+            Returns the database id of the BIKnot
+            </summary>
+        </member>
+        <member name="T:BIMBook.ProcessedModel">
+            <summary>
+            The Cookbook Processed model class
+            </summary>
+        </member>
+        <member name="P:BIMBook.ProcessedModel.FileGuid">
+            <summary>
+            Returns the file guid of the processed model.
+            </summary>
+        </member>
+        <member name="P:BIMBook.ProcessedModel.CadFile">
+            <summary>
+            Returns the CAD file of processed model.
+            </summary>
+        </member>
+        <member name="M:BIMBook.ProcessedModel.ByRevitModel(BIMBook.Book,System.String,System.String,System.String,System.String,System.String,System.DateTime,BIMBook.DesignPhase,BIMBook.Discipline,BIMBook.ProjectOption)">
+            <summary>
+            Creates a new processed document in the database.
+            If FileGuid already exists in the dB a new root object is made, otherwise a new version link is created to the original root.
+            </summary>
+            <param name="Book">The book (master dataset) this processed model object belongs to.</param>
+            <param name="FileGuid">The (unchangeable) file guid for this model.</param>
+            <param name="BIM360Link"></param>
+            <param name="ModelFileName">The filename and path for the model.</param>
+            <param name="ModelType"></param>
+            <param name="VersionGuid"></param>
+            <param name="VersionTime"></param>
+            <param name="DesignPhase"></param>
+            <param name="Discipline"></param>
+            <param name="ModelOption"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BIMBook.ProcessedModel.UnfinishedByBook(BIMBook.Book)">
+            <summary>
+            Returns all ProcessedModels objects needing postprocessing
+            </summary>
+            <param name="Book">The Book containing the associated models</param>
+            <returns></returns>
+        </member>
+        <member name="M:BIMBook.ProcessedModel.PostProcess(BIMBook.ProcessedModel)">
+            <summary>
+            Processes the objects and parameters to recipes and ingredients (Processed)
+            </summary>
+            <param name="Model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BIMBook.ProcessedModel.ExportMeetstaat(BIMBook.ProcessedModel,BIMBook.ExportTemplate,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="Book"></param>
+            <param name="Template"></param>
+            <param name="ExportPath"></param>
+        </member>
+        <member name="T:BIMBook.ProcessedObject">
+            <summary>
+            Exposes the processedobject vertex class in the database
+            </summary>
+        </member>
+        <member name="P:BIMBook.ProcessedObject.ORID">
+            <summary>
+            Returns the database id of the BIKnot
+            </summary>
+        </member>
+        <member name="P:BIMBook.ProcessedObject.ObjectId">
+            <summary>
+            The model object Id
+            </summary>
+        </member>
+        <member name="M:BIMBook.ProcessedObject.AddParameter(BIMBook.ProcessedParameter,BIMBook.ParamDicOption)">
+            <summary>
+            Adds the processed parameter to the list of processed parameters in the object.
+            The processed-parameter-vertex was already created in the database,
+            and the edge between parameter and object was already created
+            </summary>
+            <param name="Parameter">The parameter object</param>
+            <param name="paramDicOption">The dictionary key type, shared guid or name(default)</param>
+        </member>
+        <member name="M:BIMBook.ProcessedObject.ParameterValue(System.String)">
+            <summary>
+            Returns the parameter value on the object from the database.
+            </summary>
+            <param name="parameterName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BIMBook.ProcessedObject.ByProcessedKnot(System.Collections.Generic.List{BIMBook.ProcessedKnot},System.String)">
+            <summary>
+            Returns all processedobject from the database associated to the processedknot
+            </summary>
+            <param name="Knots">A list of BIKnots to associaate to the ProcessedKnot. This list should contain only BIKnots sharing the same MatchingParameter and MatchingValue</param>
+            <param name="ObjectId">The Revit ObjectId</param>
+            <returns></returns>
+        </member>
+        <member name="M:BIMBook.ProcessedObject.ByRevitGuidAndKot(BIMBook.ProcessedKnot,System.String)">
+            <summary>
+            Returns a Processedobject from the database assiociated to the knot
+            and to the revit element (by the guid)
+            </summary>
+            <param name="knot">The knot the object should be associated on.</param>
+            <param name="revitObjectGuid">The revit object id</param>
+            <returns></returns>
+        </member>
+        <member name="T:BIMBook.ProcessedParameter">
+            <summary>
+            The processed parameter class
+            </summary>
+        </member>
+        <member name="P:BIMBook.ProcessedParameter.Owner">
+            <summary>
+            Retuns the Book the vertext is associated to
+            </summary>
+        </member>
+        <member name="P:BIMBook.ProcessedParameter.Value">
+            <summary>
+            Returns the value of the parameter
+            </summary>
+        </member>
+        <member name="P:BIMBook.ProcessedParameter.SharedGuid">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:BIMBook.ProcessedParameter.Units">
+            <summary>
+            Return the units a registred on the paramneter in Revit
+            </summary>
+        </member>
+        <member name="P:BIMBook.ProcessedParameter.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:BIMBook.ProcessedParameter.ByRevitParam(BIMBook.ProcessedObject,BIMBook.RevitParameter,System.String,System.String)">
+            <summary>
+            Creates a processed parameter (parameter containing a value of an object)
+            </summary>
+            <param name="ProcessedObject">The processed object this parameter is associated to.</param>
+            <param name="Parameter">The Revit parameter to process.</param>
+            <param name="Value">The parameter's value on the object</param>
+            <returns></returns>
+        </member>
+        <member name="M:BIMBook.ProcessedParameter.ByProcessedObject(BIMBook.ProcessedObject)">
+            <summary>
+            Returns all processedparameters associated with the object
+            </summary>
+            <param name="Object"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BIMBook.ProjectOption.ByJSON(BIMBook.Book,System.String)">
+            <summary>
+            Creates a new Discipline Vertex in the database.
+            If the vertex exists it update the properties by the new values.
+            </summary>
+            <param name="Book">The Book the discipline is associated to.</param>
+            <param name="JSON"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BIMBook.AggregateDefinition">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:BIMBook.AggregateDefinition.AggregateAuto">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:BIMBook.AggregateDefinition.MatchingValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:BIMBook.RevitParameter">
+            <summary>
+            Exposes the linked vertici of Parameter and Revit-parameter in the database    
+            </summary>
+        </member>
+        <member name="P:BIMBook.RevitParameter.ParamORID">
+            <summary>
+            Returns the database id of the Parameter in the database
+            </summary>
+        </member>
+        <member name="P:BIMBook.RevitParameter.RevitParamORID">
+            <summary>
+            Returns the database id of the Revit parameter in the database
+            </summary>
+        </member>
+        <member name="P:BIMBook.RevitParameter.SharedGuid">
+            <summary>
+            Returns the Revit shared parameter Guid
+            </summary>
+        </member>
+        <member name="P:BIMBook.RevitParameter.NameInDb">
+            <summary>
+            Naam van de parameter in de database
+            </summary>
+        </member>
+        <member name="P:BIMBook.RevitParameter.NameInRevit">
+            <summary>
+            Naam van de parameter in Revit
+            </summary>
+        </member>
+        <member name="P:BIMBook.RevitParameter.Description">
+            <summary>
+            Parameter description in database
+            </summary>
+        </member>
+        <member name="P:BIMBook.RevitParameter.Units">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:BIMBook.RevitParameter.ByJSONForRevit(BIMBook.Book,System.String)">
+            <summary>
+            Creates a new Parameter and RevitSharedParameter Vertex in the database.
+            If the any of the vertici exists, it is updated with the new values.
+            </summary>
+            <param name="Book"></param>
+            <param name="JSON">{"ParamName": Parameter Name, "ParamDescription": Parameter Description, "Units": Units, "Remarks": value, "Shared_Guid": Revit parmaeter shared Guid, "Name": Revit Parameter Name}</param>
+            <returns></returns>
+        </member>
+        <member name="M:BIMBook.RevitParameter.MachingParametersByBook(BIMBook.Book)">
+            <summary>
+            Returns a Dictionary conataining all parameters used to link ingredients
+            </summary>
+            <param name="Book"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BIMBook.RevitParameter.ByIngredient(BIMBook.Ingredient,BIMBook.DesignPhase,BIMBook.Discipline)">
+            <summary>
+            
+            </summary>
+            <param name="Ingredient"></param>
+            <param name="DesignPhase"></param>
+            <param name="Discipline"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BIMBook.RevitParameter.ByBook(BIMBook.Book,BIMBook.DesignPhase,BIMBook.Discipline)">
+            <summary>
+            
+            </summary>
+            <param name="Book"></param>
+            <param name="DesignPhase"></param>
+            <param name="Discipline"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BIMBook.RevitParameter.AggregateParamtersByBook(BIMBook.Book,BIMBook.DesignPhase,BIMBook.Discipline)">
+            <summary>
+            
+            </summary>
+            <param name="Book"></param>
+            <param name="DesignPhase"></param>
+            <param name="Discipline"></param>
+            <returns></returns>
+        </member>
+        <member name="P:BIMBook.BIKnot.Owner">
+            <summary>
+            Retuns the Book the BIKnot is associated to
+            </summary>
+        </member>
+        <member name="P:BIMBook.BIKnot.ORID">
+            <summary>
+            Returns the database id of the BIKnot
+            </summary>
+        </member>
+        <member name="P:BIMBook.BIKnot.Ingredient">
+            <summary>
+            Returns the ingredient associated to the BIKnot
+            </summary>
+        </member>
+        <member name="P:BIMBook.BIKnot.DesignPhases">
+            <summary>
+            Returns a list of Designphases the BIKnot is active for
+            Null or empty means the BIKnot is generally active on all phases
+            </summary>
+        </member>
+        <member name="P:BIMBook.BIKnot.Disciplines">
+            <summary>
+            Returns a list of Disciplines the BIKnot is active for
+            Null or empty means the BIKnot is generally active on all disciplines
+            </summary>
+        </member>
+        <member name="P:BIMBook.BIKnot.ProjectOptions">
+            <summary>
+            Returns a list of Projectoptions the BIKnot is active for
+            Null or empty means the BIKnot is generally active on all options
+            </summary>
+        </member>
+        <member name="P:BIMBook.BIKnot.MatchingParameter">
+            <summary>
+            Returns the matching parameter for the BIknot. 
+            This is the parameter read on the CAD object to trigger the knot.
+            </summary>
+        </member>
+        <member name="P:BIMBook.BIKnot.MatchingValue">
+            <summary>
+            Returns the matching value of the BIKnot.
+            If this values matches the matching parameter read on the CAD object the BIKnot is triggered.
+            </summary>
+        </member>
+        <member name="M:BIMBook.BIKnot.ByJSON(BIMBook.Book,System.String)">
+            <summary>
+            Creates a new Calculations Vertex in the database.
+            If the vertex exists it update the properties by the new values.
+            </summary>
+            <param name="Book">The Book the calculation is associated to.</param>
+            <param name="JSON"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BIMBook.BIKnot.ByMatchingParamAndValue(BIMBook.ModelVersion,System.String,System.String)">
+            <summary>
+            Returns all parameters needed to be read on CAAD elements, associated to a Book, DesignPhase, Discipline and ModelOption
+            </summary>
+            <param name="modelVersion"></param>
+            <param name="MatchingParameter"></param>
+            <param name="MatchingValue"></param>
+            <param name="DesignPhase"></param>
+            <param name="Discipline"></param>
+            <param name="ModelOption"></param>
+            <returns></returns>       
+        </member>
+        <member name="T:BIMBook.ExportTemplate">
+            <summary>
+            Exposes the ExportTemplates vertici in the database.
+            </summary>
+        </member>
+        <member name="P:BIMBook.ExportTemplate.ORID">
+            <summary>
+            Returns the database id of the Export emplate
+            </summary>
+        </member>
+        <member name="P:BIMBook.ExportTemplate.StartingRecipes">
+            <summary>
+            Retuns the Book the vertext is associated to
+            </summary>
+            public Book Owner { get => _owner; }
+        </member>
+        <member name="M:BIMBook.ExportTemplate.ByName(BIMBook.Book,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="Book"></param>
+            <param name="TemplateName"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

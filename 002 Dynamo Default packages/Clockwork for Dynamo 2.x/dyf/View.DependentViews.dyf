@@ -18,7 +18,7 @@
     {
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
-      "Code": "import clr\r\nclr.AddReference('RevitAPI')\r\nfrom Autodesk.Revit.DB import *\r\n\r\nclr.AddReference(\"RevitNodes\")\r\nimport Revit\r\n\r\ndef GetDependentViews(view):\r\n\treturn [view.Document.GetElement(x) for x in view.GetDependentViewIds()]\r\n\r\nviews = UnwrapElement(IN[0])\r\n\r\nif isinstance(IN[0], list):\r\n\tOUT = [GetDependentViews(x) for x in views]\r\nelse:\r\n\tOUT = GetDependentViews(views)",
+      "Code": "import clr\r\nclr.AddReference('RevitAPI')\r\nfrom Autodesk.Revit.DB import *\r\n\r\nclr.AddReference(\"RevitNodes\")\r\nimport Revit\r\n\r\ndef GetDependentViews(view):\r\n\tif hasattr(view, \"GetDependentViewIds\"):\r\n\t\treturn [view.Document.GetElement(x) for x in view.GetDependentViewIds()]\r\n\telse: return []\r\n\r\nviews = UnwrapElement(IN[0])\r\n\r\nif isinstance(IN[0], list):\r\n\tOUT = [GetDependentViews(x) for x in views]\r\nelse:\r\n\tOUT = GetDependentViews(views)",
       "VariableInputPorts": true,
       "Id": "bd50d5ee78e848dfa349a7048f4acfad",
       "Inputs": [
@@ -51,8 +51,8 @@
       "NodeType": "InputNode",
       "Parameter": {
         "Name": "view",
-        "TypeName": "Revit.Elements.Views.View",
-        "TypeRank": 0,
+        "TypeName": "var",
+        "TypeRank": -1,
         "DefaultValue": null,
         "Description": ""
       },
@@ -113,7 +113,7 @@
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": false,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.0.1.5055",
+      "Version": "2.0.3.8810",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
@@ -131,39 +131,39 @@
     },
     "NodeViews": [
       {
+        "ShowGeometry": true,
+        "Name": "Python Script",
         "Id": "bd50d5ee78e848dfa349a7048f4acfad",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Python Script",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 250.0,
         "Y": 0.0
       },
       {
+        "ShowGeometry": true,
+        "Name": "Input",
         "Id": "59f759fbf3a941baa3a26c67b3efc85a",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Input",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 0.0,
         "Y": 0.0
       },
       {
+        "ShowGeometry": true,
+        "Name": "Output",
         "Id": "15af58b9172f472280280f865d8f25c6",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Output",
-        "ShowGeometry": true,
         "Excluded": false,
         "X": 449.0,
         "Y": 0.0
       }
     ],
     "Annotations": [],
-    "X": 265.0,
-    "Y": 70.0,
+    "X": 206.0,
+    "Y": 76.0,
     "Zoom": 1.0
   }
 }

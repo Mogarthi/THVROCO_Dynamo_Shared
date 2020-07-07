@@ -132,6 +132,19 @@
             <param name="Definition"></param>
             <returns></returns>
         </member>
+        <member name="T:DynamoBIMCookbook.Header">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DynamoBIMCookbook.Header.InDbByJSON(DynamoBIMCookbook.Book,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="Book"></param>
+            <param name="JSON"></param>
+            <returns></returns>
+        </member>
         <member name="T:DynamoBIMCookbook.CollateDefinition">
             <summary>
             
@@ -176,18 +189,6 @@
             Returns all ingredients associated to the recipe
             </summary>
             <param name="Recipe"></param>
-            <returns></returns>
-        </member>
-        <member name="T:DynamoBIMCookbook.PostProcessingObject">
-            <summary>
-            Object for post-processing the ProcessingObjects
-            </summary>
-        </member>
-        <member name="M:DynamoBIMCookbook.PostProcessingObject.ByModel(DynamoBIMCookbook.ProcessedModel)">
-            <summary>
-            
-            </summary>
-            <param name="Model"></param>
             <returns></returns>
         </member>
         <member name="T:DynamoBIMCookbook.ProcessedGroup">
@@ -250,6 +251,28 @@
             </summary>
             <param name="Model">The model to export</param>
             <param name="ExportPath">Path containing the filename to export to</param>
+        </member>
+        <member name="M:DynamoBIMCookbook.ProcessedModel.ExportToExcel(DynamoBIMCookbook.ProcessedModel,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="Model"></param>
+            <param name="ExportPath"></param>
+        </member>
+        <member name="M:DynamoBIMCookbook.ProcessedModel.ExportMeetstaat(DynamoBIMCookbook.Book,DynamoBIMCookbook.Template,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="Book"></param>
+            <param name="Template"></param>
+            <param name="ExportPath"></param>
+        </member>
+        <member name="M:DynamoBIMCookbook.ProcessedModel.ExportTemplateToExcel(DynamoBIMCookbook.Book,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="Book"></param>
+            <param name="ExportPath"></param>
         </member>
         <member name="T:DynamoBIMCookbook.ProcessedParameter">
             <summary>
@@ -322,7 +345,7 @@
             The model object Id
             </summary>
         </member>
-        <member name="M:DynamoBIMCookbook.ProcessedObject.ByRevitModel(DynamoBIMCookbook.ProcessedModel,DynamoBIMCookbook.Recipe,System.String,System.String,System.DateTime,System.String,System.String)">
+        <member name="M:DynamoBIMCookbook.ProcessedObject.ByRevitModel(DynamoBIMCookbook.ProcessedModel,System.Collections.Generic.List{DynamoBIMCookbook.Recipe},System.String,System.String,System.DateTime,System.String,System.String)">
             <summary>
             Creates a new processed document in the database.
             If FileGuid already exists in the dB a new root object is made, otherwise a new version link is created to the original root.
@@ -440,17 +463,19 @@
         </member>
         <member name="M:DynamoBIMCookbook.RevitParameter.NamesByRecipe(DynamoBIMCookbook.Recipe)">
             <summary>
-            Returns all parameters used on a recipe. Including all parameters used in associated recipe groups
+            Returns all parameternames used on a recipe. Including all parameters used in associated recipe groups
             </summary>
             <param name="Recipe"></param>
             <returns>Dictionary(Name, Parameter)</returns>
         </member>
-        <member name="M:DynamoBIMCookbook.RevitParameter.NamesByRecipes(System.Collections.Generic.List{DynamoBIMCookbook.Recipe})">
+        <member name="M:DynamoBIMCookbook.RevitParameter.ByRecipes(System.Collections.Generic.List{DynamoBIMCookbook.Recipe})">
             <summary>
-            
+            Returns a dictionary of all parameters used on a list of recipes.
+            The dictionary is keyed on the Recipe Matching Parameter.
             </summary>
             <param name="Recipes"></param>
             <returns></returns>
+            
         </member>
         <member name="T:DynamoBIMCookbook.Recipe">
             <summary>
@@ -503,12 +528,13 @@
             <param name="RecipeGroup"></param>
             <returns></returns>
         </member>
-        <member name="M:DynamoBIMCookbook.Recipe.AddRecipeEdgesInDb(DynamoBIMCookbook.Book,System.String)">
+        <member name="M:DynamoBIMCookbook.Template.ByName(DynamoBIMCookbook.Book,System.String)">
             <summary>
-            Adding the Needs edge from the recipe to the ingredient
+            
             </summary>
             <param name="Book"></param>
-            <param name="JSON"></param>
+            <param name="TemplateName"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

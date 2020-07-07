@@ -25,7 +25,7 @@
         {
           "Id": "5ee23158499a44efa36d53c09f1111e7",
           "Name": "boundingbox",
-          "Description": "Input #1",
+          "Description": "BoundingBox",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -34,7 +34,7 @@
         {
           "Id": "36e9b62b26704cf0a0fa65df9085a780",
           "Name": "normal",
-          "Description": "Input #2",
+          "Description": "Vector",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -45,7 +45,7 @@
         {
           "Id": "95658c88885b4212887851429c869c12",
           "Name": "curves",
-          "Description": "Output #1",
+          "Description": "Rückgabewert",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -64,8 +64,8 @@
       "Inputs": [
         {
           "Id": "76ea96e7729a42b38e7c306e6f595906",
-          "Name": "elements",
-          "Description": "Input #1",
+          "Name": "boundingBoxes",
+          "Description": "BoundingBox[]..[]",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -76,7 +76,7 @@
         {
           "Id": "6f59ab550d104f82a33bad315953d652",
           "Name": "BoundingBox",
-          "Description": "Output #1",
+          "Description": "Rückgabewert",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -84,7 +84,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Retrieves a bounding box for a list of elements"
+      "Description": "Merges a list of bounding boxes into a single bounding box"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
@@ -107,7 +107,7 @@
         {
           "Id": "03deb2005ebe4b7eb3d366bef18fa807",
           "Name": "plane",
-          "Description": "return value",
+          "Description": "Rückgabewert",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -225,7 +225,7 @@
         {
           "Id": "84ffd092a7f042d3b19328ad512b8dc7",
           "Name": "view",
-          "Description": "View to place element on\n\nView",
+          "Description": "Ansicht, in der das Element platziert werden soll\n\nView",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -234,7 +234,7 @@
         {
           "Id": "29dc9e5a6554417f8c4111db7485eb27",
           "Name": "curves",
-          "Description": "Cloud outline\n\nCurve[]",
+          "Description": "Umriss der Wolke\n\nCurve[]",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -243,7 +243,7 @@
         {
           "Id": "e4fc17d4c1e14a0bbb7987e9000488bf",
           "Name": "revision",
-          "Description": "Revit revision\n\nElement",
+          "Description": "Revit-Änderung\n\nElement",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -262,7 +262,7 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Construct a Revit RevisionCloud element by curves\n\nRevisionCloud.ByCurve (view: View, curves: Curve[], revision: Element): RevisionCloud"
+      "Description": "Konstruiert ein Revit-RevisionCloud-Element aus Kurven.\n\nRevisionCloud.ByCurve (view: View, curves: Curve[], revision: Element): RevisionCloud"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -292,7 +292,37 @@
         }
       ],
       "Replication": "Auto",
-      "Description": "Returns the normal direction of the Plane.\n\nPlane.Normal: Vector"
+      "Description": "Gibt die Richtung der Normalen der Ebene zurück.\n\nPlane.Normal: Vector"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.BoundingBox",
+      "Id": "1513bb383d474086ba635bed37d287ac",
+      "Inputs": [
+        {
+          "Id": "2495793e1a4c434789d58bbd62a5f0e7",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "8b2173cd268744ad880f8172fc2b4266",
+          "Name": "BoundingBox",
+          "Description": "BoundingBox",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Ruft einen an Achsen ausgerichteten BoundingBox des Elements ab.\n\nElement.BoundingBox: BoundingBox"
     }
   ],
   "Connectors": [
@@ -313,8 +343,8 @@
     },
     {
       "Start": "0045dd2acb074069853c46a70a5ed82f",
-      "End": "76ea96e7729a42b38e7c306e6f595906",
-      "Id": "95519c64f5e64c8fa549a35f7b77e56d"
+      "End": "2495793e1a4c434789d58bbd62a5f0e7",
+      "Id": "b438e07839c843fa831a5ddd9fab2dab"
     },
     {
       "Start": "941fd0f9c0344f4891064497d2b8e1c5",
@@ -340,6 +370,11 @@
       "Start": "37ebea7a55544590a11c97c79b6d8166",
       "End": "36e9b62b26704cf0a0fa65df9085a780",
       "Id": "8e7124c2e6984dd38318b1b06d6f6c0e"
+    },
+    {
+      "Start": "8b2173cd268744ad880f8172fc2b4266",
+      "End": "76ea96e7729a42b38e7c306e6f595906",
+      "Id": "eccc8c877d274154861257402fce8231"
     }
   ],
   "Dependencies": [
@@ -353,12 +388,12 @@
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": false,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.0.1.5055",
+      "Version": "2.0.3.8810",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
     "Camera": {
-      "Name": "Background Preview",
+      "Name": "Hintergrundvorschau",
       "EyeX": -17.0,
       "EyeY": 24.0,
       "EyeZ": 50.0,
@@ -371,99 +406,109 @@
     },
     "NodeViews": [
       {
+        "ShowGeometry": true,
+        "Name": "BoundingBox.PerimeterCurvesByNormal",
         "Id": "c8a7ee7444004c5fa12262323e51f541",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "BoundingBox.PerimeterCurvesByNormal",
-        "ShowGeometry": true,
         "Excluded": false,
-        "X": 627.674847357861,
-        "Y": 119.102144045444
+        "X": 823.39632436501552,
+        "Y": 24.229706054627684
       },
       {
+        "ShowGeometry": true,
+        "Name": "BoundingBox.ByElements",
         "Id": "3d31ccf458424049a307718dc9dbccb6",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "BoundingBox.ByElements",
-        "ShowGeometry": true,
         "Excluded": false,
-        "X": 289.169139465875,
-        "Y": 37.9821958456973
+        "X": 427.39632436501552,
+        "Y": -17.770293945372302
       },
       {
+        "ShowGeometry": true,
+        "Name": "View.Plane",
         "Id": "e7743934ab8741cb84fba235b30b7a77",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "View.Plane",
-        "ShowGeometry": true,
         "Excluded": false,
-        "X": 227.126822645247,
-        "Y": 176.011299689186
+        "X": 76.396324365015516,
+        "Y": 92.229706054627684
       },
       {
+        "ShowGeometry": true,
+        "Name": "Input",
         "Id": "e085eb4eedf0440890a1fe6f3372fbd4",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Input",
-        "ShowGeometry": true,
         "Excluded": false,
-        "X": 118.694362017804,
-        "Y": 38.8724035608308
+        "X": -210.60367563498448,
+        "Y": -17.770293945372302
       },
       {
+        "ShowGeometry": true,
+        "Name": "Output",
         "Id": "5d991561451247708a150289fca53a1d",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Output",
-        "ShowGeometry": true,
         "Excluded": false,
-        "X": 1248.30586713237,
-        "Y": 226.440875509051
+        "X": 1542.3963243650155,
+        "Y": 52.229706054627684
       },
       {
+        "ShowGeometry": true,
+        "Name": "Input",
         "Id": "467b02c919364803a94433db8f625dc4",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Input",
-        "ShowGeometry": true,
         "Excluded": false,
-        "X": 763.98916703095,
-        "Y": 280.522116814982
+        "X": 823.39632436501552,
+        "Y": 158.22970605462771
       },
       {
+        "ShowGeometry": true,
+        "Name": "Input",
         "Id": "0803d02d30434a448da853d93f6ebb2d",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Input",
-        "ShowGeometry": true,
         "Excluded": false,
-        "X": 83.4867815976612,
-        "Y": 228.085469654447
+        "X": -210.60367563498448,
+        "Y": 72.229706054627684
       },
       {
+        "ShowGeometry": true,
+        "Name": "RevisionCloud.ByCurve",
         "Id": "ec6b478ec9514a5688a9fd57e2e31206",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "RevisionCloud.ByCurve",
-        "ShowGeometry": true,
         "Excluded": false,
-        "X": 926.191677841675,
-        "Y": 226.075450927673
+        "X": 1189.3963243650155,
+        "Y": 52.229706054627684
       },
       {
+        "ShowGeometry": true,
+        "Name": "Plane.Normal",
         "Id": "e4407d252dfd4331b508224493d31c2b",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
-        "Name": "Plane.Normal",
-        "ShowGeometry": true,
         "Excluded": false,
-        "X": 385.468438589805,
-        "Y": 177.280316460072
+        "X": 427.39632436501552,
+        "Y": 92.229706054627684
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element.BoundingBox",
+        "Id": "1513bb383d474086ba635bed37d287ac",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 76.396324365015516,
+        "Y": -17.770293945372316
       }
     ],
     "Annotations": [],
-    "X": -38.5135249258159,
-    "Y": 209.838126891691,
+    "X": 199.48647507418411,
+    "Y": 203.838126891691,
     "Zoom": 0.97676875
   }
 }

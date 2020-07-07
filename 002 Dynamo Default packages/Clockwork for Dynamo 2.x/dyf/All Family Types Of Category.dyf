@@ -23,7 +23,7 @@
         "TypeName": "var",
         "TypeRank": -1,
         "DefaultValue": null,
-        "Description": ""
+        "Description": " Works with categories, BuiltInCategories and BuiltInCategories as strings"
       },
       "Id": "84e462d7c7a749cfa2c687c8dc290653",
       "Inputs": [],
@@ -65,7 +65,7 @@
     {
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
-      "Code": "import System\r\nimport clr\r\nclr.AddReference('RevitAPI')\r\nfrom Autodesk.Revit.DB import *\r\n\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\ndef ElementTypesByCategory(cat, doc):\r\n\tbic = System.Enum.ToObject(BuiltInCategory, cat.Id)\r\n\tcollector = FilteredElementCollector(doc).OfCategory(bic).WhereElementIsElementType()\r\n\treturn collector.ToElements()\r\n\r\ninputdoc = UnwrapElement(IN[2])\r\nif not inputdoc: doc = DocumentManager.Instance.CurrentDBDocument\r\nelif inputdoc.GetType().ToString() == \"Autodesk.Revit.DB.RevitLinkInstance\": doc = inputdoc.GetLinkDocument()\r\nelif inputdoc.GetType().ToString() == \"Autodesk.Revit.DB.Document\": doc = inputdoc\r\nelse: doc = DocumentManager.Instance.CurrentDBDocument\r\n\r\nif isinstance(IN[0], list): OUT = [ElementTypesByCategory(x, doc) for x in IN[0]]\r\nelse: OUT = ElementTypesByCategory(IN[0], doc)",
+      "Code": "import System\r\nimport clr\r\nclr.AddReference('RevitAPI')\r\nfrom Autodesk.Revit.DB import *\r\n\r\nclr.AddReference(\"RevitServices\")\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\n\r\ndef ElementTypesByCategory(bic, doc):\r\n\tcollector = FilteredElementCollector(doc).OfCategory(bic).WhereElementIsElementType()\r\n\treturn collector.ToElements()\r\n\r\ninputdoc = UnwrapElement(IN[2])\r\nif not inputdoc: doc = DocumentManager.Instance.CurrentDBDocument\r\nelif inputdoc.GetType().ToString() == \"Autodesk.Revit.DB.RevitLinkInstance\": doc = inputdoc.GetLinkDocument()\r\nelif inputdoc.GetType().ToString() == \"Autodesk.Revit.DB.Document\": doc = inputdoc\r\nelse: doc = DocumentManager.Instance.CurrentDBDocument\r\n\r\nif isinstance(IN[0], list): OUT = [ElementTypesByCategory(x, doc) for x in IN[0]]\r\nelse: OUT = ElementTypesByCategory(IN[0], doc)",
       "VariableInputPorts": true,
       "Id": "1402905f1a8840d8a4d3627f9c44bca0",
       "Inputs": [
@@ -162,13 +162,44 @@
       ],
       "Replication": "Disabled",
       "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "7d85bda8-a044-4ba0-82bc-1f55d9e28b9f",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "a9e660a4e15048f7a3580f6245069d18",
+      "Inputs": [
+        {
+          "Id": "81cb1dbc0f574c8fbd97de0be30496b8",
+          "Name": "var[]..[]",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "a2796d68f1bf46e5bb22ba469ca207c6",
+          "Name": "BuiltInCategory",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns a BuiltInCategory from a category, a Dynamo-wrapped category, a BuiltInCategory or a string representing a BuiltInCategory."
     }
   ],
   "Connectors": [
     {
       "Start": "aba855627e86461e91b9b08cfe17a988",
-      "End": "b721b1e15da14bab885e01c5480be940",
-      "Id": "9e76f3aa45c641dc8f74e673fd8cfc69"
+      "End": "81cb1dbc0f574c8fbd97de0be30496b8",
+      "Id": "7c7b84ad411045a38e275087551ee1c5"
     },
     {
       "Start": "6453da5276804d46adf809b7c9312e75",
@@ -184,16 +215,23 @@
       "Start": "401960f659704bfa845395d97ad7b5fb",
       "End": "d48bd54ce33247978ee1693859d7a5f0",
       "Id": "12650e6aeb2949c78a2675d71b4a5854"
+    },
+    {
+      "Start": "a2796d68f1bf46e5bb22ba469ca207c6",
+      "End": "b721b1e15da14bab885e01c5480be940",
+      "Id": "05fb60cd42534d9b8e0af245e2d57726"
     }
   ],
-  "Dependencies": [],
+  "Dependencies": [
+    "7d85bda8-a044-4ba0-82bc-1f55d9e28b9f"
+  ],
   "Bindings": [],
   "View": {
     "Dynamo": {
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": false,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.0.1.5055",
+      "Version": "2.0.3.8810",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
@@ -217,8 +255,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 35.6679387029192,
-        "Y": -45.3301830893446
+        "X": -445.802303764119,
+        "Y": -136.58140111302265
       },
       {
         "ShowGeometry": true,
@@ -238,7 +276,7 @@
         "IsSetAsOutput": false,
         "Excluded": false,
         "X": 553.667938702919,
-        "Y": 12.6698169106554
+        "Y": 12.669816910655399
       },
       {
         "ShowGeometry": true,
@@ -259,6 +297,16 @@
         "Excluded": false,
         "X": 35.6679387029192,
         "Y": 122.669816910655
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "BuiltInCategory.FromInput",
+        "Id": "a9e660a4e15048f7a3580f6245069d18",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 273.71554300394371,
+        "Y": -131.97673993356602
       }
     ],
     "Annotations": [],

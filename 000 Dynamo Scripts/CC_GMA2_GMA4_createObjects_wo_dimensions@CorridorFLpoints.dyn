@@ -14670,6 +14670,45 @@
       ],
       "Replication": "Disabled",
       "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "chars;\nwidth = Math.Max(750, Math.Round(200*chars/25 + 0.5*chars));",
+      "Id": "0d22d036d70c4280bc4fa1578eee4f7f",
+      "Inputs": [
+        {
+          "Id": "c70062c6569a467babeda73bdf3ec56d",
+          "Name": "chars",
+          "Description": "chars",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "9c223d53fe054ba0a8a18914b3d78ef0",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "4a2bfbcbb19940adb003e0ebef26f9cb",
+          "Name": "",
+          "Description": "width",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
     }
   ],
   "Connectors": [
@@ -17304,6 +17343,11 @@
       "Id": "67a3237bd0114a17b1607d1b0b7745b4"
     },
     {
+      "Start": "8aef6b66008f492abc96b60445be0a1f",
+      "End": "c70062c6569a467babeda73bdf3ec56d",
+      "Id": "811167151cbf4be580c78221232d49a0"
+    },
+    {
       "Start": "e5c3993ca3444bcfae36fa4ad89af71c",
       "End": "d9fb10f17fb4423c89b3f93ddc765333",
       "Id": "bab4cb63c07c4068a937d0b909dada8c"
@@ -17587,6 +17631,11 @@
       "Start": "ed4c909dc3a94dd8a67b7b9e30d9d5f1",
       "End": "3324aac59de245a29d04290b4fadf914",
       "Id": "88d4a443ac4c407aba04e58569926aa0"
+    },
+    {
+      "Start": "4a2bfbcbb19940adb003e0ebef26f9cb",
+      "End": "574c222d05474e7a98fa385aea4dd80d",
+      "Id": "0c832c07e9fd45f39d312aa068f507c2"
     }
   ],
   "Dependencies": [
@@ -20809,8 +20858,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -32486.794701632396,
-        "Y": -8727.1651614061
+        "X": -33280.292525590921,
+        "Y": -8749.9087296087328
       },
       {
         "ShowGeometry": true,
@@ -21141,6 +21190,16 @@
         "Excluded": false,
         "X": 32696.561767421234,
         "Y": -7472.217351378441
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "0d22d036d70c4280bc4fa1578eee4f7f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -32868.71017710623,
+        "Y": -8500.7893421266526
       }
     ],
     "Annotations": [
@@ -21805,15 +21864,16 @@
         "Nodes": [
           "e666b8d674444f3989438391e2dbc354",
           "4627088d321845019263ea52ec9400e3",
-          "88ae59200c1b4c7c9ba0eea95fb2705a"
+          "88ae59200c1b4c7c9ba0eea95fb2705a",
+          "0d22d036d70c4280bc4fa1578eee4f7f"
         ],
-        "Left": -32496.794701632396,
-        "Top": -8796.39406043921,
-        "Width": 1066.3506844970543,
-        "Height": 396.22889903311079,
+        "Left": -33290.292525590921,
+        "Top": -8802.9087296087328,
+        "Width": 1859.8485084555796,
+        "Height": 405.11938748208013,
         "FontSize": 36.0,
-        "InitialTop": -8743.39406043921,
-        "InitialHeight": 162.06560457728119,
+        "InitialTop": -8749.9087296087328,
+        "InitialHeight": 394.11938748208013,
         "TextblockHeight": 43.0,
         "Background": "#FFFFB8D8"
       },
@@ -22051,8 +22111,8 @@
         ],
         "Left": -34643.381668467227,
         "Top": -8952.340959828678,
-        "Width": 328.09380285702355,
-        "Height": 878.18875066561668,
+        "Width": 322.23139495510259,
+        "Height": 888.44796449397109,
         "FontSize": 48.0,
         "InitialTop": -8884.340959828678,
         "InitialHeight": 733.18875066561668,
@@ -22534,7 +22594,7 @@
       },
       {
         "Id": "82dd41cf88ae4351a3907262681a5867",
-        "Title": "GENERAL INFO\r\n________________________________________________________\r\n\r\nVersion: 3\r\nAuthor: Dick Elsman\r\nCompany: Infranea | ROCO\r\nemail: dick.elsman@infranea.com\r\n\r\nDynamo Core version: 2.3.0.5885\r\nDynamo Revit version: 2.3.0.6270\r\nRevit version: 2020.2\r\n",
+        "Title": "GENERAL INFO\r\n________________________________________________________\r\n\r\nVersion: 4\r\nAuthor: Dick Elsman\r\nCompany: Infranea | ROCO\r\nemail: dick.elsman@infranea.com\r\n\r\nDynamo Core version: 2.3.0.5885\r\nDynamo Revit version: 2.3.0.6270\r\nRevit version: 2020.2\r\n",
         "Nodes": [],
         "Left": -34633.381668467227,
         "Top": -8884.340959828678,
@@ -22548,7 +22608,7 @@
       },
       {
         "Id": "d68275590bec4605a3cdb691adab96c8",
-        "Title": "INSTRUCTIONS\r\n________________________________________________________\r\n\r\n<DESCRIPTION>\r\nAllows the user to place GMA2 objects on featureline points in the direction of the alignment (and corridor).  Duration of scripts depends on complexity of corridor and to be placed objects. Min runtime is about 5 minutes\r\n\r\n<INSTRUCTIONS>\r\nnavigate to the folder to play, and press play in the Dynamo Player.\r\nNB! This script requires a JSON config file for it to index objects and data from sources. This/these file(s) shoudl be stored in <script directory>\\config_files",
+        "Title": "INSTRUCTIONS\r\n________________________________________________________\r\n\r\n<DESCRIPTION>\r\nAllows the user to place GMA2  and GMA4 objects on featureline points pairs in the direction of the alignment (and corridor).  Duration of scripts depends on complexity of corridor and to be placed objects. Min runtime is about 5 minutes\r\n\r\n<INSTRUCTIONS>\r\nnavigate to the folder to play, and press play in the Dynamo Player.\r\nNB! This script requires a JSON config file for it to index objects and data from sources. This/these file(s) shoudl be stored in <script directory>\\config_files",
         "Nodes": [],
         "Left": -34630.738298076692,
         "Top": -8674.2241925775088,
@@ -22562,7 +22622,7 @@
       },
       {
         "Id": "1aa6f49789334df69e7e1093bca62dbf",
-        "Title": "KNOWN ISSUES AND LIMITATIONS\r\n________________________________________________________\r\n\r\n- Does not support retaining objects yet\r\n- Does not yet facilitate slopes in floors",
+        "Title": "KNOWN ISSUES AND LIMITATIONS\r\n________________________________________________________\r\n\r\n- Only runs with one CivilApplication open\r\n- Only use 1 region and baseline on your corridor\r\n- does not run properly if the families are not loaded",
         "Nodes": [],
         "Left": -34632.292972430274,
         "Top": -8398.66269116932,
@@ -22718,8 +22778,8 @@
         "Id": "36bbc6da0a4b43248030acaffa786e6a",
         "Title": "SCRIPT META\r\n_____________________________________________\r\nScript Name: CC_GMA2_GMA4_createObjects@CorridorFLpoints.dyn\n\nPackages used in this script: \nData-Shapes version: 2019.2.40\nClockwork for Dynamo 2.x version: 2.1.2\nDynamoROCO version: 2.3.0.0\nROCO Dyf Packages version: 1.0.0\n\nTimeStamp : 2020/2/6 17:58",
         "Nodes": [],
-        "Left": -34623.287865610204,
-        "Top": -8291.1522091630613,
+        "Left": -34629.150273512125,
+        "Top": -8280.8929953347069,
         "Width": 0.0,
         "Height": 0.0,
         "FontSize": 36.0,
@@ -22729,8 +22789,8 @@
         "Background": "#FFC1D676"
       }
     ],
-    "X": -44889.883486140388,
-    "Y": 8455.37850462856,
-    "Zoom": 1.3633885281200553
+    "X": 47805.107173337688,
+    "Y": 12110.912384248337,
+    "Zoom": 1.3646269815827841
   }
 }

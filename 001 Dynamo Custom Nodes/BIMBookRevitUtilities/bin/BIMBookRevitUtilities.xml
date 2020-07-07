@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BIMBookRevitUtilities</name>
+    </assembly>
+    <members>
+        <member name="P:BIMBookRevitUtilities.NestedFamily.Host">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:BIMBookRevitUtilities.ProcessedObjects">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:BIMBookRevitUtilities.ProcessedObjects.Process(BIMBook.ModelVersion,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{Autodesk.Revit.DB.FamilyInstance}},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,BIMBook.RevitParameter}}})">
+            <summary>
+            
+            </summary>
+            <param name="Version"></param>
+            <param name="FamilyInstances"></param>
+            <param name="Parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BIMBookRevitUtilities.SelectAndFilter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:BIMBookRevitUtilities.SelectAndFilter.NestedFamilyInstancesInViewByParameterName(System.String)">
+            <summary>
+            Selects all elements in avtive view;
+            Filters the elements by
+                - having a Family
+                - having the desired parameter 
+            </summary>
+            <param name="ParameterName">Name of the parameter to filter on.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BIMBookRevitUtilities.SelectAndFilter.FamilyInstancesInViewByParameterName(System.Collections.Generic.List{System.String})">
+            <summary>
+            Returns a dictionary based on the Parametername to find and all Familyinstances 
+            </summary>
+            <param name="ParameterNames"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

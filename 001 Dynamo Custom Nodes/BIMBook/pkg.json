@@ -1,0 +1,18 @@
+{
+  "license": "",
+  "file_hash": null,
+  "name": "BIMBook",
+  "version": "1.0.0.0",
+  "description": "OrientdB Nodes for BIM Recipe Book",
+  "group": "",
+  "keywords": null,
+  "dependencies": [],
+  "contents": "",
+  "engine_version": "2.3.0.0",
+  "engine": "dynamo",
+  "engine_metadata": "",
+  "site_url": "",
+  "repository_url": "",
+  "contains_binaries": true,
+  "node_libraries": [ "BIMBook, Version=2.3.0.0, Culture=neutral, PublicKeyToken=null" ]
+}

@@ -1,0 +1,25 @@
+{
+  configData: {
+    "#adaptivePoints": "GMA2",
+    "dateCreated": "07/07/2020",
+    "author": "DKE",
+    "configFileName": "GMA2_Anchoring@CorridorFLpointsAssembly",
+    "configFileDescription": "Placement of anchoring components between featurelinepoints on an assembly"
+  },
+  imageDict: {
+    "Logo": "config_files\\ROCO.jpg",
+    "ReferenceImage": "config_files\\Principle_between_FLPoints_Subassembly.png"
+  },
+  scriptDataDict: {
+    "1": {
+      "name": "Anchor",
+      "fam_search": "GMA2,anchor,tie rod",
+      "defaultParameters": {
+		"ROCO_CNU_":"0"
+      },
+      "numberParams": ["ROCO_CNU_"
+      ],
+      "recipeCodes": []
+    }
+  }
+}

@@ -4,6 +4,18 @@
         <name>RhythmRevit</name>
     </assembly>
     <members>
+        <member name="T:Rhythm.Geometry.Tessellation.ConvexHull">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Rhythm.Geometry.Tessellation.ConvexHull.FromPoints(System.Collections.Generic.List{Autodesk.DesignScript.Geometry.Point})">
+            <summary>
+            Generates a convex hull from given points.
+            </summary>
+            <param name="points"></param>
+            <returns></returns>
+        </member>
         <member name="T:Rhythm.Revit.ElementFilter.ElementFilter">
             <summary>
             Wrapper class for ElementFilter.
@@ -68,6 +80,28 @@
             Wrapper class for Area.
             </summary>
         </member>
+        <member name="M:Rhythm.Revit.Elements.Areas.AreaScheme(Revit.Elements.Element)">
+            <summary>
+            Get the input area's scheme.
+            </summary>
+            <param name="area">The area to check.</param>
+            <returns name="areaScheme"></returns>
+        </member>
+        <member name="M:Rhythm.Revit.Elements.Areas.ContainsPoint(Revit.Elements.Element,Autodesk.DesignScript.Geometry.Point)">
+            <summary>
+            This will report whether or not the area contains the given point.
+            </summary>
+            <param name="area">The area to check.</param>
+            <param name="point">The point to check.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhythm.Revit.Elements.Areas.AreaAtPoint(Autodesk.DesignScript.Geometry.Point)">
+            <summary>
+            This will return the area at the given point.
+            </summary>
+            <param name="point">The point to check.</param>
+            <returns name="area">The area found at the point (if available).</returns>
+        </member>
         <member name="M:Rhythm.Revit.Elements.Areas.Boundaries(Revit.Elements.Element)">
             <summary>
             This node will retrieve the area's boundaries. The first list is typically the outermost boundaries.
@@ -96,7 +130,7 @@
             </summary>
             <param name="point">The point to select area(s) at.</param>
             <param name="areaHeight">A manually input area height. Default value is 10.</param>
-            <returns name="area">The solid.</returns>
+            <returns name="area">The area.</returns>
             <search>
             Area.GetAreaAtPoint
             </search>
@@ -482,7 +516,7 @@
             </summary>
             <param name="curtainGridLine">The curtain gridline to remove segments from.</param>
             <param name="curves">The curves that represent the grid segment to remove.</param>
-            <returns name="curtainGridLine">The curtain grid that wsa supplied.</returns>
+            <returns name="curtainGridLine">The curtain grid that was supplied.</returns>
             <search>
             CurtainGridLine.RemoveSegment, rhythm
             </search>
@@ -599,8 +633,8 @@
             </summary>
             <param name="dimension">Dimension to set</param>
             <param name="belowValue">Value to set.</param>
-            <returns name="set">Succesfully set.</returns>
-            <returns name="notSet">Not so succesfully set.</returns>
+            <returns name="set">Successfully set.</returns>
+            <returns name="notSet">Not so successfully set.</returns>
             <search>
             dimension.SetBelowValue
             </search>
@@ -731,7 +765,7 @@
         </member>
         <member name="M:Rhythm.Revit.Elements.ElevationMarker.CreateElevationByMarkerIndex(Revit.Elements.Element,Revit.Elements.Element,System.Collections.Generic.List{System.Int32})">
             <summary>
-            This node will add evelations on each side of the marker chosen. Typically 0-3. 
+            This node will add elevations on each side of the marker chosen. Typically 0-3. 
             </summary>
             <param name="elevationMarker">The marker to host elevations on.</param>
             <param name="planView">Plan view to do this stuff to.</param>
@@ -807,7 +841,7 @@
         </member>
         <member name="M:Rhythm.Revit.Elements.DimensionTypes.UsesProjectSettings(System.Collections.Generic.List{Revit.Elements.DimensionType})">
             <summary>
-            Dtermine if the given dimension type uses project (default) settings.
+            Determine if the given dimension type uses project (default) settings.
             </summary>
             <param name="dimensionType">The dimension type the unit format options from.</param>
             <returns name="bool">A boolean mask to filter with.</returns>
@@ -830,6 +864,20 @@
             <search>
             referenceplane,referenceplane.getcurvesinview
             </search>
+        </member>
+        <member name="M:Rhythm.Revit.Elements.ReferencePlanes.ByLine(Autodesk.DesignScript.Geometry.Curve,System.Boolean)">
+            <summary>
+            This will create a reference plane by the given curve and the selected direction. True for plan view and false for a section parallel to the line.
+            </summary>
+            <param name="curve">The curve to use.</param>
+            <param name="drawInPlan">Choose whether or not to draw in plan or a section view of the curve, (looking at it).</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhythm.Revit.Elements.ReferencePlanes.XAxis">
+            <summary>
+                Get Null
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Rhythm.Revit.Elements.Parts">
             <summary>
@@ -1013,6 +1061,7 @@
             <search>
              Element.SetPinnedStatus
             </search>
+            works with background docs
         </member>
         <member name="M:Rhythm.Revit.Elements.Elements.AreaLocation(Revit.Elements.Element)">
             <summary>
@@ -1025,6 +1074,13 @@
             <search>
             Element.AreaLocation
             </search>
+        </member>
+        <member name="M:Rhythm.Revit.Elements.Elements.ViewFinder(Revit.Elements.Element)">
+            <summary>
+            This finds all the views an element appears in. Note: "Appears in" means that if it appears when you do a category collector, that counts.
+            </summary>
+            <param name="element">The element to analyze.</param>
+            <returns name="views">The views this element appears in.</returns>
         </member>
         <member name="T:Rhythm.Revit.Elements.FamilyInstances">
             <summary>
@@ -1224,18 +1280,23 @@
             Wrapper class for sheets.
             </summary>
         </member>
-        <member name="M:Rhythm.Revit.Elements.Sheet.GetViewportsAndViews(Revit.Elements.Views.Sheet,Autodesk.Revit.DB.Document)">
+        <member name="M:Rhythm.Revit.Elements.Sheet.GetViewportsAndViews(Revit.Elements.Views.Sheet)">
             <summary>
             This node will obtain viewports, views and schedules from a given sheet.
             </summary>
             <param name="sheet">The sheet to get viewports from.</param>
-            <param name="doc">The document to use. If left blank the current document will be used.</param>
             <returns name="viewports">The viewports on the sheet.</returns>
             <returns name="views">The views on the sheet.</returns>
             <returns name="schedules">The schedules on the sheet.</returns>
             <search>
             viewport, schedules,rhythm
             </search>
+        </member>
+        <member name="M:Rhythm.Revit.Elements.Sheet.CurrentDocument">
+            <summary>
+            
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Rhythm.Revit.Elements.Sheet.Create(Revit.Elements.FamilyType)">
             <summary>
@@ -1440,10 +1501,10 @@
         </member>
         <member name="T:Rhythm.Revit.Selection.Collector">
             <summary>
-            Wrapper class for textnotes.
+            Wrapper class for collectors.
             </summary>
         </member>
-        <member name="M:Rhythm.Revit.Selection.Collector.ElementsOfTypeInDocument(Autodesk.Revit.DB.Document,System.Type)">
+        <member name="M:Rhythm.Revit.Selection.Collector.ElementsOfTypeInDocument(System.Object,System.Type)">
             <summary>
             This node will collect all elements of type from given document.
             </summary>
@@ -1454,7 +1515,7 @@
             All Elements of Type in Document
             </search>
         </member>
-        <member name="M:Rhythm.Revit.Selection.Collector.ElementsOfCategoryInDocument(Autodesk.Revit.DB.Document,Revit.Elements.Category)">
+        <member name="M:Rhythm.Revit.Selection.Collector.ElementsOfCategoryInDocument(System.Object,Revit.Elements.Category)">
             <summary>
             This node will collect all elements of the given category from given document.
             </summary>
@@ -1540,7 +1601,7 @@
             Wrapper class for application level nodes.
             </summary>
         </member>
-        <member name="M:Rhythm.Revit.Application.Applications.OpenDocumentFile(System.String,System.Boolean,System.Boolean,System.Boolean)">
+        <member name="M:Rhythm.Revit.Application.Applications.OpenDocumentFile(System.String,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
             <summary>
             This node will open the given file in the background.
             </summary>
@@ -1548,6 +1609,7 @@
             <param name="audit">Choose whether or not to audit the file upon opening. (Will run slower with this)</param>
             <param name="detachFromCentral">Choose whether or not to detach from central upon opening. Only for RVT files. </param>
             <param name="preserveWorksets">Choose whether or not to preserve worksets upon opening. Only for RVT files. </param>
+            <param name="closeAllWorksets">Choose if you want to close all worksets upon opening. Defaulted to false.</param>
             <returns name="document">The document object. If the file path is blank this returns the current document.</returns>
             <search>
             Application.OpenDocumentFile, rhythm
@@ -1621,6 +1683,14 @@
             copy
             </search>
         </member>
+        <member name="M:Rhythm.Revit.Application.Documents.SaveAs(Autodesk.Revit.DB.Document,System.String)">
+            <summary>
+            This node will save the Revit document to another path.
+            </summary>
+            <param name="document">A valid Revit Document.</param>
+            <param name="filePath">The file path to save the document.</param>
+            <returns name="result">A string message whether the save as was successful or a failure.</returns>
+        </member>
         <member name="T:Rhythm.Revit.Helpers.Helpers">
             <summary>
             Helpers Wrapper
@@ -1636,7 +1706,6 @@
         <member name="M:Rhythm.Revit.Helpers.Helpers.UserMessage(System.String,System.String,System.Collections.Generic.List{System.Object})">
             <summary>
             This provides a user message with the option to cancel the process downstream. If no is selected the node will return null.
-            This node was inspired by the work of Matt Nelson, William Wong and Kyle Morin on http://stockroom.mattbenimble.com/.
             </summary>
             <param name="caption">The caption for the window title.</param>
             <param name="message">The message to give the user.</param>
@@ -1648,6 +1717,12 @@
             This allows you to turn off element binding in the DYN.
             </summary>
             <param name="toggle"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhythm.Revit.Helpers.Helpers.CurrentRevitVersion">
+            <summary>
+            Returns the current Revit version
+            </summary>
             <returns></returns>
         </member>
         <member name="T:Rhythm.Revit.Views.Sheet">
@@ -1758,6 +1833,30 @@
             cropregion, crop, rhythm
             </search>
         </member>
+        <member name="M:Rhythm.Revit.Views.View.IsFilterEnabled(Revit.Elements.Views.View,Revit.Elements.Element)">
+            <summary>
+            Revit 2021 - Checks if a view filter is enabled in the given view.
+            </summary>
+            <param name="view">The view to check the filter on.</param>
+            <param name="viewFilter"> The view filter to check.</param>
+            <returns name="bool">Is it enabled?</returns>
+        </member>
+        <member name="M:Rhythm.Revit.Views.View.ToggleFilterInView(Revit.Elements.Views.View,Revit.Elements.Element,System.Boolean)">
+            <summary>
+            Revit 2021 - Checks if a view filter is enabled in the given view.
+            </summary>
+            <param name="view">The view to check the filter on.</param>
+            <param name="viewFilter">The view filter to check.</param>
+            <param name="toggle">Toggle it to enabled or disabled.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhythm.Revit.Views.View.GetOrderedFilters(Revit.Elements.Views.View)">
+            <summary>
+            Revit 2021 - Checks if a view filter is enabled in the given view.
+            </summary>
+            <param name="view">The view to check the filter on.</param>
+            <returns></returns>
+        </member>
         <member name="T:Rhythm.Revit.Views.View3D">
             <summary>
             Wrapper class for 3d views.
@@ -1768,7 +1867,7 @@
             This node will set the given 3d view's section box.
             </summary>
             <param name="view3D">The 3D view to set the section box for.</param>
-            <param name="bBox">The boudning box to use.</param>
+            <param name="bBox">The bounding box to use.</param>
             <returns name="success">The views that worked.</returns>
             <returns name="failed">The views that failed.</returns>
             <search>
@@ -1786,8 +1885,8 @@
             Slower but more reliable version that uses transaction rollback to isolated the crop region element.
             </summary>
             <param name="viewSection">The plan view to rotate</param>
-            <param name="lineWeight">The lineweight to override to, (1-16)</param>
-            <returns name="viewSection">The overidden view.</returns>
+            <param name="lineWeight">The line weight to override to, (1-16)</param>
+            <returns name="viewSection">The overridden view.</returns>
             <search>
             overridecrop
             </search>
@@ -1948,6 +2047,137 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="T:Rhythm.Utilities.DocumentUtils">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Rhythm.Utilities.DocumentUtils.OrchidDocumentToDbDocument(System.Object)">
+            <summary>
+            This converts orchid documents to Revit DB Documents
+            </summary>
+            <param name="docObject"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhythm.Utilities.DocumentUtils.DbDocumentToOrchidDocument(Autodesk.Revit.DB.Document)">
+            <summary>
+            This converts Revit DB Documents to orchid documents.
+            </summary>
+            <param name="document"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Rhythm.Utilities.PointInPolyExtensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Rhythm.Utilities.PointInPolyExtensions.AddToPunten(System.Collections.Generic.List{Autodesk.Revit.DB.XYZ},Autodesk.Revit.DB.XYZ)">
+            <summary>
+            Add new point to list, unless already present.
+            </summary>
+        </member>
+        <member name="M:Rhythm.Utilities.PointInPolyExtensions.MaakPuntArray(Autodesk.Revit.DB.Architecture.Room)">
+            <summary>
+            Return a list of boundary 
+            points for the given room.
+            </summary>
+        </member>
+        <member name="M:Rhythm.Utilities.PointInPolyExtensions.MaakPuntArray(System.Collections.Generic.IList{System.Collections.Generic.IList{Autodesk.Revit.DB.BoundarySegment}})">
+            <summary>
+            Return a list of boundary points 
+            for the given boundary segments.
+            </summary>
+        </member>
+        <member name="M:Rhythm.Utilities.PointInPolyExtensions.MaakPuntArray(Autodesk.Revit.DB.Area)">
+            <summary>
+            Return a list of boundary 
+            points for the given area.
+            </summary>
+        </member>
+        <member name="M:Rhythm.Utilities.PointInPolyExtensions.AreaContains(Autodesk.Revit.DB.Area,Autodesk.Revit.DB.XYZ)">
+            <summary>
+            Check whether this area contains a given point.
+            </summary>
+        </member>
+        <member name="M:Rhythm.Utilities.PointInPolyExtensions.RoomContains(Autodesk.Revit.DB.Architecture.Room,Autodesk.Revit.DB.XYZ)">
+            <summary>
+            Check whether this room contains a given point.
+            </summary>
+        </member>
+        <member name="M:Rhythm.Utilities.PointInPolyExtensions.TOUV(Autodesk.Revit.DB.XYZ)">
+            <summary>
+            Project an XYZ point to a UV one in the 
+            XY plane by simply dropping the Z coordinate.
+            </summary>
+        </member>
+        <member name="T:Rhythm.Utilities.UVArray">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Rhythm.Utilities.UVArray.#ctor(System.Collections.Generic.List{Autodesk.Revit.DB.XYZ})">
+            <summary>
+            
+            </summary>
+            <param name="XYZArray"></param>
+        </member>
+        <member name="M:Rhythm.Utilities.UVArray.get_Item(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="i"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Rhythm.Utilities.UVArray.Size">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Rhythm.Utilities.PointInPoly">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Rhythm.Utilities.PointInPoly.GetQuadrant(Autodesk.Revit.DB.UV,Autodesk.Revit.DB.UV)">
+            <summary>
+            Determine the quadrant of a polygon vertex 
+            relative to the test point.
+            </summary>
+        </member>
+        <member name="M:Rhythm.Utilities.PointInPoly.X_intercept(Autodesk.Revit.DB.UV,Autodesk.Revit.DB.UV,System.Double)">
+            <summary>
+            Determine the X intercept of a polygon edge 
+            with a horizontal line at the Y value of the 
+            test point.
+            </summary>
+        </member>
+        <member name="M:Rhythm.Utilities.PointInPoly.PolyGonContains(System.Collections.Generic.List{Autodesk.Revit.DB.XYZ},Autodesk.Revit.DB.XYZ)">
+            <summary>
+            
+            </summary>
+            <param name="xyZArray"></param>
+            <param name="p1"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Rhythm.Utilities.PointInPoly.PolygonContains(Rhythm.Utilities.UVArray,Autodesk.Revit.DB.UV)">
+            <summary>
+            Determine whether given 2D point lies within 
+            the polygon.
+            
+            Written by Jeremy Tammik, Autodesk, 2009-09-23, 
+            based on code that I wrote back in 1996 in C++, 
+            which in turn was based on C code from the 
+            article "An Incremental Angle Point in Polygon 
+            Test" by Kevin Weiler, Autodesk, in "Graphics 
+            Gems IV", Academic Press, 1994.
+            
+            Copyright (C) 2009 by Jeremy Tammik. All 
+            rights reserved.
+            
+            This code may be freely used. Please preserve 
+            this comment.
+            </summary>
+        </member>
         <member name="T:Rhythm.Utilities.ViewUtils">
             <summary>
             Utilities that facilitate duplication of drafting views and schedules into another document.
@@ -2022,6 +2252,54 @@
             </summary>
             <param name="failuresAccessor"></param>
             <returns></returns>
+        </member>
+        <member name="T:Rhythm.Utilities.CommandHelpers">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Rhythm.Utilities.CommandHelpers.InvokeNode(System.String,System.String,System.Object[])">
+            <summary>
+            This allows for runtime loading of commands specific to a Revit version. This is nice because we can have Revit 2021 DLLs and more.
+            </summary>
+            <param name="dllName"></param>
+            <param name="commandName"></param>
+            <param name="args"></param>
+            <returns></returns>      
+        </member>
+        <member name="T:Rhythm.Utilities.ConvexHullUtilities">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Rhythm.Utilities.ConvexHullUtilities.MinBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <param name="selector"></param>
+            <typeparam name="tsource"></typeparam>
+            <typeparam name="tkey"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Rhythm.Utilities.ConvexHullUtilities.MinBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Collections.Generic.IComparer{``1})">
+            <summary>
+            
+            </summary>
+            <param name="source"></param>
+            <param name="selector"></param>
+            <param name="comparer"></param>
+            <typeparam name="tsource"></typeparam>
+            <typeparam name="tkey"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Rhythm.Utilities.ConvexHullUtilities.ConvexHull(System.Collections.Generic.List{Autodesk.Revit.DB.XYZ})">
+            <summary>
+            Return the convex hull of a list of points 
+            using the Jarvis march or Gift wrapping:
+            https://en.wikipedia.org/wiki/Gift_wrapping_algorithm
+            Written by Maxence.
+            </summary>
         </member>
         <member name="T:Rhythm.Utilities.StringComparisonUtilities">
             <summary>

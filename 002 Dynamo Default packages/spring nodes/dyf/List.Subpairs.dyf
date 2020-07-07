@@ -2,7 +2,7 @@
   "Uuid": "e457a7aa-33e4-401d-9abc-f7a9ea925cad",
   "IsCustomNode": true,
   "Category": "Springs.Actions",
-  "Description": "Pair up each list item with the next one and drop the list item.",
+  "Description": "Pair up each list item with the next one.",
   "Name": "ꟿ List.Subpairs",
   "ElementResolver": {
     "ResolutionMap": {
@@ -110,27 +110,26 @@
     }
   ],
   "Dependencies": [],
-  "Bindings": [],
   "View": {
     "Dynamo": {
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": false,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.0.2.6826",
+      "Version": "2.0.3.8810",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
     "Camera": {
       "Name": "Background Preview",
-      "EyeX": 13.437304496765137,
-      "EyeY": 99.696479797363281,
-      "EyeZ": 39.3309211730957,
-      "LookX": 12.0,
-      "LookY": -13.0,
-      "LookZ": -58.0,
-      "UpX": 0.0,
-      "UpY": 1.0,
-      "UpZ": 0.0
+      "EyeX": -67957.802410128148,
+      "EyeY": 68610.274882289348,
+      "EyeZ": 7975.5805986286177,
+      "LookX": -1442.317257231829,
+      "LookY": -66374.189936123323,
+      "LookZ": -24933.828958964223,
+      "UpX": -0.048432605684251361,
+      "UpY": 0.54463903501502664,
+      "UpZ": -0.83727092642975076
     },
     "NodeViews": [
       {
@@ -165,8 +164,8 @@
       }
     ],
     "Annotations": [],
-    "X": -294.854,
-    "Y": 192.678,
+    "X": 326.146,
+    "Y": 177.678,
     "Zoom": 1.1575
   }
 }

@@ -242,6 +242,116 @@
       ],
       "Replication": "Disabled",
       "Description": "Visualize the output of node."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DynamoBIMCookbook.Book.ByLantisForRevit",
+      "Id": "bd43c0f311734765bd4234584b4e907c",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "eaa30d11e016442a807a4ecc0dded628",
+          "Name": "Book",
+          "Description": "Book",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns the Lantis Cookbook in Revit mode\n\nBook.ByLantisForRevit ( ): Book"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DynamoBIMCookbook.Recipe.ByBook@DynamoBIMCookbook.Book",
+      "Id": "75918a3ea8114efcb36ec89a6c4cced6",
+      "Inputs": [
+        {
+          "Id": "e05b6b49be204a54b8cd7e3733e85e12",
+          "Name": "Book",
+          "Description": "The book object containing the requested recipes\n\nBook",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "cf771c9cb49442a09df1a87624372c95",
+          "Name": "var[]..[]",
+          "Description": "A Dictionary(MatchingValue, Recipe)",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns all recipes associated to a book.\n\nRecipe.ByBook (Book: Book): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DesignScript.Builtin.Dictionary.Keys",
+      "Id": "44f0ceb22c224c4fa60163967cea52b4",
+      "Inputs": [
+        {
+          "Id": "503d7c7b6aeb4d22a164c2eaf99c1922",
+          "Name": "dictionary",
+          "Description": "DesignScript.Builtin.Dictionary",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "8bc87e6fc7794911b3f374889a40bad6",
+          "Name": "keys",
+          "Description": "The keys of the Dictionary",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Produces the keys in a Dictionary.\n\nDictionary.Keys: string[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DesignScript.Builtin.Dictionary.Keys",
+      "Id": "3681acf3daac4bad98956fbbe5f5f30b",
+      "Inputs": [
+        {
+          "Id": "2859961c387249648510275e552438af",
+          "Name": "dictionary",
+          "Description": "DesignScript.Builtin.Dictionary",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "6337055d76044254b37970ca4d659486",
+          "Name": "keys",
+          "Description": "The keys of the Dictionary",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Produces the keys in a Dictionary.\n\nDictionary.Keys: string[]"
     }
   ],
   "Connectors": [
@@ -279,6 +389,21 @@
       "Start": "e07f27b28dc047db91b42bc12ca7e8c5",
       "End": "4c3cc341987146ca825b05fc7a236ad8",
       "Id": "05522a1d48054cda93afcfaa18d85c82"
+    },
+    {
+      "Start": "e07f27b28dc047db91b42bc12ca7e8c5",
+      "End": "2859961c387249648510275e552438af",
+      "Id": "e02104940dd3480c907e12d7f8ecb73d"
+    },
+    {
+      "Start": "eaa30d11e016442a807a4ecc0dded628",
+      "End": "e05b6b49be204a54b8cd7e3733e85e12",
+      "Id": "47d5bffbadc64ad49ab56d19c548e2ab"
+    },
+    {
+      "Start": "cf771c9cb49442a09df1a87624372c95",
+      "End": "503d7c7b6aeb4d22a164c2eaf99c1922",
+      "Id": "75238e3dcbc44f27aac7c2ba9b025ba5"
     }
   ],
   "Dependencies": [],
@@ -292,6 +417,15 @@
         "0035dbcb61144ce08a5dede847613633",
         "fc1c16ee122f4893b45d2aa144071b4e",
         "35c50d4f90a14f5787fba47033a9c9eb"
+      ]
+    },
+    {
+      "Name": "DynamoBIMCookbook",
+      "Version": "1.0.0.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "bd43c0f311734765bd4234584b4e907c",
+        "75918a3ea8114efcb36ec89a6c4cced6"
       ]
     }
   ],
@@ -395,13 +529,53 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": 1665.2326183328562,
-        "Y": 700.55075334518972
+        "X": 1703.4427400582629,
+        "Y": 594.654130277634
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Book.ByLantisForRevit",
+        "Id": "bd43c0f311734765bd4234584b4e907c",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 907.64375227877031,
+        "Y": 728.88370788952921
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Recipe.ByBook",
+        "Id": "75918a3ea8114efcb36ec89a6c4cced6",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1177.2980398837838,
+        "Y": 744.167756579692
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Dictionary.Keys",
+        "Id": "44f0ceb22c224c4fa60163967cea52b4",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1719.8817683845598,
+        "Y": 969.06161587779991
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Dictionary.Keys",
+        "Id": "3681acf3daac4bad98956fbbe5f5f30b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1959.9799908737043,
+        "Y": 967.445236075866
       }
     ],
     "Annotations": [],
-    "X": -262.03683639079759,
-    "Y": -31.241190359780035,
-    "Zoom": 0.65898910449449932
+    "X": -1528.944297678609,
+    "Y": -532.82448948980777,
+    "Zoom": 0.94395942044908354
   }
 }

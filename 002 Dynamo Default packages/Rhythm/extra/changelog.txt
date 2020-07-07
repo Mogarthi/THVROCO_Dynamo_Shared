@@ -9,4 +9,7 @@
 2019724: [Revisions] Revised Viewport.LocationData to dispose of the temporary geometry.
 2019912: [Revisions] Separation of core features and revit features. [Additions] Addition of Viewport.GetBoxCenter and Viewport.SetBoxCenter.
 20191015: [Revisions] Updated Dimension.CenterTextOnLine to work for metric files.
-2019117: [Revisions] Add skip for room tags that are actually family instances. Dispose of geometry in room nodes. [Additions] Humanizer tools to core.
+2019117: [Revisions] Add skip for room tags that are actually family instances. Dispose of geometry in room nodes. [Additions] Humanizer tools to core
+20191111: [Revisions] Fix set crop region to return Revit.Elements.Element view.
+2019124: [Revisions] Viewport.Create fixes for more stability with schedule placement. [Additions] ReferencePlanes.ByLine with a boolean.
+20200122: [Revisions] Revised Sheet.ViewportsAndViews to automatically detect input sheet's document. [Additions] Core icons.
