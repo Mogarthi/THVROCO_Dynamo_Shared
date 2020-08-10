@@ -1,0 +1,37 @@
+{
+  "configData": {
+    "#adaptivePoints": "GMA4",
+    "dateCreated": "20/04/2020",
+    "author": "DKE",
+    "configFileName": "update_Rectangle_Wall_Objects@CorridorFLpoints",
+    "configFileDescription": "Update dimensions of rectangle wall based objects based on corridor featureline point positions"
+  },
+  "imageDict": {
+    "Logo": "config_files\\ROCO.jpg",
+    "ReferenceImage": "config_files\\Rectangle_wall.png"
+  },
+  "scriptDataDict": {
+    "1": {
+      "name": "Dimensions_Roof",
+      "parameters": {
+		"a": "Height_1",
+        "b": "Height_2"
+      },
+      "Selection": {
+        "1": "Top of wall"
+      },
+      "Calculation": {
+        "a": {
+          "dZ": ["ORIGIN", "1"]
+        },
+        "b": {
+          "dZ": ["ORIGIN", "1"]
+        }
+      },
+      "Group": {
+        "First": ["a"],
+        "Last": ["b"]
+      }
+      }
+    }
+  }
