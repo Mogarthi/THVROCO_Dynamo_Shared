@@ -13,7 +13,7 @@
   scriptDataDict: {
     "1": {
       "name": "Anchor",
-      "fam_search": "GMA2,anchor|tie rod",
+      "fam_search": "GMA2,anchor,tie rod",
       "defaultParameters": {
 		"ROCO_CNU_":"0"
       },
