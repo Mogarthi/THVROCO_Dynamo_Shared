@@ -1,0 +1,46 @@
+{
+  "configData": {
+    "#adaptivePoints": "GMA4",
+    "dateCreated": "28/02/2020",
+    "author": "DKE",
+    "configFileName": "update_Rectangle_Roof_Objects@CorridorFLpoints",
+    "configFileDescription": "Update dimensions of rectangle roof based objects based on corridor featureline point positions"
+  },
+  "imageDict": {
+    "Logo": "config_files\\ROCO.jpg",
+    "ReferenceImage": "config_files\\Rectangle_tunnel_roof.png"
+  },
+  "scriptDataDict": {
+    "1": {
+      "name": "Dimensions_Roof",
+      "parameters": {
+		"a": "Width_hor_1_Right",
+        "b": "Width_hor_1_Left",
+		"c": "Width_hor_2_Left",
+		"d": "Width_hor_2_Right"
+      },
+      "Selection": {
+        "1": "Outer point Left",
+        "2": "Outer point Right"
+      },
+      "Calculation": {
+        "a": {
+          "dH": ["ORIGIN", "2"]
+        },
+        "b": {
+          "dH": ["ORIGIN", "1"]
+        },
+        "c": {
+          "dH": ["ORIGIN", "1"]
+        },
+        "d": {
+          "dH": ["ORIGIN", "2"]
+        }
+      },
+      "Group": {
+        "First": ["a", "b"],
+        "Last": ["c", "d"]
+      }
+      }
+    }
+  }

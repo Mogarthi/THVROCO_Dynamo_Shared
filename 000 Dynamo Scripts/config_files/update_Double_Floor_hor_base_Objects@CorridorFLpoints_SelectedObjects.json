@@ -1,0 +1,127 @@
+{
+  "configData": {
+    "#adaptivePoints": "GMA4",
+    "dateCreated": "22/04/2020",
+    "author": "DKE",
+    "configFileName": "update_Double_Floor_hor_base_Objects@CorridorFLpoints_SelectedObjects",
+    "configFileDescription": "Update dimensions of floor based objects based on corridor featureline point positions"
+  },
+  "imageDict": {
+    "Logo": "config_files\\ROCO.jpg",
+    "ReferenceImage": "config_files\\SlopeDimensionsDoubleTunnel.png"
+  },
+  "scriptDataDict": {
+    "1": {
+      "name": "Dimensions of left tube",
+      "parameters": {
+        "b": "ROCO_CLE_Dz_Slope_1_left_end",
+        "a": "ROCO_CLE_Dz_Slope_1_left_start",
+        "c": "ROCO_CLE_Dz_Slope_2_left_start",
+        "d": "ROCO_CLE_Dz_Slope_2_left_end",
+        "e": "Width_hor_1_Left",
+        "f": "Width_hor_2_Left",
+        "g": "Width_Hor_Mid_1_Left",
+        "h": "Width_Hor_Mid_2_Left",
+        "i": "Width_Slope_1_Left",
+        "j": "Width_Slope_2_Left"
+      },
+      "Selection": {
+        "1": "FLPoint start LEFT slope C3D",
+        "2": "FLPoint end LEFT slope C3D",
+        "3": "FLPoint outer LEFT tunnel"
+      },
+      "Calculation": {
+        "a": {
+          "dZ": ["ORIGIN", "1"]
+        },
+        "b": {
+          "dZ": ["ORIGIN", "2"]
+        },
+        "c": {
+          "dZ": ["ORIGIN", "1"]
+        },
+        "d": {
+          "dZ": ["ORIGIN", "2"]
+        },
+        "e": {
+          "dH": ["2", "3"]
+        },
+        "f": {
+          "dH": ["2", "3"]
+        },
+        "g": {
+          "dH": ["ORIGIN", "1"]
+        },
+        "h": {
+          "dH": ["ORIGIN", "1"]
+        },
+        "i": {
+          "dH": ["1", "2"]
+        },
+        "j": {
+          "dH": ["1", "2"]
+        }
+      },
+      "Group": {
+        "First": ["a", "b", "e", "g", "i"],
+        "Last": ["c", "d", "f", "h","j"]
+      }
+      },
+      "2": {
+        "name": "Dimensions of right tube",
+        "parameters": {
+          "b": "ROCO_CLE_Dz_Slope_1_right_end",
+          "a": "ROCO_CLE_Dz_Slope_1_right_start",
+          "c": "ROCO_CLE_Dz_Slope_2_right_start",
+          "d": "ROCO_CLE_Dz_Slope_2_right_end",
+          "e": "Width_hor_1_Right",
+          "f": "Width_hor_2_Right",
+          "g": "Width_Hor_Mid_1_Right",
+          "h": "Width_Hor_Mid_2_Right",
+          "i": "Width_Slope_1_Right",
+          "j": "Width_Slope_2_Right"
+        },
+        "Selection": {
+          "4": "FLPoint start RIGHT slope C3D",
+          "5": "FLPoint end RIGHT slope C3D",
+          "6": "FLPoint outer RIGHT tunnel"
+        },
+        "Calculation": {
+          "a": {
+            "dZ": ["ORIGIN", "4"]
+          },
+          "b": {
+            "dZ": ["ORIGIN", "5"]
+          },
+          "c": {
+            "dZ": ["ORIGIN", "4"]
+          },
+          "d": {
+            "dZ": ["ORIGIN", "5"]
+          },
+          "e": {
+            "dH": ["5", "6"]
+          },
+          "f": {
+            "dH": ["5", "6"]
+          },
+          "g": {
+            "dH": ["ORIGIN", "4"]
+          },
+          "h": {
+            "dH": ["ORIGIN", "4"]
+          },
+          "i": {
+            "dH": ["4", "5"]
+          },
+          "j": {
+            "dH": ["4", "5"]
+          }
+        },
+      "Group": {
+        "First": ["a", "b", "e", "g", "i"],
+        "Last": ["c", "d", "f", "h","j"]
+      }
+      }
+    }
+  }
