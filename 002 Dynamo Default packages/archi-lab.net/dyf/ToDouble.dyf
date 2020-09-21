@@ -1,163 +1,33 @@
-{
-  "Uuid": "b9c5c81e-4945-4ae3-818e-44c70c4a7a1b",
-  "IsCustomNode": true,
-  "Category": "archilab.Core.Strings",
-  "Description": "This node converts strings to doubles. When strings look like this: \"0\", \"1\" etc. and don't have decimal places the ToNumber node fails on occasion. This addresses that issue.",
-  "Name": "ToDouble",
-  "ElementResolver": {
-    "ResolutionMap": {}
-  },
-  "Inputs": [],
-  "Outputs": [],
-  "Nodes": [
-    {
-      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
-      "NodeType": "PythonScriptNode",
-      "Code": "def ToInteger(i):\n\ttry:\n\t\treturn float(i)\n\texcept:\n\t\ttry:\n\t\t\treturn float(i + \".0\")\n\t\texcept:\n\t\t\treturn None\n\n#Assign your output to the OUT variable.\nOUT = map(ToInteger, IN[0])",
-      "VariableInputPorts": true,
-      "Id": "03e5c406690948ce903a440db255133f",
-      "Inputs": [
-        {
-          "Id": "f2c5418c56294b31abe49c9b9a2cd0bc",
-          "Name": "IN[0]",
-          "Description": "Input #0",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Outputs": [
-        {
-          "Id": "f7a591134e5d4f1c8ac152294d90f3cc",
-          "Name": "OUT",
-          "Description": "Result of the python script",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Disabled",
-      "Description": "Runs an embedded IronPython script."
-    },
-    {
-      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
-      "NodeType": "InputNode",
-      "Parameter": {
-        "Name": "_string",
-        "TypeName": "var",
-        "TypeRank": -1,
-        "DefaultValue": null,
-        "Description": ""
-      },
-      "Id": "9e6b83968349484ebd3331fb99f60fc7",
-      "Inputs": [],
-      "Outputs": [
-        {
-          "Id": "a9c4d1d608144066814f3eb0f6bfe9c7",
-          "Name": "",
-          "Description": "Symbol",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Replication": "Disabled",
-      "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
-    },
-    {
-      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Output, DynamoCore",
-      "NodeType": "OutputNode",
-      "Symbol": "_double",
-      "Id": "e367f4a94a984bd8994be960fb3051eb",
-      "Inputs": [
-        {
-          "Id": "bc3fe6997164478791de32d527383a45",
-          "Name": "",
-          "Description": "",
-          "UsingDefaultValue": false,
-          "Level": 2,
-          "UseLevels": false,
-          "KeepListStructure": false
-        }
-      ],
-      "Outputs": [],
-      "Replication": "Disabled",
-      "Description": "A function output, use with custom nodes"
-    }
-  ],
-  "Connectors": [
-    {
-      "Start": "f7a591134e5d4f1c8ac152294d90f3cc",
-      "End": "bc3fe6997164478791de32d527383a45",
-      "Id": "19bdb6d18bd64e65a8a656e41d181adb"
-    },
-    {
-      "Start": "a9c4d1d608144066814f3eb0f6bfe9c7",
-      "End": "f2c5418c56294b31abe49c9b9a2cd0bc",
-      "Id": "217d5169ff4443c09ee8310647ecc46f"
-    }
-  ],
-  "Dependencies": [],
-  "Bindings": [],
-  "View": {
-    "Dynamo": {
-      "ScaleFactor": 1.0,
-      "HasRunWithoutCrash": false,
-      "IsVisibleInDynamoLibrary": true,
-      "Version": "2.2.1.5175",
-      "RunType": "Manual",
-      "RunPeriod": "1000"
-    },
-    "Camera": {
-      "Name": "Background Preview",
-      "EyeX": -17.0,
-      "EyeY": 24.0,
-      "EyeZ": 50.0,
-      "LookX": 12.0,
-      "LookY": -13.0,
-      "LookZ": -58.0,
-      "UpX": 0.0,
-      "UpY": 1.0,
-      "UpZ": 0.0
-    },
-    "NodeViews": [
-      {
-        "ShowGeometry": true,
-        "Name": "Python Script",
-        "Id": "03e5c406690948ce903a440db255133f",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": 250.0,
-        "Y": 0.0
-      },
-      {
-        "ShowGeometry": true,
-        "Name": "Input",
-        "Id": "9e6b83968349484ebd3331fb99f60fc7",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": 0.0,
-        "Y": 0.0
-      },
-      {
-        "ShowGeometry": true,
-        "Name": "Output",
-        "Id": "e367f4a94a984bd8994be960fb3051eb",
-        "IsSetAsInput": false,
-        "IsSetAsOutput": false,
-        "Excluded": false,
-        "X": 447.0,
-        "Y": 0.0
-      }
-    ],
-    "Annotations": [],
-    "X": 240.36835823260262,
-    "Y": 389.24829373450393,
-    "Zoom": 1.9652445561768577
-  }
-}
+<Workspace Version="1.3.1.1736" X="0" Y="0" zoom="1" ScaleFactor="1" Name="ToDouble" Description="This node converts strings to doubles. When strings look like this: &quot;0&quot;, &quot;1&quot; etc. and don't have decimal places the ToNumber node fails on occasion. This addresses that issue." ID="b9c5c81e-4945-4ae3-818e-44c70c4a7a1b" Category="archilab.Core.Strings">
+  <NamespaceResolutionMap />
+  <Elements>
+    <PythonNodeModels.PythonNode guid="03e5c406-6909-48ce-903a-440db255133f" type="PythonNodeModels.PythonNode" nickname="Python Script" x="250" y="0" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="1">
+      <PortInfo index="0" default="False" />
+      <Script>def ToInteger(i):
+	try:
+		return float(i)
+	except:
+		try:
+			return float(i + ".0")
+		except:
+			return None
+
+#Assign your output to the OUT variable.
+OUT = map(ToInteger, IN[0])</Script>
+    </PythonNodeModels.PythonNode>
+    <Dynamo.Graph.Nodes.CustomNodes.Symbol guid="9e6b8396-8349-484e-bd33-31fb99f60fc7" type="Dynamo.Graph.Nodes.CustomNodes.Symbol" nickname="Input" x="0" y="0" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <Symbol value="string" />
+    </Dynamo.Graph.Nodes.CustomNodes.Symbol>
+    <Dynamo.Graph.Nodes.CustomNodes.Output guid="e367f4a9-4a98-4bd8-994b-e960fb3051eb" type="Dynamo.Graph.Nodes.CustomNodes.Output" nickname="Output" x="447" y="0" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+      <Symbol value="double" />
+    </Dynamo.Graph.Nodes.CustomNodes.Output>
+  </Elements>
+  <Connectors>
+    <Dynamo.Graph.Connectors.ConnectorModel start="03e5c406-6909-48ce-903a-440db255133f" start_index="0" end="e367f4a9-4a98-4bd8-994b-e960fb3051eb" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="9e6b8396-8349-484e-bd33-31fb99f60fc7" start_index="0" end="03e5c406-6909-48ce-903a-440db255133f" end_index="0" portType="0" />
+  </Connectors>
+  <Notes />
+  <Annotations />
+  <Presets />
+</Workspace>

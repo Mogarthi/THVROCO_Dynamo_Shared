@@ -144,6 +144,14 @@
       "DSCore.Object": {
         "Key": "DSCore.Object",
         "Value": "DSCoreNodes.dll"
+      },
+      "PointPair": {
+        "Key": "DynamoROCO.PointPair",
+        "Value": "DynamoROCO.dll"
+      },
+      "FeatureLinePoint": {
+        "Key": "CivilConnection.FeatureLinePoint",
+        "Value": "Autodesk2020.dll"
       }
     }
   },
@@ -2670,11 +2678,11 @@
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
       "NodeType": "CodeBlockNode",
-      "Code": "civilApplication;\ncivilDoc= CivilApplication.GetDocumentByName(civilApplication,docName);\ncorridor= CivilDocument.GetCorridorByName(civilDoc,corName);\nbaseLines= corridor.Baselines;\nflPoints= Baseline.GetFeaturelinePointsByCode(baseLines, FLpCode);\nflPointStations= FeaturelinePoint.Station(flPoints);\npointPair= PointsOrganization.ByFeaturelinePoints(flPoints);",
+      "Code": "civilApplication;\ncivilDoc= CivilApplication.GetDocumentByName(civilApplication,docName);\ncorridor= CivilDocument.GetCorridorByName(civilDoc,corName);\nbaseLines= corridor.Baselines;\nflPoints= Baseline.GetFeaturelinePointsByCode(baseLines, FLpCode);\nflPointStations= FeatureLinePoint.Station(flPoints);\npointPair= PointPair.ByFeaturelinePoints(flPoints);",
       "Id": "f8657709b2c54e5785ed31e27ec8794f",
       "Inputs": [
         {
-          "Id": "3f784dab0bfa4cdfbaab2ad096c9b804",
+          "Id": "c1a18723914c4adeab3ed39aafe35d56",
           "Name": "civilApplication",
           "Description": "civilApplication",
           "UsingDefaultValue": false,
@@ -2683,7 +2691,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "f4b30e81163344d4931b76c60b4a1add",
+          "Id": "34515eb77dce4c11b471b2d3e88bd4b7",
           "Name": "docName",
           "Description": "docName",
           "UsingDefaultValue": false,
@@ -2692,7 +2700,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "48d941cfc0684e36b44c68d8e605d947",
+          "Id": "af496458b7ce40e3ab1a5e9d85e125cb",
           "Name": "corName",
           "Description": "corName",
           "UsingDefaultValue": false,
@@ -2701,7 +2709,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "ba8918f704584c1eb1d997680ab32118",
+          "Id": "fd303b4b0631497e89d542a13a1fc073",
           "Name": "FLpCode",
           "Description": "FLpCode",
           "UsingDefaultValue": false,
@@ -2712,7 +2720,7 @@
       ],
       "Outputs": [
         {
-          "Id": "113bf7be3b794a81b9fa7351e919ae0e",
+          "Id": "eddbef68dd1040f3bfcd3075b32a331b",
           "Name": "",
           "Description": "Value of expression at line 1",
           "UsingDefaultValue": false,
@@ -2721,7 +2729,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "afcc7bf153c24def94847ea016ba6c63",
+          "Id": "f25fcb94721f4bd9bbef03b402ba2c2e",
           "Name": "",
           "Description": "civilDoc",
           "UsingDefaultValue": false,
@@ -2730,7 +2738,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "cfe848b3754c4d8da184ff237a28e9ad",
+          "Id": "d6ad36050aec47a9be6c14c30c47541b",
           "Name": "",
           "Description": "corridor",
           "UsingDefaultValue": false,
@@ -2739,7 +2747,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "c755d36e637e4cedb276a18e972e27b9",
+          "Id": "fd13abd7ef7947f7bf85ffc23229b586",
           "Name": "",
           "Description": "baseLines",
           "UsingDefaultValue": false,
@@ -2748,7 +2756,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "69df40630e8d4528ae65ec32b7e7ca61",
+          "Id": "3c7ae242e82c491c92dc39cad66a5df0",
           "Name": "",
           "Description": "flPoints",
           "UsingDefaultValue": false,
@@ -2757,7 +2765,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "8366f60a0b9144c79141dc30b2577acc",
+          "Id": "89575ff545c24e07be2fecd28f223eed",
           "Name": "",
           "Description": "flPointStations",
           "UsingDefaultValue": false,
@@ -2766,7 +2774,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "b792155f5ff54b709f46bcbc8a0adbd8",
+          "Id": "ce20a3adaa86416889a3a910fa8788d7",
           "Name": "",
           "Description": "pointPair",
           "UsingDefaultValue": false,
@@ -3032,11 +3040,11 @@
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
       "NodeType": "CodeBlockNode",
-      "Code": "itemKeys=x.Keys;\nflPointCodes= x[x.Keys];\nbaseLines;\nlistSegments;\nbaselineList=List.Chop(List.Flatten(List.OfRepeatedItem(baseLines,listSegments))\n,listSegments);\nflPoints=Baseline.GetFeaturelinePointsByCode(baselineList, flPointCodes);\n//flPoints=Baseline.GetFeaturelinesByCodeStation(baselineList, flPointCodes, stationList);\nflPointStations= FeaturelinePoint.Station(flPoints);\npointPair= PointsOrganization.ByFeaturelinePoints(flPoints);\npointPairDict;\nscriptSettingsDict;\nselectionGroups=scriptSettingsDict.Keys;",
+      "Code": "itemKeys=x.Keys;\nflPointCodes= x[x.Keys];\nbaseLines;\nlistSegments;\nbaselineList=List.Chop(List.Flatten(List.OfRepeatedItem(baseLines,listSegments))\n,listSegments);\nflPoints=Baseline.GetFeaturelinePointsByCode(baselineList, flPointCodes);\n//flPoints=Baseline.GetFeaturelinesByCodeStation(baselineList, flPointCodes, stationList);\nflPointStations= FeatureLinePoint.Station(flPoints);\npointPair= PointPair.ByFeaturelinePoints(flPoints);\npointPairDict;\nscriptSettingsDict;\nselectionGroups=scriptSettingsDict.Keys;",
       "Id": "ab556d2a476a4619ba723501c510d822",
       "Inputs": [
         {
-          "Id": "54de055be45a48559ed727bd68b22f79",
+          "Id": "d49b521ca1c34b429fa2c28d94d23aff",
           "Name": "x",
           "Description": "x",
           "UsingDefaultValue": false,
@@ -3045,7 +3053,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "459f3ba559e44699b656a1001850ad5c",
+          "Id": "a817f0a3609d489ebd4474b6cc13a4e6",
           "Name": "baseLines",
           "Description": "baseLines",
           "UsingDefaultValue": false,
@@ -3054,7 +3062,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "24651aec77714325bb55d6d29d722856",
+          "Id": "2981051a265c4f5ba9cbb7b7682b1373",
           "Name": "listSegments",
           "Description": "listSegments",
           "UsingDefaultValue": false,
@@ -3063,7 +3071,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "26473a7e7b714d82abcb43972a24f4f5",
+          "Id": "f594ef72356647e4aaabdf0067de6dee",
           "Name": "pointPairDict",
           "Description": "pointPairDict",
           "UsingDefaultValue": false,
@@ -3072,7 +3080,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "d8011b34b6674f6e93667436af95881b",
+          "Id": "c598a843f187458a8086dfaf573e1518",
           "Name": "scriptSettingsDict",
           "Description": "scriptSettingsDict",
           "UsingDefaultValue": false,
@@ -3083,7 +3091,7 @@
       ],
       "Outputs": [
         {
-          "Id": "ed4d6b6c9820411bb3ac31f63162b279",
+          "Id": "4dc3c22f5253466c9c2ef85f25eeed65",
           "Name": "",
           "Description": "itemKeys",
           "UsingDefaultValue": false,
@@ -3092,7 +3100,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "77071dca74594f05b9b30c11576b1477",
+          "Id": "cbb33936694842cdb31d163063ec3688",
           "Name": "",
           "Description": "flPointCodes",
           "UsingDefaultValue": false,
@@ -3101,7 +3109,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "d1f11f5067a54c388342fc995b795ec5",
+          "Id": "61b21e97d37e4bda85ae65a6b000ac68",
           "Name": "",
           "Description": "Value of expression at line 3",
           "UsingDefaultValue": false,
@@ -3110,7 +3118,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "12e39499640e40388567f5117c37f3fc",
+          "Id": "b357504f54b54620a4e8b77474f6392c",
           "Name": "",
           "Description": "Value of expression at line 4",
           "UsingDefaultValue": false,
@@ -3119,7 +3127,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "b6ab61d62224461785458156b81de925",
+          "Id": "a198b0d563d14659afdfef475257cd30",
           "Name": "",
           "Description": "baselineList",
           "UsingDefaultValue": false,
@@ -3128,7 +3136,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "d91846e3c04447df8ffb6caea36e1c14",
+          "Id": "82bd2e17fc584cf8af0701f81292ffa7",
           "Name": "",
           "Description": "flPoints",
           "UsingDefaultValue": false,
@@ -3137,7 +3145,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "ad489b14e5b340a0a06fa5a5a712f473",
+          "Id": "b3d447b8d5ad4efea706b2aa4022ce99",
           "Name": "",
           "Description": "flPointStations",
           "UsingDefaultValue": false,
@@ -3146,7 +3154,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "0796c4439e2c499ba49169a2ed15dd76",
+          "Id": "3b11b79d54ce4705a5a970948350d578",
           "Name": "",
           "Description": "pointPair",
           "UsingDefaultValue": false,
@@ -3155,7 +3163,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "601ce6a1d6564f2a95fad06afce96645",
+          "Id": "1be7bad752c64337a1d1b9fff966afa5",
           "Name": "",
           "Description": "Value of expression at line 11",
           "UsingDefaultValue": false,
@@ -3164,7 +3172,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "e51dc5293af64e909322d25e75cf5fb2",
+          "Id": "cb97af313d9f4298994fb5808fa256de",
           "Name": "",
           "Description": "Value of expression at line 12",
           "UsingDefaultValue": false,
@@ -3173,7 +3181,7 @@
           "KeepListStructure": false
         },
         {
-          "Id": "c198be08a9bd49cdb4251e392019a89c",
+          "Id": "6f6f64d65ce3499aaadf56b1c98398cb",
           "Name": "",
           "Description": "selectionGroups",
           "UsingDefaultValue": false,
@@ -5894,8 +5902,8 @@
     },
     {
       "Start": "45b7545e85644dbd84d3e58be352637f",
-      "End": "d8011b34b6674f6e93667436af95881b",
-      "Id": "1b510075a0fe4c208b77d73b78a7e3e6"
+      "End": "c598a843f187458a8086dfaf573e1518",
+      "Id": "9e804e7d980547d29cdf8dfc6bc76814"
     },
     {
       "Start": "feb845cad4d0433087b8d575650bfc87",
@@ -6004,23 +6012,23 @@
     },
     {
       "Start": "117e238db18644918ac7277c4980766a",
-      "End": "f4b30e81163344d4931b76c60b4a1add",
-      "Id": "78c13a98a36a4b0a9614abd59b16300f"
+      "End": "34515eb77dce4c11b471b2d3e88bd4b7",
+      "Id": "b79d366d605c428c8143061d65ca52cd"
     },
     {
       "Start": "be52aaf9dae14be5b8084a4f8ce1e09c",
-      "End": "48d941cfc0684e36b44c68d8e605d947",
-      "Id": "49ffefa3fce0462e8351b5f0f306c513"
+      "End": "af496458b7ce40e3ab1a5e9d85e125cb",
+      "Id": "dd9beb2a0c194341b0377d2953a3bde8"
     },
     {
       "Start": "ca58570ee1d248118b52448717e3b1b0",
-      "End": "ba8918f704584c1eb1d997680ab32118",
-      "Id": "d23c2f8e98c5461087f3d48e0650e0b4"
+      "End": "fd303b4b0631497e89d542a13a1fc073",
+      "Id": "63934e2ef9b94b19bd25fa869d986ced"
     },
     {
       "Start": "9de5ba8d78ba4615810644da8f54358c",
-      "End": "3f784dab0bfa4cdfbaab2ad096c9b804",
-      "Id": "71f1f7bc343c41b0afeb5a54c85d9743"
+      "End": "c1a18723914c4adeab3ed39aafe35d56",
+      "Id": "74479a9f01c6432da0926b21d49f021e"
     },
     {
       "Start": "af5f0ede45aa44d8bb808c7284bbfe13",
@@ -6259,33 +6267,33 @@
     },
     {
       "Start": "4e07ba05970b429f8d4f3a66892ac021",
-      "End": "26473a7e7b714d82abcb43972a24f4f5",
-      "Id": "232f8d9da5d34d8b8880612a9548bce6"
+      "End": "f594ef72356647e4aaabdf0067de6dee",
+      "Id": "a074217a4175447698fd5f5a06025290"
     },
     {
       "Start": "a1e7ad4e1eae4424924a2d28dec60c95",
-      "End": "459f3ba559e44699b656a1001850ad5c",
-      "Id": "3cadeb76ccd44501b0e24c76c3dbe6b2"
+      "End": "a817f0a3609d489ebd4474b6cc13a4e6",
+      "Id": "b4be6dbe4d7a4b3eb9294ccf0eebcc32"
     },
     {
-      "Start": "cfe848b3754c4d8da184ff237a28e9ad",
+      "Start": "d6ad36050aec47a9be6c14c30c47541b",
       "End": "6f6c0486e10b4408ade9460832a2ea2e",
-      "Id": "c505e9d6c49a4affb4a66bfbe16229c6"
+      "Id": "af7c8a0d97cd41d5bc550a529c003c9d"
     },
     {
-      "Start": "c755d36e637e4cedb276a18e972e27b9",
+      "Start": "fd13abd7ef7947f7bf85ffc23229b586",
       "End": "4e0e1c3c1a844daa84cb2489528d1ba7",
-      "Id": "4015dca88be943cf9f2e452c6943ac3d"
+      "Id": "3432900846b44b9fbd4ef6814dac3f12"
     },
     {
-      "Start": "8366f60a0b9144c79141dc30b2577acc",
+      "Start": "89575ff545c24e07be2fecd28f223eed",
       "End": "5b4a0a2681244b3a9e209b860b1e06c1",
-      "Id": "df72316efbd748178435b615583e54a6"
+      "Id": "a3bc298156c74ecc9c67a865ece193e4"
     },
     {
-      "Start": "b792155f5ff54b709f46bcbc8a0adbd8",
+      "Start": "ce20a3adaa86416889a3a910fa8788d7",
       "End": "90dfbd836cd241fb8b600c58299a36fe",
-      "Id": "fb493c873ce24b73acfab85a3cd2fa2f"
+      "Id": "6c43d72014344ccda949cd05b98b67b1"
     },
     {
       "Start": "61370f49019742c58b8c803e8cba45e2",
@@ -6333,39 +6341,39 @@
       "Id": "3df868305b9f4198af5928deb6ff6b5e"
     },
     {
-      "Start": "ed4d6b6c9820411bb3ac31f63162b279",
+      "Start": "4dc3c22f5253466c9c2ef85f25eeed65",
       "End": "bac6b29e11d44c45b1efb9a97781a7fc",
-      "Id": "1e1e063b780c42ba931c00bc7b36a60a"
+      "Id": "9ca80cb07c9c452183240c286eea8c1e"
     },
     {
-      "Start": "12e39499640e40388567f5117c37f3fc",
+      "Start": "b357504f54b54620a4e8b77474f6392c",
       "End": "629013268faf419f9be32d0b82711ab1",
-      "Id": "3ac0a13610be4dff9a956dfcb099a8bd"
+      "Id": "4b1db298379745889a07cda1a6c0397b"
     },
     {
-      "Start": "ad489b14e5b340a0a06fa5a5a712f473",
+      "Start": "b3d447b8d5ad4efea706b2aa4022ce99",
       "End": "885642c3083e42ac9962fd6efc015a78",
-      "Id": "8fa06714803a4424a98af82957a4a575"
+      "Id": "1db033bf10d9467cbb6c0219df702bef"
     },
     {
-      "Start": "0796c4439e2c499ba49169a2ed15dd76",
+      "Start": "3b11b79d54ce4705a5a970948350d578",
       "End": "7126680d8d894a80b1cdfebb783120ab",
-      "Id": "5f33853e686f4feda3681c7645576be0"
+      "Id": "9491d5aef72b40d9a5bf941715b97df8"
     },
     {
-      "Start": "601ce6a1d6564f2a95fad06afce96645",
+      "Start": "1be7bad752c64337a1d1b9fff966afa5",
       "End": "e4feab7f962d404bbc9e6621d8d863a4",
-      "Id": "7fc84f9f617e4627875145f65830e9c7"
+      "Id": "eb8baf872dea49e8b19aec03bcdfc350"
     },
     {
-      "Start": "e51dc5293af64e909322d25e75cf5fb2",
+      "Start": "cb97af313d9f4298994fb5808fa256de",
       "End": "7aab74074fcc4555acf49ece19c152f9",
-      "Id": "7598b6890e184f75b394d529be09d86a"
+      "Id": "b5deef775d7f4d208ec6f4e4d05bf7ba"
     },
     {
-      "Start": "c198be08a9bd49cdb4251e392019a89c",
+      "Start": "6f6f64d65ce3499aaadf56b1c98398cb",
       "End": "5c3a02dc37844f258601a390f8360c3c",
-      "Id": "a8f50fa57a92456ea0105f704a348ab8"
+      "Id": "d9797786286a48b799738d0547275aaa"
     },
     {
       "Start": "478f0c5267e44dc39b5db2756060560b",
@@ -6769,13 +6777,13 @@
     },
     {
       "Start": "296a1c912eb64a2c8c58cb2727e1b373",
-      "End": "54de055be45a48559ed727bd68b22f79",
-      "Id": "91376734865a41d789021e901f6c4737"
+      "End": "d49b521ca1c34b429fa2c28d94d23aff",
+      "Id": "9cce7fa8de3c42a58f4e6a57bd6b6e21"
     },
     {
       "Start": "c4ba757735eb4a6d9b9f0f8c315cc958",
-      "End": "24651aec77714325bb55d6d29d722856",
-      "Id": "103e24ce3cf94be0b7e675a44f461074"
+      "End": "2981051a265c4f5ba9cbb7b7682b1373",
+      "Id": "56354ca201064c8dacc4395384869789"
     },
     {
       "Start": "c8227c9c3bc74fd48b946642041e0731",
@@ -7192,8 +7200,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -24297.007713327526,
-        "Y": -11857.713285271038
+        "X": -24220.193556036287,
+        "Y": -11840.302076285025
       },
       {
         "ShowGeometry": true,
@@ -7202,8 +7210,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -24396.768896842183,
-        "Y": -11968.200532995632
+        "X": -24467.437921550121,
+        "Y": -11989.708497037178
       },
       {
         "ShowGeometry": true,
@@ -7412,8 +7420,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -23979.775179437398,
-        "Y": -11959.879814852129
+        "X": -23913.202909784995,
+        "Y": -11971.145891254844
       },
       {
         "ShowGeometry": true,
@@ -7592,8 +7600,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -13422.732200467217,
-        "Y": -11690.599527799224
+        "X": -13526.737557309614,
+        "Y": -11727.56010915644
       },
       {
         "ShowGeometry": true,
@@ -8293,7 +8301,7 @@
         "Height": 888.52993998472084,
         "FontSize": 48.0,
         "InitialTop": -11698.821039468341,
-        "InitialHeight": 754.42069380014073,
+        "InitialHeight": 757.52993998472084,
         "TextblockHeight": 58.0,
         "Background": "#FF848484"
       },
@@ -8313,12 +8321,12 @@
           "a1add7da0edf4c7bb0043a6410beeddf"
         ],
         "Left": -24567.496338295365,
-        "Top": -12021.200532995632,
+        "Top": -12042.708497037178,
         "Width": 3188.8988939532974,
-        "Height": 438.04210200883608,
+        "Height": 459.55006605038216,
         "FontSize": 36.0,
-        "InitialTop": -11968.200532995632,
-        "InitialHeight": 411.04210200883608,
+        "InitialTop": -11989.708497037178,
+        "InitialHeight": 432.55006605038216,
         "TextblockHeight": 43.0,
         "Background": "#FFFFAA45"
       },
@@ -8411,12 +8419,12 @@
           "4e44f429cea8453b9e49380f79bd43e2"
         ],
         "Left": -15309.392461025836,
-        "Top": -11743.599527799224,
+        "Top": -11780.56010915644,
         "Width": 3772.2071552384514,
-        "Height": 708.47450560507059,
+        "Height": 745.43508696228673,
         "FontSize": 36.0,
-        "InitialTop": -11690.599527799224,
-        "InitialHeight": 681.47450560507059,
+        "InitialTop": -11727.56010915644,
+        "InitialHeight": 718.43508696228673,
         "TextblockHeight": 43.0,
         "Background": "#FFFFC999"
       },
@@ -8744,8 +8752,8 @@
         "Background": "#FFC1D676"
       }
     ],
-    "X": 22537.373129413598,
-    "Y": 7327.5326904149088,
-    "Zoom": 0.58954038957271737
+    "X": 2276.001468615656,
+    "Y": 1746.8934724633868,
+    "Zoom": 0.11990135684439876
   }
 }

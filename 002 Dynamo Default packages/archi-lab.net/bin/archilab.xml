@@ -452,10 +452,10 @@
         </member>
         <member name="M:archilab.Lists.Lists.DuplicateItemIndicies(System.Collections.Generic.List{System.Object})">
             <summary>
-            Returns a list of Duplicate item indices as well as unique item indices.
+            Returns a list of Duplicate item indicies as well as unique item indicies.
             </summary>
             <param name="list">List of items to analyze.</param>
-            <returns>List of Unique and Duplicate item indices.</returns>
+            <returns>List of Unique and Duplicate item indicies.</returns>
         </member>
         <member name="M:archilab.Lists.Lists.ReplaceItemAtIndex(System.Collections.Generic.List{System.Object},System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Object})">
             <summary>
@@ -487,31 +487,6 @@
             <param name="x"></param>
             <param name="y"></param>
             <returns></returns>
-        </member>
-        <member name="T:archilab.Pdf.PDF">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:archilab.Pdf.PDF.PageCount(System.String)">
-            <summary>
-            Returns page count of a PDF document.
-            </summary>
-            <param name="filePath">File Path to a PDF document.</param>
-            <returns>Number of pages in the PDF.</returns>
-        </member>
-        <member name="T:archilab.Revit.Elements.AppearanceAssets">
-            <summary>
-            Appearance Asset wrapper class.
-            </summary>
-        </member>
-        <member name="M:archilab.Revit.Elements.AppearanceAssets.SetDiffuseColor(Revit.Elements.Element,DSCore.Color)">
-            <summary>
-            Sets the Diffuse Color property for the Appearance Asset inside of the Material.
-            </summary>
-            <param name="appearanceAsset">Appearance Asset to set the color for.</param>
-            <param name="color">Color that property will be set to.</param>
-            <returns>Appearance Asset with the adjusted color property.</returns>
         </member>
         <member name="T:archilab.Revit.Elements.Elements">
             <summary>
@@ -548,29 +523,6 @@
             <returns></returns>
             <search>delete, remove, element</search>
         </member>
-        <member name="M:archilab.Revit.Elements.Elements.IsVisible(Revit.Elements.Element,Revit.Elements.Views.View)">
-            <summary>
-            Checks whether an Element is visible in given View. 
-            </summary>
-            <param name="element">Element to check.</param>
-            <param name="view">View to check visibility in.</param>
-            <returns>True if Element is visible in View, otherwise false.</returns>
-        </member>
-        <member name="M:archilab.Revit.Elements.Elements.OwnerView(Revit.Elements.Element)">
-            <summary>
-            
-            </summary>
-            <param name="element"></param>
-            <returns></returns>
-        </member>
-        <member name="M:archilab.Revit.Elements.Elements.BoundingBox(Revit.Elements.Element,Revit.Elements.Views.View)">
-            <summary>
-            
-            </summary>
-            <param name="element"></param>
-            <param name="view"></param>
-            <returns></returns>
-        </member>
         <member name="T:archilab.Revit.Elements.ElementTypes">
             <summary>
             Methods and properties typically associated with Element Types in Revit
@@ -603,156 +555,6 @@
             <param name="line">Line to place Family Instance at.</param>
             <param name="level">Level to associate Family Instance with.</param>
             <returns>New Family Instance.</returns>
-        </member>
-        <member name="T:archilab.Revit.Elements.ImageInstances">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:archilab.Revit.Elements.ImageInstances.InternalElement">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:archilab.Revit.Elements.ImageInstances.Create(Revit.Elements.Views.View,archilab.Revit.Elements.ImageTypes,archilab.Revit.Elements.ImagePlacementOptions)">
-            <summary>
-            
-            </summary>
-            <param name="view"></param>
-            <param name="imageType"></param>
-            <param name="imagePlacementOptions"></param>
-            <returns></returns>
-        </member>
-        <member name="T:archilab.Revit.Elements.ImagePlacementOptions">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:archilab.Revit.Elements.ImagePlacementOptions.#ctor(Autodesk.Revit.DB.ImagePlacementOptions)">
-            <summary>
-            
-            </summary>
-            <param name="ipo"></param>
-        </member>
-        <member name="M:archilab.Revit.Elements.ImagePlacementOptions.Create(Autodesk.DesignScript.Geometry.Point,System.String)">
-            <summary>
-            
-            </summary>
-            <param name="location"></param>
-            <param name="boxPlacementType"></param>
-            <returns></returns>
-        </member>
-        <member name="T:archilab.Revit.Elements.ImageTypeOptions">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:archilab.Revit.Elements.ImageTypeOptions.#ctor(Autodesk.Revit.DB.ImageTypeOptions)">
-            <summary>
-            
-            </summary>
-            <param name="ito"></param>
-        </member>
-        <member name="M:archilab.Revit.Elements.ImageTypeOptions.Create(System.String)">
-            <summary>
-            Creates Image Type Options for image import.
-            </summary>
-            <param name="filePath">File path to Image.</param>
-            <returns>Image Type Options object.</returns>
-        </member>
-        <member name="M:archilab.Revit.Elements.ImageTypeOptions.Create(System.String,System.Double,System.Int32)">
-            <summary>
-            Creates Image Type Options for image/pdf import.
-            </summary>
-            <param name="filePath">File path to image/PDF.</param>
-            <param name="resolution">Optional resolution.</param>
-            <param name="pageNumber">Optional page number if PDF has more than one page.</param>
-            <returns>Image Type Option object.</returns>
-        </member>
-        <member name="P:archilab.Revit.Elements.ImageTypeOptions.PageNumber">
-            <summary>
-            Retrieves Page Number that options are set to.
-            </summary>
-        </member>
-        <member name="P:archilab.Revit.Elements.ImageTypeOptions.Resolution">
-            <summary>
-            Retrieves Resolution that options are set to.
-            </summary>
-        </member>
-        <member name="P:archilab.Revit.Elements.ImageTypeOptions.FilePath">
-            <summary>
-            Retrieves File Path that options are set to.
-            </summary>
-        </member>
-        <member name="T:archilab.Revit.Elements.ImageTypes">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:archilab.Revit.Elements.ImageTypes.#ctor(Autodesk.Revit.DB.ImageType)">
-            <summary>
-            
-            </summary>
-            <param name="ito"></param>
-        </member>
-        <member name="M:archilab.Revit.Elements.ImageTypes.Create(archilab.Revit.Elements.ImageTypeOptions,System.Boolean)">
-            <summary>
-            Creates a new Image Type import object.
-            </summary>
-            <param name="imageTypeOptions">Image Type Options object.</param>
-            <param name="reload">If true reload existing document, otherwise create new one.</param>
-            <returns>Image Type object.</returns>
-        </member>
-        <member name="P:archilab.Revit.Elements.ImageTypes.PageNumber">
-            <summary>
-            Retrieves Page Number that import was created from.
-            </summary>
-        </member>
-        <member name="P:archilab.Revit.Elements.ImageTypes.FilePath">
-            <summary>
-            Retrieves File Path that import was created from.
-            </summary>
-        </member>
-        <member name="T:archilab.Revit.Elements.LineStyles">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:archilab.Revit.Elements.LineStyles.SetColor(System.String,DSCore.Color)">
-            <summary>
-            
-            </summary>
-            <param name="lineStyle"></param>
-            <param name="color"></param>
-            <returns></returns>
-        </member>
-        <member name="T:archilab.Revit.Elements.Materials">
-            <summary>
-            Material wrapper class.
-            </summary>
-        </member>
-        <member name="M:archilab.Revit.Elements.Materials.Assets(Revit.Elements.Material)">
-            <summary>
-            Retrieves default Assets that Material can have. 
-            </summary>
-            <param name="material">Material to retrieve the assets from.</param>
-            <returns>Assets if set for the Material.</returns>
-        </member>
-        <member name="M:archilab.Revit.Elements.Materials.UseRenderAppearanceForShading(Revit.Elements.Material,System.Boolean)">
-            <summary>
-            Sets the checkbox property on the Material that would force the Appearance Color to be used for Shading display in Revit.
-            </summary>
-            <param name="material">Material to set the property for.</param>
-            <param name="check">True if checkbox is to be checked, otherwise false.</param>
-            <returns>Material with the adjusted property.</returns>
-        </member>
-        <member name="M:archilab.Revit.Elements.Materials.SetColor(Revit.Elements.Material,DSCore.Color)">
-            <summary>
-            Sets the color of the Material.
-            </summary>
-            <param name="material">Material to set the Color for.</param>
-            <param name="color">Color to set the Material to.</param>
-            <returns>Material with the adjusted color.</returns>
         </member>
         <member name="T:archilab.Revit.Elements.Parameter">
             <summary>
@@ -828,7 +630,7 @@
             </summary>
             <param name="schema">Schema to delete.</param>
             <param name="overridePermissions">Normally Schema can only be edited by user with access permissions.
-            Set this to true to override default access and force deletion of this Schema.</param>
+            Set this to true to override default access and force deletion of this Scheama.</param>
         </member>
         <member name="M:archilab.Revit.Elements.Schema.WriteAccessGranted(archilab.Revit.Elements.Schema)">
             <summary>
@@ -863,79 +665,6 @@
             <summary>
             Override for Schema display (Watch Node).
             </summary>
-            <returns></returns>
-        </member>
-        <member name="T:archilab.Revit.Elements.Tags">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:archilab.Revit.Elements.Tags.IsOrphaned(Revit.Elements.Element)">
-            <summary>
-            
-            </summary>
-            <param name="tag"></param>
-            <returns></returns>
-        </member>
-        <member name="M:archilab.Revit.Elements.Tags.TagText(Revit.Elements.Element)">
-            <summary>
-            
-            </summary>
-            <param name="tag"></param>
-            <returns></returns>
-        </member>
-        <member name="M:archilab.Revit.Elements.Tags.TagHeadPosition(Revit.Elements.Element)">
-            <summary>
-            
-            </summary>
-            <param name="tag"></param>
-            <returns></returns>
-        </member>
-        <member name="M:archilab.Revit.Elements.Tags.IsMaterialTag(Revit.Elements.Element)">
-            <summary>
-            
-            </summary>
-            <param name="tag"></param>
-            <returns></returns>
-        </member>
-        <member name="M:archilab.Revit.Elements.Tags.OwnerView(Revit.Elements.Element)">
-            <summary>
-            
-            </summary>
-            <param name="tag"></param>
-            <returns></returns>
-        </member>
-        <member name="M:archilab.Revit.Elements.Tags.OwnerView(System.Int32)">
-            <summary>
-            
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:archilab.Revit.Elements.Tags.IsTaggingLinkDoc(System.Int32)">
-            <summary>
-            
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:archilab.Revit.Elements.Tags.IsOrphaned(System.Int32)">
-            <summary>
-            
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="T:archilab.Revit.Elements.TextNotes">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:archilab.Revit.Elements.TextNotes.Width(Revit.Elements.Element)">
-            <summary>
-            
-            </summary>
-            <param name="textNote"></param>
             <returns></returns>
         </member>
         <member name="T:archilab.Revit.Elements.ViewFilter">
@@ -1088,14 +817,6 @@
             <param name="name"></param>
             <returns></returns>
         </member>
-        <member name="M:archilab.Revit.Elements.Workset.Rename(archilab.Revit.Elements.Workset,System.String)">
-            <summary>
-            
-            </summary>
-            <param name="workset"></param>
-            <param name="name"></param>
-            <returns></returns>
-        </member>
         <member name="M:archilab.Revit.Elements.Workset.GetAll">
             <summary>
             Retrieves all user created Worksets.
@@ -1127,12 +848,6 @@
             <summary>
             Collection of various selection nodes. 
             </summary>
-        </member>
-        <member name="M:archilab.Revit.Selection.Select.GetDocuments">
-            <summary>
-            Retrieves all Link Documents and their Names/Paths.
-            </summary>
-            <returns>Link Documents, Link Names, Link Instances and Link Paths.</returns>
         </member>
         <member name="M:archilab.Revit.Selection.Select.GetRoomAtPoint(Autodesk.DesignScript.Geometry.Point)">
             <summary>
@@ -1177,14 +892,14 @@
         </member>
         <member name="M:archilab.Revit.Selection.Select.ByElementId(System.Object)">
             <summary>
-            Select Element by Id
+                Select Element by Id
             </summary>
             <param name="id">ElementId, String, Guid or Integer id of the element.</param>
             <returns name="Element">Found element or null.</returns>
         </member>
         <member name="M:archilab.Revit.Selection.Select.ByCategoryAndLevel(Revit.Elements.Category,Revit.Elements.Element)">
             <summary>
-            Select Elements by Level and Category.
+                Select Elements by Level and Category.
             </summary>
             <param name="category">Category to filter for.</param>
             <param name="level">Level to filter for.</param>
@@ -1206,9 +921,9 @@
             <param name="view">View to filter for.</param>
             <returns name="Element">Element.</returns>
         </member>
-        <member name="M:archilab.Revit.Selection.Select.ByParameterValue(System.Type,System.String,System.Object,System.Object,System.String)">
+        <member name="M:archilab.Revit.Selection.Select.ByParamterValue(System.Type,System.String,System.Object,System.Object,System.String)">
             <summary>
-            Parameter value filter.
+                Parameter value filter.
             </summary>
             <param name="elementType"></param>
             <param name="parameterName"></param>
@@ -1220,80 +935,6 @@
         <member name="M:archilab.Revit.Selection.Select.GetNull">
             <summary>
             Get Null
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:archilab.Revit.Units.UnitUtils">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:archilab.Revit.Units.UnitUtils.ConvertFromInternalUnits(System.Double,System.String)">
-            <summary>
-            
-            </summary>
-            <param name="value"></param>
-            <param name="displayUnitType"></param>
-            <returns></returns>
-        </member>
-        <member name="M:archilab.Revit.Units.UnitUtils.Format(archilab.Revit.Units.Units,System.String,System.Double,System.Boolean,System.Boolean)">
-            <summary>
-            
-            </summary>
-            <param name="units"></param>
-            <param name="unitType"></param>
-            <param name="value"></param>
-            <param name="maxAccuracy"></param>
-            <param name="forEditing"></param>
-            <returns></returns>
-        </member>
-        <member name="T:archilab.Revit.Units.FormatOptions">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:archilab.Revit.Units.FormatOptions.#ctor(Autodesk.Revit.DB.DisplayUnitType)">
-            <summary>
-            
-            </summary>
-            <param name="dut"></param>
-        </member>
-        <member name="M:archilab.Revit.Units.FormatOptions.Create(System.String)">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:archilab.Revit.Units.Units">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:archilab.Revit.Units.Units.#ctor(Autodesk.Revit.DB.Units)">
-            <summary>
-            
-            </summary>
-            <param name="units"></param>
-        </member>
-        <member name="M:archilab.Revit.Units.Units.Create(System.String)">
-            <summary>
-            
-            </summary>
-            <param name="unitSystem"></param>
-            <returns></returns>
-        </member>
-        <member name="M:archilab.Revit.Units.Units.SetFormatOptions(archilab.Revit.Units.Units,System.String,archilab.Revit.Units.FormatOptions)">
-            <summary>
-            
-            </summary>
-            <param name="units"></param>
-            <param name="unitType"></param>
-            <param name="formatOptions"></param>
-            <returns></returns>
-        </member>
-        <member name="M:archilab.Revit.Units.Units.GetInternal">
-            <summary>
-            
             </summary>
             <returns></returns>
         </member>
@@ -1340,7 +981,7 @@
             <param name="views">List of Views.</param>
             <param name="name">Name of the View Set.</param>
             <param name="replace">Override existing View Set with same name.</param>
-            <returns>View Sheet Set.</returns>
+            <returns>True if succeeded, otherwise false.</returns>
         </member>
         <member name="T:archilab.Revit.Views.Sheets">
             <summary>
@@ -1358,15 +999,6 @@
             </summary>
             <param name="sheet">View Sheet.</param>
             <returns name="Element">Revisions on Sheet.</returns>
-        </member>
-        <member name="M:archilab.Revit.Views.Sheets.GetRevisionNumberOnSheet(Revit.Elements.Views.Sheet,Revit.Elements.Element)">
-            <summary>
-            Retrieves Revision Number that given Revision has on a Sheet.
-            This comes handy when Revision Numbers are set to vary per Sheet. 
-            </summary>
-            <param name="sheet">View Sheet.</param>
-            <param name="revision">Revision to get the number for.</param>
-            <returns name="number">Revision Number on a Sheet.</returns>
         </member>
         <member name="M:archilab.Revit.Views.Sheets.Viewports(Revit.Elements.Views.Sheet)">
             <summary>
@@ -1397,7 +1029,7 @@
         </member>
         <member name="M:archilab.Revit.Views.Views.RemoveFilter(Revit.Elements.Views.View,System.Collections.Generic.List{Revit.Elements.Element})">
             <summary>
-            Remove view filter from view.
+                Remove view filter from view.
             </summary>
             <param name="view">View to remove view filter from.</param>
             <param name="viewFilter">View filter to be removed.</param>
@@ -1406,7 +1038,7 @@
         </member>
         <member name="M:archilab.Revit.Views.Views.ViewTemplate(Revit.Elements.Views.View)">
             <summary>
-            Get View Template applied to view.
+                Get View Template applied to view.
             </summary>
             <param name="view">View to retrieve View Template from.</param>
             <returns name="view">View Template applied to view.</returns>
@@ -1414,7 +1046,7 @@
         </member>
         <member name="M:archilab.Revit.Views.Views.SetViewTemplate(Revit.Elements.Views.View,Revit.Elements.Views.View)">
             <summary>
-            Set View Template for a View.
+                Set View Template for a View.
             </summary>
             <param name="view">View that template will be applied to.</param>
             <param name="viewTemplate">View Template that will be applied to View.</param>
@@ -1423,7 +1055,7 @@
         </member>
         <member name="M:archilab.Revit.Views.Views.RemoveViewTemplate(Revit.Elements.Views.View)">
             <summary>
-            Removes View Template from given view.
+                Removes View Template from given view.
             </summary>
             <param name="view">View to remove View Template from.</param>
             <returns name="view">View that template was removed from.</returns>
@@ -1431,7 +1063,7 @@
         </member>
         <member name="M:archilab.Revit.Views.Views.GetByType(System.String)">
             <summary>
-            Get all views by type.
+                Get all views by type.
             </summary>
             <param name="viewType">View type to retrieve all views for. If View Template selected, 
             3D View Templates will be excluded from returned View Templates (currently a Dynamo limitation).</param>
@@ -1440,18 +1072,10 @@
         </member>
         <member name="M:archilab.Revit.Views.Views.IsTitleblockSchedule(Revit.Elements.Element)">
             <summary>
-            Check if Schedule is Titleblock Schedule.
+                Check if Schedule is Titleblock Schedule.
             </summary>
             <param name="view"></param>
             <returns></returns>
-        </member>
-        <member name="M:archilab.Revit.Views.Views.IsOnSheet(Revit.Elements.Views.View)">
-            <summary>
-            Check if View is placed on a Sheet.
-            </summary>
-            <param name="view">View to check.</param>
-            <returns>True if View is on Sheet, otherwise False.</returns>
-            <search>isOnSheet, is on sheet</search>
         </member>
         <member name="M:archilab.Revit.Views.Views.SetWorksetVisibility(Revit.Elements.Views.View,System.Collections.Generic.List{archilab.Revit.Elements.Workset},System.String)">
             <summary>
@@ -1468,7 +1092,7 @@
             </summary>
             <param name="view">View to duplicate.</param>
             <param name="name">Name to be assigned to new view.</param>
-            <param name="options">Duplicate options. Ex: Duplicate as Dependent.</param>
+            <param name="options">Duplicate options. Ex: Duplicate as Dependant.</param>
             <returns name="view">New View.</returns>
         </member>
         <member name="M:archilab.Revit.Views.Views.CreateCallout(Revit.Elements.Views.View,Revit.Elements.Element,Autodesk.DesignScript.Geometry.Rectangle)">
@@ -1480,47 +1104,9 @@
             <param name="extents"></param>
             <returns></returns>
         </member>
-        <member name="M:archilab.Revit.Views.Views.CreateReferenceCallout(Revit.Elements.Views.View,Revit.Elements.Views.View,Autodesk.DesignScript.Geometry.Rectangle)">
-            <summary>
-            
-            </summary>
-            <param name="view"></param>
-            <param name="referenceView"></param>
-            <param name="extents"></param>
-            <returns></returns>
-        </member>
-        <member name="M:archilab.Revit.Views.Views.ChangeReferencedView(Revit.Elements.Element,Revit.Elements.Views.View)">
-            <summary>
-            
-            </summary>
-            <param name="callout"></param>
-            <param name="reference"></param>
-            <returns></returns>
-        </member>
-        <member name="M:archilab.Revit.Views.Views.GetReferenceCallouts(Revit.Elements.Views.View)">
-            <summary>
-            
-            </summary>
-            <param name="view"></param>
-            <returns></returns>
-        </member>
-        <member name="M:archilab.Revit.Views.Views.Outline(Revit.Elements.Views.View)">
-            <summary>
-            
-            </summary>
-            <param name="view"></param>
-            <returns></returns>
-        </member>
-        <member name="M:archilab.Revit.Views.Views.CropBox(Revit.Elements.Views.View)">
-            <summary>
-            
-            </summary>
-            <param name="view"></param>
-            <returns></returns>
-        </member>
         <member name="M:archilab.Revit.Views.Views.GetNull">
             <summary>
-            Get Null
+                Get Null
             </summary>
             <returns></returns>
         </member>

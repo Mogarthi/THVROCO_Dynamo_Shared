@@ -202,11 +202,12 @@
             <param name="f"></param>
             <returns></returns>
         </member>
-        <member name="M:CivilConnection.Alignment.GetCurves">
+        <member name="M:CivilConnection.Alignment.GetCurves(System.Double)">
             <summary>
             Returns the list of Dynamo curves that defines the Alignment.
             </summary>
-            <returns>A list of lines and arcs that decribe the Alignment.</returns>
+            <param name="tessellation">The length of the tessellation for spirals, by default is 1 unit.</param>
+            <returns>A list of curves that represent the Alignment.</returns>
             <remarks>The tool returns only lines and arcs.</remarks>
         </member>
         <member name="M:CivilConnection.Alignment.SortCurves(System.Collections.Generic.IList{Autodesk.DesignScript.Geometry.Curve})">
@@ -254,34 +255,6 @@
             <returns>
             A <see cref="T:System.String" /> that represents this instance.
             </returns>
-            
-        </member>
-        <member name="M:CivilConnection.Alignment.PointGroupsByInterval(System.Double,System.Double,System.Double,System.Double,System.Double)">
-            <summary>
-            Returns the list of Dynamo points in groups at an interval along an Alignment. A pointgroup contains 2 points.
-            </summary>
-            <param name="StartStation">The station along the alignment to start creating the points at.</param>
-            <param name="EndStation"> The station along the alignment to end the calculation of points.</param>
-            <param name="Elevation"> The elevation of the created points.</param>
-            <param name="Distance"> The distance between the two points in the group.</param>
-            <param name="Interval">The interval between the groups</param>
-            <returns>A dictionary of a list of points, grouped by pairs. The key of each group is the midstation between the 2 points of each group.</returns>
-            <remarks>The distance and interval are chord distances.</remarks>
-            
-        </member>
-        <member name="M:CivilConnection.Alignment.PointGroupsByDoubleInterval(System.Double,System.Double,System.Double,System.Double,System.Double,System.Int32,System.Double)">
-            <summary>
-            Returns the list of Dynamo points in nested groups (inner and outer) at 2 intervals along Alignment.
-            </summary>
-            <param name="StartStation">The station along the alignment to start creating the points at.</param>
-            <param name="EndStation"> The station along the alignment to end the calculation of points.</param>
-            <param name="Elevation"> The elevation of the created points.</param>
-            <param name="Distance"> The distance between the two points of the group.</param>
-            <param name="InnerInterval">The distance between the groups of  points</param>
-            <param name="NumberOfMinorGroups">The number of inner groups in an outer group.</param>
-            <param name="OuterInterval">The distance between the outer groups.</param>
-            <returns>A list of points that decribe the Alignment.</returns>
-            <remarks>The tool returns only lines and arcs.</remarks>
         </member>
         <member name="T:CivilConnection.AppliedAssembly">
             <summary>
@@ -473,9 +446,9 @@
             <returns>A list of PolyCurves for each BaselineRegion.</returns>
             <remarks>In case of large dataset, the Geometry Working Range wiill return a warning. Set the Geometry Working Range to Medium.</remarks>
         </member>
-        <member name="M:CivilConnection.Baseline.OffsetAlignment">
+        <member name="M:CivilConnection.Baseline.GetOffsetAlignment">
             <summary>
-            Returns the Offset Alignment names.
+            Returns the Offset Alignment name.
             </summary>
             <returns>The names of the offset Alignments, otherwise "None".</returns>
         </member>
@@ -566,15 +539,6 @@
             </summary>
             <param name="code"></param>
             <returns></returns>
-        </member>
-        <member name="M:CivilConnection.Baseline.GetFeaturelinePointsByCode(System.String)">
-            <summary>
-            Gets the points of a corridor featurelines by code organized by: Baseline &gt; Region
-            </summary>
-            <param name="code">the Featurelines code.</param>
-            <returns>
-            A list of featureline points grouped by line.
-            </returns>
         </member>
         <member name="M:CivilConnection.Baseline.ToString">
             <summary>
@@ -744,12 +708,12 @@
             <param name="curve">The curve.</param>
             <returns>It Uses the start and end Points of the curve to create the CableTray</returns>
         </member>
-        <member name="M:CivilConnection.MEP.CableTray.ByPolyCurve(Revit.Elements.Element,Autodesk.DesignScript.Geometry.PolyCurve,System.Double)">
+        <member name="M:CivilConnection.MEP.CableTray.ByPolyCurve_(Revit.Elements.Element,Autodesk.DesignScript.Geometry.PolyCurve,System.Double)">
             <summary>
             Creates a set of CableTrays following a PolyCurve specifying a maximum length.
             </summary>
             <param name="CableTrayType">The CableTray type.</param>
-            <param name="polyCurve">The PolyCurve to follow.</param>
+            <param name="polyCurve">The PolyCurve to follow in WCS.</param>
             <param name="maxLength">The maximum length of the CableTrays following the PolyCurve.</param>
             <returns></returns>
         </member>
@@ -758,8 +722,8 @@
             Creates a CableTray by two Points.
             </summary>
             <param name="cableTrayType">Type of the cable tray.</param>
-            <param name="start">The start Point.</param>
-            <param name="end">The end Point.</param>
+            <param name="start">The start Point in WCS.</param>
+            <param name="end">The end Point in WCS.</param>
             <returns></returns>
         </member>
         <member name="M:CivilConnection.MEP.CableTray.ByRevitElement(Revit.Elements.Element)">
@@ -879,7 +843,7 @@
             Creates a list of Conduits from a PolyCurve.
             </summary>
             <param name="conduitType">Type of the conduit.</param>
-            <param name="polyCurve">The poly curve.</param>
+            <param name="polyCurve">The poly curvein WCS.</param>
             <param name="maxLength">The maximum length.</param>
             <param name="featureline">The featureline.</param>
             <returns></returns>
@@ -1910,6 +1874,15 @@
             The List of Points
             </returns>
         </member>
+        <member name="M:CivilConnection.CivilSurface.GetPointsAlongLine(System.Collections.Generic.List{Autodesk.DesignScript.Geometry.Line})">
+            <summary>
+            Gets all surface points along line
+            </summary>
+            <param name="lines">The lines to process</param>
+            <returns>
+            The List of Points
+            </returns>
+        </member>
         <member name="M:CivilConnection.CivilSurface.GetSurfacePoints">
             <summary>
             Get all surface points
@@ -1953,6 +1926,22 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CivilConnection.CivilSurface.GetTrianglesSurfaces(System.String,System.Boolean)">
+            <summary>
+            Gets all the triangle surfaces in a CivilSurface via LandXML
+            </summary>
+            <param name="landXMLpath">The path to the LandXML that contains the surface export</param>
+            <param name="onlyVisible">Processes only the visible faces</param>
+            <returns></returns>
+        </member>
+        <member name="M:CivilConnection.CivilSurface.GetFacesSurfaces(System.String,System.Boolean)">
+            <summary>
+            Gets all the triangle faces in a CivilSurface via LandXML
+            </summary>
+            <param name="landXMLpath">The path to the LandXML that contains the surface export</param>
+            <param name="onlyVisible">Processes only the visible faces</param>
+            <returns></returns>
+        </member>
         <member name="M:CivilConnection.CivilSurface.JoinSurfaces(System.Collections.Generic.IList{Autodesk.DesignScript.Geometry.Surface},System.Int32)">
             <summary>
             Joins the surfaces recursively into a Polysurface
@@ -1960,6 +1949,16 @@
             <param name="surfaces">The surfaces to join</param>
             <param name="limit">The amount of surfaces to join with recursion</param>
             <returns></returns>
+        </member>
+        <member name="M:CivilConnection.CivilSurface.GetIntersectionPoint(Autodesk.DesignScript.Geometry.Point,Autodesk.DesignScript.Geometry.Vector)">
+            <summary>
+            Get intersection point between the line with start point and direction on the surface 
+            </summary>
+            <param name="point">The point to process</param>
+            <param name="vector">The direction vector</param>
+            <returns>
+            The intersection point
+            </returns>
         </member>
         <member name="M:CivilConnection.CivilSurface.ToString">
             <summary>
@@ -1972,7 +1971,7 @@
         <member name="T:CivilConnection.Corridor">
             <summary>
             Corridor obejct type.
-            </summary>  
+            </summary>
         </member>
         <member name="F:CivilConnection.Corridor._corridor">
             <summary>
@@ -2065,26 +2064,6 @@
             <summary>
             Gets the corridor surfaces.
             </summary>
-            <returns></returns>
-        </member>
-        <member name="M:CivilConnection.Corridor.GetPointsByCode1(System.String)">
-            <summary>
-            Gets the points by code1.
-            </summary>
-            <param name="code">The code.</param>
-            <returns></returns>
-        </member>
-        <member name="M:CivilConnection.Corridor.GetFeatureLinePoints">
-            <summary>
-            Gets the feature line points.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:CivilConnection.Corridor.GetFeaturelinesByCode_Old1(System.String)">
-            <summary>
-            Gets the featurelines by Code &gt; Baseline &gt; Region.
-            </summary>
-            <param name="code">The code.</param>
             <returns></returns>
         </member>
         <member name="M:CivilConnection.Corridor.GetShapesFromXML">
@@ -2390,33 +2369,12 @@
             A <see cref="T:System.String" /> that represents this instance.
             </returns>
         </member>
-        <member name="T:CivilConnection.FeaturelinePoint">
+        <member name="T:CivilConnection.FeatureLinePoint">
             <summary>
             FeaturelinePoint obejct type.
             </summary>
         </member>
-        <member name="F:CivilConnection.FeaturelinePoint._baseline">
-            <summary>
-            The baseline
-            </summary>
-        </member>
-        <member name="F:CivilConnection.FeaturelinePoint._code">
-            <summary>
-            The code
-            </summary>
-        </member>
-        <member name="F:CivilConnection.FeaturelinePoint._position">
-            <summary>
-            The position
-            </summary>
-        </member>
-        <member name="F:CivilConnection.FeaturelinePoint._station">
-            <summary>
-            The station
-            </summary>
-        </member>
-        <!-- Badly formed XML comment ignored for member "F:CivilConnection.FeaturelinePoint._cs" -->
-        <member name="P:CivilConnection.FeaturelinePoint.Baseline">
+        <member name="P:CivilConnection.FeatureLinePoint.Baseline">
             <summary>
             Gets the baseline.
             </summary>
@@ -2424,7 +2382,7 @@
             The baseline.
             </value>
         </member>
-        <member name="P:CivilConnection.FeaturelinePoint.Code">
+        <member name="P:CivilConnection.FeatureLinePoint.Code">
             <summary>
             Gets the code.
             </summary>
@@ -2432,7 +2390,7 @@
             The code.
             </value>
         </member>
-        <member name="P:CivilConnection.FeaturelinePoint.Position">
+        <member name="P:CivilConnection.FeatureLinePoint.Position">
             <summary>
             Gets the position.
             </summary>
@@ -2440,7 +2398,7 @@
             XYZ arraty of the position.
             </value>
         </member>
-        <member name="P:CivilConnection.FeaturelinePoint.Station">
+        <member name="P:CivilConnection.FeatureLinePoint.Station">
             <summary>
             Gets the station.
             </summary>
@@ -2448,19 +2406,18 @@
             The station.
             </value>
         </member>
-        <member name="P:CivilConnection.FeaturelinePoint.CoordinateSystem">
+        <member name="P:CivilConnection.FeatureLinePoint.CoordinateSystem">
             <summary>
              Get the coordinate system at the point
             </summary>        
         </member>
-        <member name="M:CivilConnection.FeaturelinePoint.#ctor(CivilConnection.Baseline,Autodesk.DesignScript.Geometry.Point,System.String,System.Double)">
+        <member name="M:CivilConnection.FeatureLinePoint.#ctor(CivilConnection.Alignment,Autodesk.AECC.Interop.Roadway.AeccFeatureLine,Autodesk.AECC.Interop.Roadway.AeccFeatureLinePoint)">
             <summary>
-            Initializes a new instance of the <see cref="T:CivilConnection.FeaturelinePoint"/> class.
+            Initializes a new instance of the <see cref="T:CivilConnection.FeatureLinePoint"/> class.
             </summary>
             <param name="baseline">The baseline.</param>
             <param name="pt">The point.</param>
-            <param name="code">The code.</param>
-            <param name="station">The station on the baseline.</param>
+            <param name="parent">The featureline having the point.</param>
         </member>
         <member name="T:CivilConnection.LandFeatureline">
             <summary>
@@ -2500,6 +2457,11 @@
         <member name="F:CivilConnection.LandFeatureline._maxElevation">
             <summary>
             The maximum elevation
+            </summary>
+        </member>
+        <member name="F:CivilConnection.LandFeatureline._coordinates">
+            <summary>
+            The coordinates
             </summary>
         </member>
         <member name="F:CivilConnection.LandFeatureline._style">
@@ -2734,7 +2696,7 @@
             <param name="rvtFI">The existing Revit Family Instance.</param>
             <param name="found">A boolean value that states if the family was existing or created anew.</param>
         </member>
-        <member name="M:CivilConnection.Mass.ByCrossSections(Autodesk.DesignScript.Geometry.Curve[][],System.String,System.String,System.Boolean,System.Boolean)">
+        <member name="M:CivilConnection.Mass.ByCrossSections(Autodesk.DesignScript.Geometry.Curve[][],System.String,System.String,System.Boolean,System.Boolean,System.Boolean)">
             <summary>
             Creates a free form mass family by cross sections on the fly and inserts it in the project in Revit local coordinates.
             </summary>
@@ -2743,9 +2705,10 @@
             <param name="familyTemplate">The mass template path.</param>
             <param name="append">Append the geometry definition to the current geometry in the Family.</param>
             <param name="join">If true attempets to join the geometries.</param>
+            <param name="rebar">Can host rebar.</param>
             <returns></returns>
         </member>
-        <member name="M:CivilConnection.Mass.BySolid(Autodesk.DesignScript.Geometry.Solid,System.String,System.String,Revit.Elements.Material,System.Boolean)">
+        <member name="M:CivilConnection.Mass.BySolid(Autodesk.DesignScript.Geometry.Solid,System.String,System.String,Revit.Elements.Material,System.Boolean,System.Boolean)">
             <summary>
             Returns a FamilyInstance by a Dynamo solid in Revit local coordinates.
             </summary>
@@ -2753,9 +2716,11 @@
             <param name="name">The name of the family type.</param>
             <param name="familyTemplate">the path to the RFT file to use as a template.</param>
             <param name="material">The material to assign to the Revit family type.</param>
+            <param name="isVoid">If true it will create a void that can be used to cut other Revit elements.</param>
+            <param name="rebar">Can host rebar.</param>
             <returns></returns>
         </member>
-        <member name="M:CivilConnection.Mass.ByPathCrossSections(Autodesk.DesignScript.Geometry.Point[],Autodesk.DesignScript.Geometry.Curve[][],System.String,System.String,System.Boolean,System.Boolean)">
+        <member name="M:CivilConnection.Mass.ByPathCrossSections(Autodesk.DesignScript.Geometry.Point[],Autodesk.DesignScript.Geometry.Curve[][],System.String,System.String,System.Boolean,System.Boolean,System.Boolean)">
             <summary>
             Creates a free form mass family by cross sections and path on the fly and inserts it in the project in Revit local coordinates.
             </summary>
@@ -2765,9 +2730,10 @@
             <param name="familyTemplate"></param>
             <param name="append"></param>
             <param name="createForm"></param>
+            <param name="rebar">Can host Rebar.</param>
             <returns></returns>
         </member>
-        <member name="M:CivilConnection.Mass.ByLoftCrossSections(Autodesk.DesignScript.Geometry.Curve[][],System.String,System.String,System.Boolean)">
+        <member name="M:CivilConnection.Mass.ByLoftCrossSections(Autodesk.DesignScript.Geometry.Curve[][],System.String,System.String,System.Boolean,System.Boolean)">
             <summary>
             Creates a free form mass family by cross sections on the fly and inserts it in the project in Revit local coordinates.
             </summary>
@@ -2775,9 +2741,10 @@
             <param name="name">The name.</param>
             <param name="familyTemplate">The mass template path.</param>
             <param name="append">Append the geoemtry definition to the current geometry in the Family.</param>
+            <param name="rebar">Can host rebar.</param>
             <returns></returns>
         </member>
-        <member name="M:CivilConnection.Mass.ByShapesCreaseStations(System.String,System.String,CivilConnection.AppliedSubassemblyShape[],System.Double[],System.Boolean)">
+        <member name="M:CivilConnection.Mass.ByShapesCreaseStations(System.String,System.String,CivilConnection.AppliedSubassemblyShape[],System.Double[],System.Boolean,System.Boolean)">
             <summary>
             Creates a free form mass family by cross sections on the fly and inserts it in the project in Revit local coordinates.
             </summary>
@@ -2786,9 +2753,10 @@
             <param name="name">The name.</param>
             <param name="familyTemplate">The mass template path.</param>
             <param name="append">Append the geoemtry definition to the current geometry in the Family.</param>
+            <param name="rebar">Can host rebar.</param>
             <returns></returns>
         </member>
-        <member name="M:CivilConnection.Mass.ByClosedCurvesCreaseStations(System.String,System.String,CivilConnection.Alignment,Autodesk.DesignScript.Geometry.PolyCurve[],System.Double[],System.Boolean)">
+        <member name="M:CivilConnection.Mass.ByClosedCurvesCreaseStations(System.String,System.String,CivilConnection.Alignment,Autodesk.DesignScript.Geometry.PolyCurve[],System.Double[],System.Boolean,System.Boolean)">
             <summary>
             Creates a free form mass family by cross sections on the fly and inserts it in the project in Revit local coordinates.
             </summary>
@@ -2798,6 +2766,7 @@
             <param name="familyTemplate">The mass template path.</param>
             <param name="alignment">The alignment used to calculate the stations.</param>
             <param name="append">Append the geoemtry definition to the current geometry in the Family.</param>
+            <param name="rebar">Can host rebar.</param>
             <returns></returns>
         </member>
         <member name="T:CivilConnection.MultiPoint">
@@ -3343,7 +3312,13 @@
         </member>
         <member name="M:CivilConnection.RevitUtils.DocumentTotalTransform">
             <summary>
-            Documents the total transform.
+            Gets the CoordinateSystem of the Revit document total transform.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CivilConnection.RevitUtils.DocumentTotalTransformInverse">
+            <summary>
+            Gets the Inverse CoordinateSystem of the Revit document total transform.
             </summary>
             <returns></returns>
         </member>
@@ -3806,7 +3781,12 @@
         </member>
         <member name="P:CivilConnection.SessionVariables.DocumentTotalTransform">
             <summary>
-            Returns a Dynamo CoordinateSystem that represents the Revti Document Total Transform for the session.
+            Returns a Dynamo CoordinateSystem that represents the Revit Document Total Transform for the session.
+            </summary>
+        </member>
+        <member name="P:CivilConnection.SessionVariables.DocumentTotalTransformInverse">
+            <summary>
+            Returns a Dynamo CoordinateSystem that represents the Revit Document Total Transform Inverse for the session.
             </summary>
         </member>
         <member name="M:CivilConnection.SessionVariables.#ctor">
@@ -4155,46 +4135,6 @@
             <param name="structural">if set to <c>true</c> [structural].</param>
             <returns>
             The floor
-            </returns>
-        </member>
-        <member name="T:CivilConnection.StationPoint">
-            <summary>
-            StationPoint object type.
-            </summary>
-        </member>
-        <member name="P:CivilConnection.StationPoint.Station">
-            <summary>
-            Gets the station on the alignment of this point.
-            </summary>
-            <value>
-            The station.
-            </value>
-        </member>
-        <member name="P:CivilConnection.StationPoint.CS">
-            <summary>
-            Gets the coordiante system along the alignment in this point.
-            </summary>
-            <value>
-            The coordinate system.
-            </value>
-        </member>
-        <member name="P:CivilConnection.StationPoint.Point">
-            <summary>
-            Gets the point.
-            </summary>
-            <value>
-            The point.
-            </value>
-        </member>
-        <member name="M:CivilConnection.StationPoint.#ctor(System.Double,Autodesk.DesignScript.Geometry.CoordinateSystem,Autodesk.DesignScript.Geometry.Point)">
-            <summary>
-            Creates station point (a point on the alignment with accompanieing metadata)
-            </summary>
-            <param name="station">The station.</param>
-            <param name="cs">The coordinatesystem along the alignment in the point.</param>
-            <param name="point">The point.</param>
-            <returns>
-            The new Alignment
             </returns>
         </member>
         <member name="T:CivilConnection.Subassembly">
@@ -4678,6 +4618,15 @@
             <param name="layer">The layer.</param>
             <returns></returns>
         </member>
+        <member name="M:CivilConnection.Utils.ImportGeometryByPath(Autodesk.AECC.Interop.UiRoadway.AeccRoadwayDocument,System.String,System.String)">
+            <summary>
+            Imports the geometry of a SAT file
+            </summary>
+            <param name="doc"></param>
+            <param name="path"></param>
+            <param name="layer"></param>
+            <returns></returns>
+        </member>
         <member name="M:CivilConnection.Utils.ImportElement(Autodesk.AECC.Interop.UiRoadway.AeccRoadwayDocument,Revit.Elements.Element,System.String,System.String)">
             <summary>
             Imports the element.
@@ -4764,6 +4713,24 @@
             Gets the triangles from a CivilSurface
             </summary>
             <param name="surface">The CivilSurface.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CivilConnection.Utils.GetSurfaceTrianglesByLandXML(CivilConnection.CivilSurface,System.String,System.Boolean)">
+            <summary>
+            Gets the triangles from a CivilSurface
+            </summary>
+            <param name="surface">The CivilSurface.</param>
+            <param name="path">The path to the LandXML that contains the surface export.</param>
+            <param name="onlyVisible">If true processes the visible triangles in the XML.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CivilConnection.Utils.GetFacesLandXML(CivilConnection.CivilSurface,System.String,System.Boolean)">
+            <summary>
+            Gets the triangles from a CivilSurface
+            </summary>
+            <param name="surface">The CivilSurface.</param>
+            <param name="path">The path to the LandXML that contains the surface export.</param>
+            <param name="onlyVisible">If true processes the visible triangles in the XML.</param>
             <returns></returns>
         </member>
         <member name="M:CivilConnection.Utils.JoinSurfaces(System.Collections.Generic.IList{Autodesk.DesignScript.Geometry.Surface},System.Int32)">

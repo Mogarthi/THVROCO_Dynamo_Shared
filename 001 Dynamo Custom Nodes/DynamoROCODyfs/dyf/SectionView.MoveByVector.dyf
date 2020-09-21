@@ -1,0 +1,228 @@
+{ "author": "ROCO",
+  "Uuid": "76cc9476-87a1-459a-9f37-2b633ac264a6",
+  "IsCustomNode": true,
+  "Category": "DynamoROCODyfs.Views",
+  "Description": "move section view element by vector(startpoint,endpoint,length)",
+  "Name": "SectionView_MoveByVector",
+  "ElementResolver": {
+    "ResolutionMap": {
+      "SectionView": {
+        "Key": "Revit.Elements.Views.SectionView",
+        "Value": "RevitNodes.dll"
+      }
+    }
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "SectionView.MoveByVector(elem,vector);",
+      "Id": "e47f2169b4b747a7a7f530b007be6a44",
+      "Inputs": [
+        {
+          "Id": "64cf7506615b465184d5e5bfc0f17a52",
+          "Name": "elem",
+          "Description": "elem",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "9b355b102d1c4ab7bc7f881ec82e34fd",
+          "Name": "vector",
+          "Description": "vector",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "cc5c472a327747b7abd38df36277f06a",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
+      "NodeType": "InputNode",
+      "Parameter": {
+        "Name": "elem",
+        "TypeName": "var",
+        "TypeRank": -1,
+        "DefaultValue": null,
+        "Description": ""
+      },
+      "Id": "4c6da5f8886644999cac9d6abfe13f95",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "d8f269477a0645d59e2891e20a80d6e4",
+          "Name": "",
+          "Description": "Symbol",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
+      "NodeType": "InputNode",
+      "Parameter": {
+        "Name": "vector",
+        "TypeName": "var",
+        "TypeRank": -1,
+        "DefaultValue": null,
+        "Description": ""
+      },
+      "Id": "5342834959394ae982b0440be09b826d",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "c63bd2b9d691408da4e106d5581dd8fd",
+          "Name": "",
+          "Description": "Symbol",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "sectionViews;",
+      "Id": "d425900fa79b4fb08accfefe2da0ca35",
+      "Inputs": [
+        {
+          "Id": "4b1c1e4502014a7eb23a2df26f021b1b",
+          "Name": "sectionViews",
+          "Description": "sectionViews",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "37023b1086744d0abd41eacf2cc1c811",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "cc5c472a327747b7abd38df36277f06a",
+      "End": "4b1c1e4502014a7eb23a2df26f021b1b",
+      "Id": "a400b026af154f11a17b0904d1fdeef2"
+    },
+    {
+      "Start": "d8f269477a0645d59e2891e20a80d6e4",
+      "End": "64cf7506615b465184d5e5bfc0f17a52",
+      "Id": "7fe4853e6b9d471fbe9ac821ab99bccc"
+    },
+    {
+      "Start": "c63bd2b9d691408da4e106d5581dd8fd",
+      "End": "9b355b102d1c4ab7bc7f881ec82e34fd",
+      "Id": "991514bf843b462b961f47b0a5f2d83a"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.0.5885",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "e47f2169b4b747a7a7f530b007be6a44",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 504.0,
+        "Y": 450.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Input",
+        "Id": "4c6da5f8886644999cac9d6abfe13f95",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 310.0,
+        "Y": 443.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Input",
+        "Id": "5342834959394ae982b0440be09b826d",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 292.0,
+        "Y": 513.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "d425900fa79b4fb08accfefe2da0ca35",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 980.0,
+        "Y": 462.0
+      }
+    ],
+    "Annotations": [],
+    "X": 0.0,
+    "Y": 0.0,
+    "Zoom": 1.0
+  }
+}

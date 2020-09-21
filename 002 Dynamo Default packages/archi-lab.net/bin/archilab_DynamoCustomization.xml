@@ -22,9 +22,6 @@
       <namespace name="archilab.Revit.Views">
         <category>archilab.Revit</category>
       </namespace>
-      <namespace name="archilab.Revit.Units">
-        <category>archilab.Revit</category>
-      </namespace>
       <namespace name="archilab.Http">
         <category>archilab.Http</category>
       </namespace>
@@ -33,9 +30,6 @@
       </namespace>
       <namespace name="archilab.Core">
         <category>archilab.Core</category>
-      </namespace> 
-      <namespace name="archilab.Pdf">
-        <category>archilab.PDF</category>
       </namespace>
     </namespaces>
 </doc>

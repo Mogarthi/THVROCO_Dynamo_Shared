@@ -1,9 +1,9 @@
-{
+{ "author": "ROCO",
   "Uuid": "d5e0dc35-26cf-4d24-aed8-10bf6801937f",
   "IsCustomNode": true,
   "Category": "DynamoROCODyfs.Points",
   "Description": "Calculate parametevalues from points in dictionary by station, and settingsdictionary.",
-  "Name": "points_calculateParameterValues",
+  "Name": "Points.calculateParameterValues",
   "ElementResolver": {
     "ResolutionMap": {
       "List": {

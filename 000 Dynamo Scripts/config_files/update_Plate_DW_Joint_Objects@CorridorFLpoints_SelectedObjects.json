@@ -1,0 +1,54 @@
+{
+  "configData": {
+    "#adaptivePoints": "GMA4",
+    "dateCreated": "22/04/2020",
+    "author": "DKE",
+    "configFileName": "update_Double_Floor_joint_Objects@CorridorFLpoints_SelectedObjects",
+    "configFileDescription": "Update dimensions of objects that represent the joint of concrete plates on DW objects based on corridor featureline point positions"
+  },
+  "imageDict": {
+    "Logo": "config_files\\ROCO.jpg",
+    "ReferenceImage": "config_files\\Principle_Floor_DW_joint.png"
+  },
+  "scriptDataDict": {
+    "1": {
+      "name": "Dimensions of junction",
+      "parameters": {
+        "a": "Height_1",
+        "b": "Height_2",
+        "c": "Width_Total_1",
+        "d": "Width_Total_2",
+        "e": "ROCO_CLE_Dz_Slope_1_right_end",
+		"f": "ROCO_CLE_Dz_Slope_2_right_end",
+      },
+      "Selection": {
+        "1": "FLPoint representing base of joint",
+        "2": "FLPoint end of junction"
+      },
+      "Calculation": {
+        "a": {
+          "dZ": ["1", "ORIGIN"]
+        },
+        "b": {
+          "dZ": ["1", "ORIGIN"]
+        },
+        "c": {
+          "dL": ["ORIGIN", "2"]
+        },
+        "d": {
+          "dL": ["ORIGIN", "2"]
+        },
+        "e": {
+          "dZ": ["ORIGIN", "2"]
+        },
+        "f": {
+          "dZ": ["ORIGIN", "2"]
+        }
+      },
+      "Group": {
+        "First": ["a","c","e"],
+		"Last":["b","d","f"]
+      }
+      }
+    }
+  }
