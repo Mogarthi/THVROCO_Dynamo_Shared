@@ -1,0 +1,165 @@
+{
+  "Uuid": "0176a851-f8ab-4c5e-8f65-3408b45fc7eb",
+  "IsCustomNode": true,
+  "Category": "DynamoROCODyfs.ActiveDocument",
+  "Description": "Sets project units to meters with 3 decimals",
+  "Name": "FixProjectUnits",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\r\nimport sys\r\n# import Revit API\r\nclr.AddReference('RevitAPI')\r\nfrom Autodesk.Revit.DB import *\r\n# import Revit API UI\r\nclr.AddReference('RevitAPIUI')\r\n# import Revit Services\r\nclr.AddReference('RevitServices')\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\nfrom RevitServices.Transactions import TransactionManager \r\n# import ProtoGeometry \r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\ndmi=DocumentManager.Instance #setting up document manager instance\r\ndoc=dmi.CurrentDBDocument #Gets current document\r\nuiapp = dmi.CurrentUIApplication #gets current Revit app \r\napp= uiapp.Application #gets current UI app\r\n\r\n#The inputs to this node will be stored as a list in the IN variables.\r\nTrigger = IN[0]\r\n\r\n# Start Transaction\r\nTransactionManager.Instance.EnsureInTransaction(doc)\r\ntry:\r\n\tDUT=DisplayUnitType.DUT_METERS\r\n\tUST=UnitSymbolType.UST_M\r\n\t\r\n\ttargetUnits=Units(UnitSystem.Metric)\r\n\tformatOptions=FormatOptions(DUT,UST,.001)\r\n\ttargetUnits.SetFormatOptions(UnitType.UT_Length,formatOptions)\r\n\t\r\n\tdoc.SetUnits(targetUnits)\r\n\tOUT=\"SUCCESS\"\r\nexcept:\r\n\tOUT=\"FAIL\"\r\n\tpass\r\n\r\n# End Transaction\r\nTransactionManager.Instance.TransactionTaskDone()\r\n\r\n",
+      "VariableInputPorts": true,
+      "Id": "0774545407764d7c862a966aa75a668a",
+      "Inputs": [
+        {
+          "Id": "3a5275d7fac84d4db44f30b03d0b323c",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "5296478f58c147f79ff5014aa01b7441",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
+      "NodeType": "InputNode",
+      "Parameter": {
+        "Name": "trigger",
+        "TypeName": "var",
+        "TypeRank": -1,
+        "DefaultValue": null,
+        "Description": ""
+      },
+      "Id": "9a6e5722bc7f4a48bd3b582130108a05",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "cb86c516007c4d4baf477e73fe00fcd4",
+          "Name": "",
+          "Description": "Symbol",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Output, DynamoCore",
+      "NodeType": "OutputNode",
+      "ElementResolver": null,
+      "Symbol": "Result",
+      "Id": "c1b05302b75345059e8a8dc06d3a7b14",
+      "Inputs": [
+        {
+          "Id": "795407f100d84ca5b9a6045452aae8e0",
+          "Name": "",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [],
+      "Replication": "Disabled",
+      "Description": "A function output, use with custom nodes"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "5296478f58c147f79ff5014aa01b7441",
+      "End": "795407f100d84ca5b9a6045452aae8e0",
+      "Id": "7205b7848dd24f4d972d91e165f5e687"
+    },
+    {
+      "Start": "cb86c516007c4d4baf477e73fe00fcd4",
+      "End": "3a5275d7fac84d4db44f30b03d0b323c",
+      "Id": "5ce0880ca6374ec2956c076c5d73f31d"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.0.5885",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "Id": "0774545407764d7c862a966aa75a668a",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Python Script",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 457.89033150600653,
+        "Y": 179.63751396367107
+      },
+      {
+        "Id": "9a6e5722bc7f4a48bd3b582130108a05",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Input",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 306.74718245766434,
+        "Y": 179.57806630120132
+      },
+      {
+        "Id": "c1b05302b75345059e8a8dc06d3a7b14",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Output",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 662.7223659900319,
+        "Y": 179.84040971612876
+      }
+    ],
+    "Annotations": [],
+    "X": -519.67891916894359,
+    "Y": -367.2290739710416,
+    "Zoom": 2.370040607913583
+  }
+}
