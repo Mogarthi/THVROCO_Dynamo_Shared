@@ -1,0 +1,259 @@
+{
+  "Uuid": "489bd327-d54a-4688-9021-12f103e2745d",
+  "IsCustomNode": true,
+  "Category": "DynamoROCODyfs.String",
+  "Description": "Matches string input with regular expression",
+  "Name": "MatchRegEx",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# ROCO_Match regular exprssion\r\n\r\n#Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nimport re\r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\ndata_in = IN[0]\r\nregex = IN[1]\r\n\r\n# Place your code below this line\r\ndata_check = re.compile(regex)\r\nif data_check.match(data_in):\r\n\tresult = True\r\nelse:\r\n\tresult = False\r\n\t\r\n# Assign your output to the OUT variable.\r\nOUT = result",
+      "VariableInputPorts": true,
+      "Id": "3e19c7e884ea4896bc7e79a6d76d18a4",
+      "Inputs": [
+        {
+          "Id": "7503ede1b7cf478caecf5a86e1c174d6",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "235b54e1111c41c8a4bc0c4739af0e8d",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "26cbff832432402bbb572d705b4e9bd2",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Output, DynamoCore",
+      "NodeType": "OutputNode",
+      "ElementResolver": null,
+      "Symbol": "output",
+      "Id": "6ddeb76d4f2a4f03b59c71eb2e332a33",
+      "Inputs": [
+        {
+          "Id": "0203140e6f5a4b96942d65123ddeec25",
+          "Name": "",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [],
+      "Replication": "Disabled",
+      "Description": "A function output, use with custom nodes"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.FromObject, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "99a05e6c3f3242a9b14b3e900f8b3dd3",
+      "Inputs": [
+        {
+          "Id": "0d0ce66c73814dfdbb9c14a0462bdc4d",
+          "Name": "obj",
+          "Description": "Object to be serialized",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "4a3b093e011a4b7b8b4430437c231c98",
+          "Name": "str",
+          "Description": "Result of math computation",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Convert an object to a string representation."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
+      "NodeType": "InputNode",
+      "Parameter": {
+        "Name": "Regex",
+        "TypeName": "string",
+        "TypeRank": 0,
+        "DefaultValue": null,
+        "Description": ""
+      },
+      "Id": "ffa107b48ed2420b8d8ae230a5e5b3c0",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "7af6120f95634fe58def6fce52c7c023",
+          "Name": "",
+          "Description": "Symbol",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
+      "NodeType": "InputNode",
+      "Parameter": {
+        "Name": "data",
+        "TypeName": "var",
+        "TypeRank": 0,
+        "DefaultValue": null,
+        "Description": ""
+      },
+      "Id": "062b38c906d9453088d4f3a2c235c417",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "3fb0a28cbdfe4f25b5e4e79f96bbccb7",
+          "Name": "",
+          "Description": "Symbol",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "26cbff832432402bbb572d705b4e9bd2",
+      "End": "0203140e6f5a4b96942d65123ddeec25",
+      "Id": "a97f44bb56204d11bb67f69a956ebda5"
+    },
+    {
+      "Start": "4a3b093e011a4b7b8b4430437c231c98",
+      "End": "7503ede1b7cf478caecf5a86e1c174d6",
+      "Id": "b72b30e00229408d9a8da902e7040df6"
+    },
+    {
+      "Start": "7af6120f95634fe58def6fce52c7c023",
+      "End": "235b54e1111c41c8a4bc0c4739af0e8d",
+      "Id": "2403bc7dc4314110a886660c5d3c65b5"
+    },
+    {
+      "Start": "3fb0a28cbdfe4f25b5e4e79f96bbccb7",
+      "End": "0d0ce66c73814dfdbb9c14a0462bdc4d",
+      "Id": "03ab083ab30348188f1355029af8c915"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.0.5885",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "3e19c7e884ea4896bc7e79a6d76d18a4",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 555.33642853177935,
+        "Y": 291.02340936860259
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Output",
+        "Id": "6ddeb76d4f2a4f03b59c71eb2e332a33",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 744.7924528301894,
+        "Y": 291.1698113207546
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "String from Object",
+        "Id": "99a05e6c3f3242a9b14b3e900f8b3dd3",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 390.22641509433936,
+        "Y": 279.84905660377359
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "RegEx",
+        "Id": "ffa107b48ed2420b8d8ae230a5e5b3c0",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 246.33962264150932,
+        "Y": 367.81132075471658
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "List",
+        "Id": "062b38c906d9453088d4f3a2c235c417",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 256.18867924528337,
+        "Y": 281.66037735849062
+      }
+    ],
+    "Annotations": [],
+    "X": -158.07622641509431,
+    "Y": 38.726037735849076,
+    "Zoom": 0.8425
+  }
+}

@@ -540,6 +540,15 @@
             <param name="code"></param>
             <returns></returns>
         </member>
+        <member name="M:CivilConnection.Baseline.GetFeaturelinePointsByCode(System.String)">
+            <summary>
+            Gets the points of a corridor featurelines by code organized by: Baseline Featureline
+            </summary>
+            <param name="code">the Featurelines code.</param>
+            <returns>
+            A list of featureline points grouped by featureline.
+            </returns>
+        </member>
         <member name="M:CivilConnection.Baseline.ToString">
             <summary>
             Public textual representation of the Dynamo node preview
@@ -2390,12 +2399,36 @@
             The code.
             </value>
         </member>
-        <member name="P:CivilConnection.FeatureLinePoint.Position">
+        <member name="P:CivilConnection.FeatureLinePoint.XYZ">
             <summary>
             Gets the position.
             </summary>
             <value>
-            XYZ arraty of the position.
+            XYZ of the position.
+            </value>
+        </member>
+        <member name="P:CivilConnection.FeatureLinePoint.X">
+            <summary>
+            Gets the X coordinate of the featurelinepoint
+            </summary>
+            <value>
+            double
+            </value>
+        </member>
+        <member name="P:CivilConnection.FeatureLinePoint.Y">
+            <summary>
+            Gets the Y coordinate of the featurelinepoint
+            </summary>
+            <value>
+            double
+            </value>
+        </member>
+        <member name="P:CivilConnection.FeatureLinePoint.Z">
+            <summary>
+            Gets the Z coordinate of the featurelinepoint
+            </summary>
+            <value>
+            double
             </value>
         </member>
         <member name="P:CivilConnection.FeatureLinePoint.Station">
@@ -2418,6 +2451,14 @@
             <param name="baseline">The baseline.</param>
             <param name="pt">The point.</param>
             <param name="parent">The featureline having the point.</param>
+        </member>
+        <member name="M:CivilConnection.FeatureLinePoint.PointByFeatureLinePoint">
+            <summary>
+            Initializes a new instance of the Point class by using the coordinates of the FeatureLinePoint
+            </summary>
+            <value>
+            Point
+            </value>
         </member>
         <member name="T:CivilConnection.LandFeatureline">
             <summary>
